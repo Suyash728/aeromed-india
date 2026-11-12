@@ -116,7 +116,7 @@ All 7 capability pillars have been implemented, tested, and tracked on the Adapt
 ## 📁 Monorepo Directory Structure
 
 ```
-innovate-aqi-backend/
+aeromed-india/
 ├── backend/                             # Python FastAPI Microservice & ML Models
 │   ├── data/
 │   │   ├── CAQM_GRAP_Schedule.pdf       # Official government PDF for Forge
