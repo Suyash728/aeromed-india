@@ -14,7 +14,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 
-WORKSPACE = "/home/suyash/Projects/innovate-aqi-backend"
+WORKSPACE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(WORKSPACE, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 

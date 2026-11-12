@@ -19,7 +19,7 @@ from adaption import Adaption
 
 load_dotenv()
 
-WORKSPACE = "/home/suyash/Projects/innovate-aqi-backend"
+WORKSPACE = os.path.dirname(os.path.abspath(__file__))
 API_KEY = os.environ.get("ADAPTION_API_KEY", "")
 
 # 12 Major Indian Languages with ISO Codes & Native Scripts (+ English)
