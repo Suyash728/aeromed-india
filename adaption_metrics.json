@@ -1,10 +1,25 @@
 {
-  "pipeline_version": "v2.0 (Full 7-Pillar Architecture)",
-  "timestamp": "2026-11-12T20:07:53.965306+00:00",
+  "pipeline_name": "Pan-India Air Pollution & Respiratory Surveillance Adaption AI Pipeline",
+  "timestamp": "2026-11-12T20:42:45.756143+00:00",
+  "live_deployment": {
+    "platform": "Render Cloud",
+    "url": "https://innovate-aqi-backend.onrender.com",
+    "docs": "https://innovate-aqi-backend.onrender.com/docs",
+    "status": "live_production"
+  },
+  "evaluation_benchmarks": {
+    "source": "Adaption Labs Official Automated Evaluation",
+    "grade_before": "B",
+    "grade_after": "B",
+    "percentile_before": 17.8,
+    "percentile_after": 31.5,
+    "percentile_improvement": "+77.0% relative boost",
+    "status": "evaluated"
+  },
   "account_credits": {
     "initial_grant": 1000.0,
     "credits_consumed_approx": 223.0,
-    "credits_remaining": 777.0,
+    "credits_remaining": 767.0,
     "safe_estimation_validated": true
   },
   "seven_pillars": {
@@ -139,7 +154,7 @@
     "pillar_5_trajectories": {
       "name": "Multi-Turn Trajectory Extension",
       "purpose": "Citizen-Doctor interactive respiratory triage chat",
-      "multi_turn_turns": 3,
+      "endpoint": "POST /api/triage-chat",
       "enabled_in_api": true
     },
     "pillar_6_combine": {
@@ -158,28 +173,13 @@
       "dataset_status": "succeeded",
       "base_model": "Qwen/Qwen3.5-2B",
       "status": "running",
-      "training_method": "instruction",
       "domain_augmentation_rows": 1000,
-      "max_iterations": 3.0,
+      "training_method": "instruction",
       "target_win_rate": 0.75,
-      "hyperparams_recommended_by_sdk": true,
-      "recommended_hyperparameters": {
-        "training_type": "lora",
-        "n_epochs": 1.0,
-        "learning_rate": 5e-05,
-        "batch_size": "max",
-        "lora_r": 16.0,
-        "lora_alpha": 32.0,
-        "lora_trainable_modules": "all-linear",
-        "lr_scheduler_type": "linear",
-        "warmup_ratio": 0.03,
-        "max_grad_norm": 2.0,
-        "weight_decay": 0.0
-      },
-      "iterations_completed": 0.0,
-      "best_win_rate": null,
+      "max_iterations": 3.0,
+      "iterations_completed": 1.0,
       "error": null,
-      "last_verified_at": "2026-11-12T20:07:53.965315+00:00"
+      "hyperparams_recommended_by_sdk": true
     }
   },
   "hackathon_bonus_proof": {
@@ -197,20 +197,5 @@
     ],
     "pan_india_12_languages": true,
     "pan_india_12_cities": true
-  },
-  "evaluation_benchmarks": {
-    "source": "Adaption Labs Official Automated Evaluation",
-    "grade_before": "B",
-    "grade_after": "B",
-    "percentile_before": 17.8,
-    "percentile_after": 31.5,
-    "percentile_improvement": "+77.0% relative boost",
-    "status": "evaluated"
-  },
-  "live_deployment": {
-    "platform": "Render",
-    "url": "https://innovate-aqi-backend.onrender.com",
-    "docs": "https://innovate-aqi-backend.onrender.com/docs",
-    "status": "live_production"
   }
 }

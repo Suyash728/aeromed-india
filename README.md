@@ -29,9 +29,9 @@ An end-to-end Machine Learning and 7-Pillar Adaption AI clinical surveillance pl
 ## 📁 Repository Structure
 ```
 innovate-aqi-backend/
-├── main.py                          # FastAPI REST API server (v2 - 9 endpoints)
+├── main.py                          # FastAPI REST API server (9 endpoints)
 ├── data_pipeline.py                 # 12-city 10-year historical data generator & ML regressor
-├── adaption_pipeline_v2.py          # Full 7-pillar Adaption AI SDK pipeline
+├── adaption_pipeline.py             # Canonical 7-pillar Adaption AI SDK pipeline
 ├── test_api.py                      # Comprehensive 9-test integration suite (100% pass)
 ├── start.sh                         # One-click startup script
 ├── Procfile                         # Render / Railway process definition

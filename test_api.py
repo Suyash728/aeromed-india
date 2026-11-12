@@ -1,5 +1,5 @@
 """
-Comprehensive Integration Test Suite for Innovate AQI Backend v2.
+Comprehensive Integration Test Suite for Pan-India AQI Respiratory Surveillance API.
 Verifies all 9 endpoints, 12 cities, 12 Indian languages, and multi-turn triage chat.
 """
 
@@ -22,7 +22,7 @@ def test_root():
     assert data["version"] == "2.0.0"
     assert data["supported_cities"] == 12
     assert "triage_chat" in data["endpoints"]
-    print("PASS: test_root (v2 metadata confirmed)")
+    print("PASS: test_root (metadata confirmed)")
 
 def test_languages_endpoint():
     response = client.get("/api/languages")
@@ -149,7 +149,7 @@ def test_adaption_7_pillars_metrics():
     print("PASS: test_adaption_7_pillars_metrics (Full 7 pillars proof validated)")
 
 if __name__ == "__main__":
-    print("Running v2 integration tests...")
+    print("Running integration tests...")
     test_root()
     test_languages_endpoint()
     test_health()
@@ -159,4 +159,4 @@ if __name__ == "__main__":
     test_simulate_risk()
     test_multi_turn_triage_chat()
     test_adaption_7_pillars_metrics()
-    print("\n🎉 ALL 9 V2 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+    print("\n🎉 ALL 9 INTEGRATION TESTS PASSED SUCCESSFULLY!")

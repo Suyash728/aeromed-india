@@ -1,7 +1,7 @@
 # 🏆 Jury Proof Summary: Pan-India AQI & Respiratory Surveillance Platform
 
 > **Category**: $1,000 Best Use of Adaption Award  
-> **Platform Version**: v2.0 (Full 7-Pillar Adaption AI Pipeline)  
+> **Platform Architecture**: Full 7-Pillar Adaption AI Pipeline  
 > **Live Production URL (Render Cloud)**: `https://innovate-aqi-backend.onrender.com`  
 > **Swagger UI Interactive Docs**: `https://innovate-aqi-backend.onrender.com/docs`  
 > **Local Base URL**: `http://localhost:8000`  

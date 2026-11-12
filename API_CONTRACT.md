@@ -1,8 +1,8 @@
-# 📑 Innovate AQI Backend v2 — Frontend API Contract & Integration Guide
+# 📑 Pan-India AQI Surveillance Backend — Frontend Integration Guide
 
 > **Live Production API**: `https://innovate-aqi-backend.onrender.com`  
 > **Interactive Swagger Docs**: `https://innovate-aqi-backend.onrender.com/docs`  
-> **Backend Service**: Pan-India Air Pollution & Respiratory Disease Surveillance API (v2.0)  
+> **Backend Service**: Pan-India Air Pollution & Respiratory Disease Surveillance API  
 > **Target Frontend**: React.js / Next.js / Vite  
 > **CORS**: Wide Open (`*`) — Ready for direct client-side fetch across all domains  
 > **Regional Scale**: 12 Indian Metros across all zones + 12 Official Indian Languages in Native Scripts  
@@ -82,7 +82,7 @@ export const aqiApi = {
 
 ## 📡 Endpoints Specification
 
-### 1. `GET /api/languages` (New in v2)
+### 1. `GET /api/languages`
 Populates your top-bar language selector and city selector.
 
 #### Response (`200 OK`):
@@ -122,7 +122,7 @@ Populates your top-bar language selector and city selector.
 
 ---
 
-### 2. `POST /api/triage-chat` (New in v2 - Pillar E Trajectory Extension)
+### 2. `POST /api/triage-chat` (Pillar E Trajectory Extension)
 Enables an interactive clinical triage copilot drawer where citizens can ask continuous doctor-patient follow-ups.
 
 #### Request Body:
@@ -202,7 +202,7 @@ Returns concrete proof of all **7 Adaption AI Pillars** for the hackathon pitch 
 
 ```json
 {
-  "pipeline_version": "v2.0 (Full 7-Pillar Architecture)",
+  "pipeline_name": "Pan-India Air Pollution & Respiratory Surveillance Adaption AI Pipeline",
   "account_credits": {
     "credits_consumed_approx": 223.0,
     "credits_remaining": 777.0

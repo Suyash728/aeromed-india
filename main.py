@@ -1,5 +1,5 @@
 """
-FastAPI Server for Indian Air Pollution & Respiratory Disease Surveillance (v2)
+FastAPI Server for Pan-India Air Pollution & Respiratory Disease Surveillance
 - Real-time AQI tracking across 12 Indian Metros via Open-Meteo
 - ML Disease Risk Engine (Gradient Boosting Regressor, R^2 = 0.988)
 - Pan-India 12 Indian Languages with native script support
@@ -565,7 +565,7 @@ def get_adaption_metrics():
     if os.path.exists(metrics_path):
         with open(metrics_path, "r") as f:
             return json.load(f)
-    return {"message": "Adaption metrics file not found yet. Run adaption_pipeline_v2.py first."}
+    return {"message": "Adaption metrics file not found yet. Run adaption_pipeline.py first."}
 
 if __name__ == "__main__":
     import uvicorn

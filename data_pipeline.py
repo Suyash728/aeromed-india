@@ -1,5 +1,5 @@
 """
-Data Pipeline for Indian Air Pollution & Respiratory Disease Patterns (v2 - 12 Cities)
+Data Pipeline for Pan-India Air Pollution & Respiratory Disease Surveillance
 Generates high-fidelity historical data (2015-2025) across 12 Indian Metros,
 computes Pearson correlation matrices, trains disease risk regressors, and exports
 React-ready frontend seed data.
@@ -219,4 +219,4 @@ if __name__ == "__main__":
     df = generate_historical_dataset()
     model, importances, r2, mae = train_risk_regressor(df)
     generate_frontend_seed_data(df, importances, r2, mae)
-    print("Data Pipeline v2 Completed Successfully!")
+    print("Data Pipeline Completed Successfully!")
