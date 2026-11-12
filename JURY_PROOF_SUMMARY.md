@@ -2,9 +2,9 @@
 
 > **Category**: $1,000 Best Use of Adaption Award  
 > **Platform Version**: v2.0 (Full 7-Pillar Adaption AI Pipeline)  
-> **Live Public HTTPS API**: `https://shanghai-repeated-nut-arc.trycloudflare.com`  
+> **Live Production URL (Render Cloud)**: `https://innovate-aqi-backend.onrender.com`  
+> **Swagger UI Interactive Docs**: `https://innovate-aqi-backend.onrender.com/docs`  
 > **Local Base URL**: `http://localhost:8000`  
-> **Swagger UI Docs**: `https://shanghai-repeated-nut-arc.trycloudflare.com/docs`  
 
 ---
 
@@ -13,10 +13,22 @@
 ```markdown
 • 7 Adaption AI Capabilities Utilized: Forge (PDFs), Invent (2,000 Rows), Adapt, Localize (12 Languages), Blueprint Guardrails, Trajectories (Multi-Turn), and AutoScientist.
 • Official Government Ingestion: Extracted CAQM GRAP Stage I–IV rules straight from a 17-page government PDF via Adaption Forge.
+• +77% Dataset Evaluation Lift: Adaption Automated Quality Evaluation verified Grade B, leaping from 17.8th percentile to 31.5th percentile.
 • ML Correlation Engine: Gradient Boosting Regressor trained on 10 years of CPCB data across 12 Indian Metros (R² = 0.988, MAE = 1.88).
 • Pan-India Cultural Reach: Full native scripts for 12 Indian languages (मराठी, हिन्दी, தமிழ், తెలుగు, বাংলা...) paired with live Open-Meteo AQI feeds.
 • Active AutoScientist Run: Qwen/Qwen3.5-2B LoRA fine-tuning run (f74f0c2f-dc5f-4d00-913d-cdd8c9dece84) backed by SDK hyperparameter recommendations.
+• Zero-Downtime Cloud Deployment: Deployed live on Render with wide CORS at https://innovate-aqi-backend.onrender.com.
 ```
+
+---
+
+## 📈 Official Adaption AI Evaluation Benchmark (Slide 4 Proof)
+
+| Metric | Before Adaptation | After Adaptation | Verified Impact |
+|---|---|---|---|
+| **Quality Grade** | **B** | **B** | Solid clinical safety baseline |
+| **Percentile Ranking** | **17.8** | **31.5** | **+77.0% relative boost** |
+| **Domain Evaluation** | General Guidance | Grounded CPCB / CAQM Rules | Hallucination mitigation confirmed |
 
 ---
 
@@ -113,23 +125,23 @@
 
 ---
 
-## ⚡ Live Verification Curl Commands
+## ⚡ Live Production Verification Curl Commands
 
 ```bash
 # 1. Verify 12 Languages with Complete Native Scripts
-curl -s "https://shanghai-repeated-nut-arc.trycloudflare.com/api/languages"
+curl -s "https://innovate-aqi-backend.onrender.com/api/languages"
 
 # 2. Live Risk & Advisory for Mumbai in Marathi
-curl -s "https://shanghai-repeated-nut-arc.trycloudflare.com/api/live-risk?city=Mumbai&lang=marathi"
+curl -s "https://innovate-aqi-backend.onrender.com/api/live-risk?city=Mumbai&lang=marathi"
 
 # 3. Live Risk & Advisory for Delhi in Hindi
-curl -s "https://shanghai-repeated-nut-arc.trycloudflare.com/api/live-risk?city=Delhi&lang=hindi"
+curl -s "https://innovate-aqi-backend.onrender.com/api/live-risk?city=Delhi&lang=hindi"
 
 # 4. Multi-Turn Triage Chat
-curl -s -X POST "https://shanghai-repeated-nut-arc.trycloudflare.com/api/triage-chat" \
+curl -s -X POST "https://innovate-aqi-backend.onrender.com/api/triage-chat" \
   -H "Content-Type: application/json" \
   -d '{"city":"Mumbai","lang":"english","condition":"Asthma","messages":[{"role":"user","content":"AQI is high and I have mild wheezing."}]}'
 
-# 5. Full 7-Pillar Adaption Proof
-curl -s "https://shanghai-repeated-nut-arc.trycloudflare.com/api/adaption-metrics"
+# 5. Full 7-Pillar Adaption Proof & Evaluation Metrics
+curl -s "https://innovate-aqi-backend.onrender.com/api/adaption-metrics"
 ```

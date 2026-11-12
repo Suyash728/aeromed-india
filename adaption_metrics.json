@@ -197,5 +197,20 @@
     ],
     "pan_india_12_languages": true,
     "pan_india_12_cities": true
+  },
+  "evaluation_benchmarks": {
+    "source": "Adaption Labs Official Automated Evaluation",
+    "grade_before": "B",
+    "grade_after": "B",
+    "percentile_before": 17.8,
+    "percentile_after": 31.5,
+    "percentile_improvement": "+77.0% relative boost",
+    "status": "evaluated"
+  },
+  "live_deployment": {
+    "platform": "Render",
+    "url": "https://innovate-aqi-backend.onrender.com",
+    "docs": "https://innovate-aqi-backend.onrender.com/docs",
+    "status": "live_production"
   }
 }

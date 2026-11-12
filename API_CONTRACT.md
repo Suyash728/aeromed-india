@@ -1,9 +1,10 @@
 # 📑 Innovate AQI Backend v2 — Frontend API Contract & Integration Guide
 
+> **Live Production API**: `https://innovate-aqi-backend.onrender.com`  
+> **Interactive Swagger Docs**: `https://innovate-aqi-backend.onrender.com/docs`  
 > **Backend Service**: Pan-India Air Pollution & Respiratory Disease Surveillance API (v2.0)  
 > **Target Frontend**: React.js / Next.js / Vite  
-> **CORS**: Wide Open (`*`) — Ready for direct client-side fetch  
-> **Default Local URL**: `http://localhost:8000`  
+> **CORS**: Wide Open (`*`) — Ready for direct client-side fetch across all domains  
 > **Regional Scale**: 12 Indian Metros across all zones + 12 Official Indian Languages in Native Scripts  
 
 ---
@@ -13,15 +14,15 @@
 ### 1. Environment Variable
 In your React project's `.env`:
 ```env
-VITE_API_BASE_URL="http://localhost:8000"
-# When deployed via Cloudflare or Ngrok:
-# VITE_API_BASE_URL="https://your-tunnel-name.trycloudflare.com"
+VITE_API_BASE_URL="https://innovate-aqi-backend.onrender.com"
+# For local offline development fallback:
+# VITE_API_BASE_URL="http://localhost:8000"
 ```
 
 ### 2. Complete Copy-Paste JavaScript API Client (`src/services/api.js`)
 
 ```javascript
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://innovate-aqi-backend.onrender.com';
 
 export const aqiApi = {
   // 1. Fetch 12 Indian Languages (with native scripts) and 12 Mapped Metros
