@@ -1,4 +1,4 @@
-# Pan-India Air Pollution & Respiratory Disease Surveillance Backend (v2)
+# Pan-India Air Pollution & Respiratory Disease Surveillance Backend 
 
 An end-to-end Machine Learning and 7-Pillar Adaption AI clinical surveillance platform built for the Innovate Hackathon.
 
