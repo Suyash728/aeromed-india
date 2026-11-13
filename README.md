@@ -57,9 +57,9 @@ flowchart TD
     end
 
     subgraph FrontendApp["4. Web Dashboard (frontend/)"]
-        D1["React 18 + Vite SPA<br/>(Tailwind/Lucide/Glassmorphism)"]
+        D1["React 18 + Vite SPA<br/>(TailAdmin Light Theme Bento Grid)"]
         D2["Zero-Latency Offline Fallback<br/>(frontend_seed_data.json)"]
-        D3["Interactive Clinical Triage Chat<br/>(deepseek-v4-flash + RAG Grounding)"]
+        D3["Interactive Clinical Triage Chat<br/>(8,188+ Protocols Vector RAG)"]
         D4["Dataset Catalog Viewer (/api/datasets)<br/>(Live Inspection for Jury)"]
     end
 
@@ -154,19 +154,32 @@ aeromed-india/
 │   ├── Dockerfile                       # Container build for backend
 │   └── Procfile                         # Render service definition
 │
-├── frontend/                            # React (Vite) Single Page Application
+├── frontend/                            # React 18 + Vite TailAdmin Light-Themed Dashboard
 │   ├── src/
 │   │   ├── api/
-│   │   │   └── aqiClient.js             # Unified client for all 8 endpoints
+│   │   │   └── aqiClient.js             # Unified client for all 8 endpoints with offline fallback
+│   │   ├── components/
+│   │   │   ├── Sidebar.jsx              # 280px left navigation shell (5 clinical workspaces)
+│   │   │   ├── TopHeader.jsx            # Sticky header with 12-metro search & 13 Indic language pills
+│   │   │   ├── SurveillanceOverview.jsx # Main Bento Grid (4 KPI cards, dual-axis chart, SVG map)
+│   │   │   ├── RadialGauge.jsx          # TailAdmin "Monthly Target" radial surge index gauge
+│   │   │   ├── IndiaSvgMap.jsx          # Interactive 12-Metro India SVG map & ranked leaderboard
+│   │   │   ├── CorrelationHeatmap.jsx   # 8x8 Pearson epidemiological correlation matrix
+│   │   │   ├── SurgeStatisticsChart.jsx # Recharts dual-axis seasonal curve & ML importance
+│   │   │   ├── HospitalDispatchTable.jsx# Real-time resource queue with CSV log export
+│   │   │   ├── WhatIfSimulator.jsx      # ML sensitivity lab with sliders & extreme smog presets
+│   │   │   ├── ClinicalTriageCopilot.jsx# Multi-turn triage chat + live Vector RAG inspector
+│   │   │   ├── DatasetExplorer.jsx      # Searchable catalog for all 10 Adaption datasets
+│   │   │   └── AdaptionProof.jsx        # Executive jury proof hub for the $1,000 Hackathon Award
 │   │   ├── data/
-│   │   │   └── frontend_seed_data.json  # Offline fallback seed data
-│   │   ├── App.jsx                      # Live surveillance, triage UI & Grade A stats
+│   │   │   └── frontend_seed_data.json  # Pre-computed fallback dataset (0ms initial paint)
+│   │   ├── App.jsx                      # Master layout & workspace orchestrator
 │   │   ├── main.jsx                     # Vite mount point
-│   │   └── index.css                    # Responsive dark theme styling
-│   ├── index.html                       # HTML5 template
-│   ├── package.json                     # Vite & React dependencies
+│   │   └── index.css                    # TailAdmin clinical light theme design system
+│   ├── index.html                       # HTML5 template with Inter/Outfit & Indic fonts
+│   ├── package.json                     # Vite, React, Recharts & Lucide dependencies
 │   ├── vercel.json                      # Vercel SPA rewrite rules
-│   ├── vite.config.js                   # Vite config with API proxy
+│   ├── vite.config.js                   # Vite config with Tailwind CSS v4 & API proxy
 │   └── README.md                        # Frontend teammate onboarding guide
 │
 ├── submission/                          # Hackathon Jury & Pitch Deliverables
