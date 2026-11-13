@@ -17,6 +17,14 @@
         "o3": 0.0007,
         "temperature": 0.0007,
         "humidity": 0.0007
+      },
+      "adaption_evaluation": {
+        "quality_score": 9.4,
+        "quality_grade": "Grade A",
+        "dataset_name": "Pan-India AQI Respiratory Clinical Q&A (2,000 Rows)",
+        "percentile": 33.0,
+        "autoscientist_gain": "+55.8% Gain",
+        "autoscientist_model": "Qwen/Qwen3.5-2B (LoRA fine-tuned)"
       }
     }
   },

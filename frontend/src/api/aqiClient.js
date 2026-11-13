@@ -155,6 +155,14 @@ export const aqiClient = {
   async getHealth() {
     return await fetchJson('/api/health');
   },
+
+  /**
+   * 8. GET /api/datasets
+   * Retrieves full catalog, row counts, and sample preview rows of all datasets in backend/data.
+   */
+  async getDatasets() {
+    return await fetchJson('/api/datasets');
+  },
 };
 
 export default aqiClient;

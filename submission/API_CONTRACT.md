@@ -204,21 +204,47 @@ Returns concrete proof of all **7 Adaption AI Pillars** for the hackathon pitch 
 {
   "pipeline_name": "Pan-India Air Pollution & Respiratory Surveillance Adaption AI Pipeline",
   "account_credits": {
-    "credits_consumed_approx": 223.0,
-    "credits_remaining": 777.0
+    "credits_consumed_approx": 536.0,
+    "credits_remaining": 464.0
+  },
+  "evaluation_benchmarks": {
+    "overall_quality": "9.4 / 10 (Grade A)",
+    "dataset_id": "3bf58b6b-462c-4412-8171-fa1bed843e67",
+    "completion_avg_quality": 9.85
   },
   "seven_pillars": {
-    "pillar_1_forge": { "dataset_id": "31535351-f429-4240-a8ea-db8af555936e", "document": "CAQM_GRAP_Schedule.pdf", "pages": 17 },
-    "pillar_2_scaled_invent": { "dataset_id": "3bf58b6b-462c-4412-8171-fa1bed843e67", "rows": 2000, "credits": 200.0 },
-    "pillar_3_localization": { "languages_count": 13, "cities_count": 12 },
+    "pillar_1_forge": { "dataset_id": "31535351-f429-4240-a8ea-db8af555936e", "status": "succeeded" },
+    "pillar_2_scaled_invent": { "dataset_id": "3bf58b6b-462c-4412-8171-fa1bed843e67", "rows": 2000, "grade": "Grade A (9.4)" },
+    "pillar_3_localization": { "dataset_id": "ac7589fd-355d-45e2-9168-4ab4a7e1ceef", "rows": 80, "locales": 9 },
     "pillar_4_blueprint": { "hallucination_mitigation": true, "safety_categories": ["medical_prescriptions"] },
-    "pillar_5_trajectories": { "purpose": "Citizen-Doctor interactive respiratory triage chat" },
-    "pillar_6_combine": { "validation_method": "client.datasets.combine.validate()" },
-    "pillar_7_autoscientist": { "experiment_id": "4f098c91-a243-4d68-a6ea-6b33c79e11b2", "base_model": "Qwen/Qwen3.5-2B" }
-  },
-  "hackathon_bonus_proof": {
-    "award": "$1,000 Best Use of Adaption Award"
+    "pillar_5_trajectories": { "dataset_id": "e6fd4ced-b683-4abb-8e99-77aa496456db", "status": "running" },
+    "pillar_6_combine": { "dataset_id": "8c3a464c-45c7-4164-aa8d-7a105125f3a9", "rows": 2050, "status": "succeeded" },
+    "pillar_7_autoscientist": { "experiment_id": "f74f0c2f-dc5f-4d00-913d-cdd8c9dece84", "status": "succeeded", "gain": "+55.8% Gain" }
   }
+}
+```
+
+---
+
+### 5. `GET /api/datasets`
+Returns the complete inventory and sample preview rows of all datasets in `backend/data/` and `backend/data/adaption_exports/`:
+
+```json
+{
+  "status": "success",
+  "total_datasets": 8,
+  "total_rows": 6782,
+  "total_storage_mb": 39.02,
+  "catalog": [
+    {
+      "dataset_name": "Pan-India Respiratory Clinical Master Q&A (2,050 Rows)",
+      "filename": "pan_india_master_clinical_qa_2050.csv",
+      "adaption_dataset_id": "8c3a464c-45c7-4164-aa8d-7a105125f3a9",
+      "pillar": "Combined Master",
+      "row_count": 2050,
+      "quality_grade": "Grade A (9.4/10)"
+    }
+  ]
 }
 ```
 

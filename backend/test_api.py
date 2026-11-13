@@ -77,7 +77,11 @@ def test_live_risk_mumbai_marathi():
     assert "predicted_risk" in data
     assert "clinical_advisory" in data
     assert len(data["clinical_advisory"]["advisory"]) > 10
-    print("PASS: test_live_risk_mumbai_marathi")
+    # Verify TF-IDF RAG clinical evidence grounding
+    assert "grounded_dataset_id" in data
+    assert "matched_clinical_protocol" in data
+    assert data["grounding_similarity_score"] > 0
+    print("PASS: test_live_risk_mumbai_marathi (with RAG clinical grounding)")
 
 def test_live_risk_guwahati_assamese():
     response = client.get("/api/live-risk?city=Guwahati&lang=assamese")
@@ -110,6 +114,19 @@ def test_simulate_risk():
     assert data["severity"] in ["High", "Critical"]
     assert "grap_protocol" in data
     print("PASS: test_simulate_risk")
+
+def test_datasets_endpoint():
+    response = client.get("/api/datasets")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["total_datasets"] >= 5
+    assert data["total_rows"] > 5000
+    assert len(data["catalog"]) >= 5
+    dataset_names = [d["dataset_name"] for d in data["catalog"]]
+    assert any("2,050 Rows" in n or "Master" in n for n in dataset_names)
+    assert any("2,000 Rows" in n or "Grade A" in n for n in dataset_names)
+    print("PASS: test_datasets_endpoint (Live catalog & preview confirmed)")
 
 def test_multi_turn_triage_chat():
     payload = {
@@ -157,6 +174,7 @@ if __name__ == "__main__":
     test_live_risk_mumbai_marathi()
     test_live_risk_guwahati_assamese()
     test_simulate_risk()
+    test_datasets_endpoint()
     test_multi_turn_triage_chat()
     test_adaption_7_pillars_metrics()
-    print("\n🎉 ALL 9 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+    print("\n🎉 ALL 10 INTEGRATION TESTS PASSED SUCCESSFULLY!")

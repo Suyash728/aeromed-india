@@ -139,13 +139,13 @@ export default function App() {
         </div>
         <div className="stat-card">
           <div className="stat-label">Adaption AI Quality</div>
-          <div className="stat-value">8.0 → 8.3</div>
-          <div className="stat-hint">+3.8% Overall Quality Uplift</div>
+          <div className="stat-value">9.4 / 10</div>
+          <div className="stat-hint">Grade A Certified (2,000 Rows)</div>
         </div>
         <div className="stat-card">
-          <div className="stat-label">Dataset Benchmark</div>
-          <div className="stat-value">17.8 → 31.5</div>
-          <div className="stat-hint">Percentile Jump (Grade B)</div>
+          <div className="stat-label">AutoScientist Win</div>
+          <div className="stat-value">+55.8% Gain</div>
+          <div className="stat-hint">Completed LoRA (Qwen 3.5 2B)</div>
         </div>
         <div className="stat-card">
           <div className="stat-label">Linguistic Coverage</div>

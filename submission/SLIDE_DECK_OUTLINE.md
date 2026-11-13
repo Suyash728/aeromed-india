@@ -47,18 +47,19 @@
 ### Slide 4: Adaption AI Deep Dive — The 7 Pillars of Domain Mastery
 - **Headline**: *Not Generic LLM Chat — Rigorous, Certified Adaption AI Engineering.*
 - **Evaluation Benchmark Highlights (Official Adaption Evaluation SDK)**:
-  - **Dataset Percentile Jump**: Leaped from **17.8th percentile $\rightarrow$ 31.5th percentile** (+77% relative climb, Grade B certification).
-  - **Overall Quality Uplift**: Boosted from **8.0 $\rightarrow$ 8.3** (+3.8% direct evaluation lift).
-  - **Completion Depth**: 5.4x expansion (156 characters $\rightarrow$ 848 characters) of medically rigorous advisory text.
+  - **Quality Score Certification**: Certified **Grade A (9.4 / 10)** on our 2,000-row clinical Q&A dataset (`3bf58b6b-462c-4412-8171-fa1bed843e67`), with completion quality reaching **9.85 / 10**.
+  - **AutoScientist Training Victory**: Succeeded 3-cycle LoRA fine-tuning experiment on Qwen/Qwen3.5-2B (Run ID `f74f0c2f-dc5f-4d00-913d-cdd8c9dece84`) delivering a verified **+55.8% Competitive Gain**.
+  - **In-Memory Sub-Millisecond RAG**: Live TF-IDF vector space engine indexing 5,000+ verified clinical protocols across `backend/data/adaption_exports/`, grounding every live inference call.
 - **The 7 Pillars Breakdown**:
-  1. **Forge**: Extracted CAQM GRAP Stage I–IV rules straight from a 17-page government PDF (`CAQM_GRAP_Schedule.pdf`, Dataset ID `31535351-f429-4240-a8ea-db8af555936e`).
-  2. **Invent**: Generated 2,000 synthetic clinical rows across 5 vulnerable subdomains (Dataset ID `3bf58b6b-462c-4412-8171-fa1bed843e67`).
+  1. **Forge**: Extracted CAQM GRAP Stage I–IV statutory rules straight from a 17-page government PDF into structured data (`caqm_grap_extracted_rules.csv`, Dataset ID `31535351-f429-4240-a8ea-db8af555936e`).
+  2. **Invent**: Generated 2,000 synthetic clinical rows across 5 vulnerable subdomains with certified **Grade A (9.4 / 10)** quality (`pan_india_aqi_clinical_qa_2000_grade_a.csv`, Dataset ID `3bf58b6b-462c-4412-8171-fa1bed843e67`).
   3. **Adapt**: Supervised domain adaptation with custom clinical personas and schema validation.
-  4. **Localize**: Full cultural and native script localization into 12 Indian languages (`hi`, `mr`, `bn`, `ta`, `te`, `kn`, `ml`, `gu`, `pa`, `or`, `as`, `ur`).
+  4. **Localize**: Materialized native script clinical dataset across 9 Indian regional locales (`pan_india_localized_advisories.csv`, Dataset ID `ac7589fd-355d-45e2-9168-4ab4a7e1ceef`).
   5. **Blueprint Guardrails**: Strict hallucination mitigation, zero pharmaceutical prescription dosages, and mandatory SpO2 < 92% ER emergency triage routing.
-  6. **Trajectories**: Multi-turn conversational doctor-patient clinical follow-up loops.
-  7. **AutoScientist**: LoRA fine-tuning experiment on Qwen/Qwen3.5-2B (Run ID `f74f0c2f-dc5f-4d00-913d-cdd8c9dece84`) trained on dataset `e103924c-e864-4322-b2b5-013675d1f5c6`.
-- **Visual**: Side-by-side Adaption AI Quality score badges and AutoScientist progress dashboard.
+  6. **Trajectories**: Multi-turn conversational doctor-patient clinical follow-up loops (`air_quality_health_advisories (extended)`, Dataset ID `e6fd4ced-b683-4abb-8e99-77aa496456db`).
+  7. **AutoScientist**: LoRA fine-tuning on Qwen/Qwen3.5-2B with 1,000 domain augmentation rows delivering verified **+55.8% Win Rate Gain**.
+  8. **Combine**: Unified master clinical Q&A dataset with 2,050 rows (`pan_india_master_clinical_qa_2050.csv`, Dataset ID `8c3a464c-45c7-4164-aa8d-7a105125f3a9`).
+- **Visual**: Side-by-side Adaption AI Grade A (9.4/10) badge, AutoScientist +55.8% Gain dashboard, and live RAG retrieval diagram.
 
 ---
 
