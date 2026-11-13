@@ -17,8 +17,8 @@ This document provides a verifiable, production-grade audit of every dataset tra
 | [`air_quality_health_advisories_seed_8.csv`](air_quality_health_advisories_seed_8.csv) | `63d59d5d-de1f-4c2d-b830-6a8b29cae05a` | **Pillar D: Blueprint Seed** | Uploaded | 8 | 0.03 MB | **Grade B (8.3 / 10, +3.8% Lift)** |
 | [`pan_india_clinical_advisories_raw_8.csv`](pan_india_clinical_advisories_raw_8.csv) | `e103924c-e864-4322-b2b5-013675d1f5c6` | **Pillar G: AutoScientist Source** | Uploaded | 8 | 0.01 MB | Training Source |
 | [`caqm_grap_extracted_rules.csv`](caqm_grap_extracted_rules.csv) | `31535351-f429-4240-a8ea-db8af555936e` | **Pillar A: Forge PDF Extraction** | Document Adapted | 17 Pages Extracted | 0.06 MB | Statutory Standard |
-| [`multi_turn_clinical_trajectories.csv`](multi_turn_clinical_trajectories.csv) *(generating)* | `e6fd4ced-b683-4abb-8e99-77aa496456db` | **Pillar E: Trajectory Extension** | Extended Multi-Turn | Active | ~0.50 MB | Multi-Turn Triage |
-| [`outdoor_workers_smog_protocols.csv`](outdoor_workers_smog_protocols.csv) *(generating)* | `0788bf56-1cf0-41fd-8a03-d255dc3ef4a7` | **Pillar B+C: Occupational Protocols** | Invented + Localized | 1,000 | ~7.50 MB | High-Impact Occupational |
+| [`multi_turn_clinical_trajectories.csv`](multi_turn_clinical_trajectories.csv) | `e6fd4ced-b683-4abb-8e99-77aa496456db` | **Pillar E: Trajectory Extension** | Extended Multi-Turn | 7 | 0.03 MB | **Grade A (9.3 / 10)** |
+| [`outdoor_workers_smog_protocols.csv`](outdoor_workers_smog_protocols.csv) | `0788bf56-1cf0-41fd-8a03-d255dc3ef4a7` | **Pillar B+C: Occupational Protocols** | Invented + Localized | 1,000 | 44.37 MB | **Grade A (9.5 / 10, 57.7th Percentile)** |
 
 ---
 

@@ -104,7 +104,20 @@
       "purpose": "Citizen-Doctor interactive respiratory triage chat",
       "endpoint": "POST /api/triage-chat",
       "enabled_in_api": true,
-      "status": "running"
+      "status": "succeeded",
+      "row_count": 7,
+      "exported_file": "multi_turn_clinical_trajectories.csv"
+    },
+    "pillar_occupational_workers": {
+      "name": "Occupational & Vulnerable Commuter Smog Protocols",
+      "dataset_id": "0788bf56-1cf0-41fd-8a03-d255dc3ef4a7",
+      "dataset_name": "India Outdoor Workers & High-Risk Commuter Smog Protocols",
+      "quality_grade": "Grade A",
+      "quality_score": 9.5,
+      "percentile_score": 57.7,
+      "row_count": 1000,
+      "status": "succeeded",
+      "exported_file": "outdoor_workers_smog_protocols.csv"
     },
     "pillar_6_combine": {
       "name": "Multi-Source Dataset Merge & Validation",

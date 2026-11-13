@@ -1,0 +1,199 @@
+prompt,completion,enhanced_prompt,enhanced_completion,extended_prompt
+City: Bengaluru | PM2.5: 45 ug/m3 | PM10: 75 ug/m3 | Condition: General Population | Language: English,MODERATE AIR QUALITY ADVISORY: Bengaluru air quality is in the moderate category (PM2.5: 45 ug/m3). General population can carry out normal outdoor activities. Highly sensitive individuals with allergic rhinitis should limit prolonged strenuous outdoor exertion during peak traffic hours (8:00 AM - 11:00 AM).,,"Based on the current air quality data for **Bengaluru**, here is the assessment for the **General Population**:
+
+### 🌫️ Air Quality Status: **Moderate**
+*   **PM2.5 (45 µg/m³):** This level falls within the ""Moderate"" category (typically 36–75 µg/m³). While acceptable for most, it may pose a concern for a very small number of people who are unusually sensitive to air pollution.
+*   **PM10 (75 µg/m³):** This also indicates a ""Moderate"" level. Particulate matter of this size can cause minor breathing discomfort for some individuals.
+
+### 💡 Health Advice for the General Population
+Since the air quality is **Moderate**:
+*   **Outdoor Activities:** It is generally safe for healthy individuals to engage in normal outdoor activities.
+*   **Sensitive Groups:** If you experience symptoms like coughing or throat irritation, consider reducing prolonged or heavy exertion outdoors.
+*   **Precaution:** If you are planning intense exercise (like running), you might want to do it during times when traffic is lower or in greener areas of the city to minimize exposure.
+
+*Note: Air quality can change rapidly depending on traffic, weather, and local emissions. Keep an eye on real-time updates if you have respiratory conditions.*","If PM10 increases to 80 ug/m3, can you show the updated data in the same format I used originally?"
+City: Delhi | PM2.5: 290 ug/m3 | PM10: 380 ug/m3 | Condition: COPD Patient | Language: Hindi,गंभीर श्वसन स्वास्थ्य परामर्श (दिल्ली): वायु प्रदूषण सूचकांक अत्यंत खतरनाक स्तर (PM2.5: 290 ug/m3) पर है। क्रॉनिक ऑब्सट्रक्टिव पल्मोनरी डिजीज (COPD) के मरीजों के लिए निर्देश: १) घर से बाहर निकलने से पूरी तरह परहेज करें। २) अपने मेंटेनेंस इनहेलर और स्टेरॉयड डोज डॉक्टर की सलाह के अनुसार जारी रखें। ३) पल्स ऑक्सीमीटर से SpO2 स्तर की नियमित निगरानी करें; ९०% से कम होने पर तुरंत मेडिकल सहायता लें। ४) धूल और धुएं से बचने के लिए खिड़कियां बंद रखें।,,"⚠️ **स्वास्थ्य चेतावनी: दिल्ली में वायु प्रदूषण का अत्यंत खतरनाक स्तर** ⚠️
+
+**वर्तमान वायु गुणवत्ता स्थिति:**
+*   **PM2.5:** 290 µg/m³ (गंभीर/खतरनाक)
+*   **PM10:** 380 µg/m³ (गंभीर/खतरनाक)
+
+**COPD (क्रॉनिक ऑब्सट्रक्टिव पल्मोनरी डिजीज) के मरीजों के लिए विशेष दिशा-निर्देश:**
+
+दिल्ली में वर्तमान प्रदूषण का स्तर आपके स्वास्थ्य के लिए **अत्यंत जोखिम भरा** है। यह स्थिति फेफड़ों पर भारी दबाव डाल सकती है। कृपया तुरंत निम्नलिखित सावधानियां बरतें:
+
+1. **घर के अंदर रहें:** जब तक वायु गुणवत्ता सुधर न जाए, बाहर न निकलें। खिड़कियां और दरवाजे बंद रखें ताकि दूषित हवा अंदर न आए।
+2. **एयर प्यूरीफायर का उपयोग करें:** यदि उपलब्ध हो, तो HEPA फिल्टर वाले एयर प्यूरीफायर को चालू रखें।
+3. **N95 मास्क पहनें:** यदि बाहर निकलना अनिवार्य हो, तो केवल **N95 या N99 मास्क** का उपयोग करें। साधारण कपड़े का मास्क सूक्ष्म कणों (PM2.5) से सुरक्षा नहीं देगा।
+4. **दवाएं और इनहेलर पास रखें:** अपने मेंटेनेंस इनहेलर और अन्य जरूरी दवाएं डॉक्टर की सलाह के अनुसार समय पर लें। अपना रेस्क्यू इनहेलर (Rescue Inhaler) हमेशा अपने पास रखें।
+5. **शारीरिक गतिविधि सीमित करें:** घर के अंदर भी भारी व्यायाम या मेहनत वाले काम न करें, इससे श्वास दर बढ़ती है और आपको अधिक दूषित हवा अंदर खींचनी पड़ती है।
+6. **SpO2 स्तर की निगरानी:** पल्स ऑक्सीमीटर से अपने ऑक्सीजन स्तर की नियमित जांच करें। यदि SpO2 90% से कम हो जाए, तो तुरंत मेडिकल सहायता लें।
+7. **हाइड्रेटेड रहें:** पर्याप्त गुनगुना पानी पिएं ताकि बलगम (mucus) पतला रहे और गले में जलन कम हो।
+
+🛑 **आपातकालीन संकेत (Emergency Signs):**
+यदि आपको सांस लेने में अत्यधिक कठिनाई, सीने में तेज जकड़न, खांसी/बलगम का बढ़ना, या होंठों और नाखूनों का नीला पड़ना महसूस हो, तो तुरंत नजदीकी अस्पताल जाएं या आपातकालीन नंबर (112) पर कॉल करें।
+
+**नोट:** यह सलाह सामान्य जानकारी के लिए है। कृपया अपने डॉक्टर द्वारा बताए गए विशिष्ट उपचार और निर्देशों का पालन करें।","अगर मुझे बाहर जाना पड़े और मेरे पास सिर्फ सर्जिकल मास्क है, तो क्या वही काम करेगा?"
+City: Chennai | PM2.5: 55 ug/m3 | PM10: 88 ug/m3 | Condition: Post-COVID Lung Fibrosis | Language: English,ADVISORY FOR COMPROMISED LUNG CAPACITY: Chennai PM2.5 is at 55 ug/m3. Patients with compromised lung diffusion should avoid congested roadways and coastal humidity fluctuations. Practice incentive spirometry indoors and maintain adequate hydration.,,"***Disclaimer:** I am an AI, not a doctor. Please consult your pulmonologist or healthcare provider for personalized medical advice regarding your specific condition.*
+
+### Air Quality Analysis for Post-COVID Lung Fibrosis
+
+**Current Status in Chennai:**
+*   **PM2.5 (55 µg/m³):** Significantly above the WHO 24-hour guideline (15 µg/m³). This poses a **HIGH** health risk for individuals with compromised lungs.
+*   **PM10 (88 µg/m³):** Elevated levels that can irritate upper airways and trigger coughing fits.
+
+**Impact on Post-COVID Lung Fibrosis:**
+Lung fibrosis causes scarring, making lungs stiffer and less efficient at exchanging oxygen. Fine particulate matter (PM2.5) can penetrate deep into the alveoli, causing inflammation. In fibrotic lungs, this can lead to:
+*   Increased breathlessness (dyspnea) and fatigue.
+*   Reduced oxygen saturation (SpO2).
+*   Potential exacerbation or ""flare-up"" of respiratory distress.
+
+### Recommended Precautions
+
+**1. Outdoor Activity**
+*   **Stay Indoors:** Limit outdoor exposure as much as possible, especially during peak traffic hours (9–11 AM and 6–9 PM). Avoid congested roadways like Anna Salai and GST Road.
+*   **No Outdoor Exertion:** Do not exercise, walk, or jog outside, as increased breathing rates pull more pollutants deep into the lungs.
+*   **Mask Up:** If you must step out, wear a well-fitted **N95 or FFP2 mask**. Cloth or surgical masks are insufficient against PM2.5.
+
+**2. Indoor Environment**
+*   **Air Purification:** Run a HEPA air purifier (with an appropriate CADR rating for your room) in your primary living space.
+*   **Seal Your Space:** Keep windows and doors closed. Use weather stripping to seal gaps if necessary to prevent outdoor pollutants from entering.
+*   **Avoid Indoor Pollutants:** Do not burn incense, mosquito coils, or candles. Minimize cooking fumes using an exhaust fan, and avoid strong chemical cleaners.
+*   **Humidity Control:** Chennai's humidity can make polluted air feel heavier. Use air conditioning in ""Dry"" or ""Cool"" mode to maintain indoor humidity between 40-60% and prevent mold growth.
+
+**3. Health Monitoring & Medical Management**
+*   **Pulse Oximetry:** Regularly monitor your SpO2 levels. If they drop below your baseline (usually below 94-95%, or as advised by your doctor), seek medical attention.
+*   **Medication:** Ensure prescribed inhalers or antifibrotic medications are readily accessible.
+*   **Breathing Exercises:** Continue pulmonary rehabilitation exercises (like pursed-lip breathing or incentive spirometry) **only indoors** and as advised by your pulmonologist.
+*   **Hydration:** Drink plenty of warm water to keep mucus membranes moist and help the body clear trapped particles.
+
+### When to Seek Medical Help Immediately
+Contact your doctor or visit an emergency room if you experience:
+*   Severe shortness of breath (even while resting).
+*   A sudden drop in oxygen levels.
+*   Chest pain, tightness, or extreme discomfort.
+*   Bluish tint to the lips or fingernails (cyanosis).
+*   Uncontrollable coughing, unexplained fatigue, or confusion.","Since I am located in Chennai, can you switch to Tamil for the next response?"
+City: Kolkata | PM2.5: 195 ug/m3 | PM10: 260 ug/m3 | Condition: Chronic Bronchitis | Language: English,SEVERE ALERT: Kolkata winter haze has elevated PM2.5 to 195 ug/m3. Bronchitis patients face a 45% increased risk of acute bacterial exacerbation. Recommendations: 1) Minimize exposure to cold morning air. 2) Steam inhalation twice daily. 3) Ensure vaccination against pneumococcus and annual influenza is up to date. 4) Use surgical/N95 masks outdoors.,,"# ⚠️ Severe Health Alert: Hazardous Air Quality
+
+**Location:** Kolkata  
+**Current PM2.5:** 195 µg/m³ (Hazardous)  
+**Current PM10:** 260 µg/m³ (Very Unhealthy)  
+**Pre-existing Condition:** Chronic Bronchitis  
+
+### 🛑 Risk Assessment: EXTREME
+The current air quality in Kolkata is dangerously high. For an individual with Chronic Bronchitis, this environment poses a severe health risk. The PM2.5 levels are significantly higher than the World Health Organization's safe 24-hour guideline, and these fine particles can penetrate deep into the lungs, triggering inflammation, increasing mucus production, and potentially causing a severe acute exacerbation of your symptoms.
+
+### 🛡️ Immediate Protective Actions
+
+1. **Stay Indoors:** Avoid all outdoor physical activities. Keep windows and doors closed to prevent outdoor smog from entering your home. If you do not have an air purifier, stay in the innermost room of your house with the least outdoor air leakage.
+2. **Air Filtration:** Run an air purifier with a HEPA filter continuously in the room you occupy. 
+3. **Protective Gear:** If you must step outside, wear a fitted N95, FFP2, or P2 mask. Standard cloth or surgical masks will not filter out PM2.5 particles.
+4. **Medication Adherence:** Keep your rescue inhaler or prescribed bronchodilators easily accessible at all times. Stick strictly to your maintenance medication schedule.
+5. **Avoid Physical Exertion & Irritants:** Do not exercise, even indoors, unless your air filtration is sufficient. Avoid burning candles, incense, or high-fume cooking methods indoors.
+6. **Hydration & Airway Care:** Drink plenty of warm water to help thin mucus secretions. Steam inhalation twice daily and minimizing exposure to cold morning air can also help manage symptoms.
+7. **Preventative Care:** Ensure your vaccinations against pneumococcus and annual influenza are up to date to reduce the risk of respiratory infections.
+
+### 🚑 When to Seek Medical Help
+Contact your healthcare provider or visit an emergency room immediately if you experience:
+* Severe difficulty breathing or gasping for air.
+* Lips or fingernails turning blue or gray.
+* Chest pain or tightness.
+* Confusion, extreme fatigue, or difficulty speaking in full sentences.
+* No relief from symptoms after using your rescue medication.
+
+***
+
+*Disclaimer: I am an AI assistant, not a doctor. This information is based on environmental data and general health guidelines for Chronic Bronchitis. Please consult your physician for specific medical advice tailored to your condition.*",Did I use the letter 'u' or the micro symbol 'µ' for the pollution units in my initial input?
+City: Mumbai | PM2.5: 180 ug/m3 | PM10: 240 ug/m3 | Condition: Adult with Asthma | Language: English,"CRITICAL RESPIRATORY ADVISORY: PM2.5 levels in Mumbai are currently at 180 ug/m3 (Severe Category), exceeding safe WHO thresholds by over 12x. For individuals with bronchial asthma: 1) Refrain strictly from early morning walks and outdoor exercise. 2) Keep rescue bronchodilator inhalers (Salbutamol/Budesonide) accessible at all times. 3) Use N95/FFP2 masks if outdoor transit is mandatory. 4) Run HEPA air purifiers indoors and seal window gaps. Seek urgent emergency triage if peak expiratory flow drops below 60%.",,"**⚠️ Critical Air Quality Alert for Mumbai**
+
+The current air quality in Mumbai is **extremely hazardous**, with PM2.5 levels at **180 µg/m³** and PM10 at **240 µg/m³**. These values are significantly higher than the World Health Organization's (WHO) safe 24-hour limits (15 µg/m³ for PM2.5 and 45 µg/m³ for PM10).
+
+For an **adult with asthma**, these conditions pose a severe health risk. Exposure to this level of pollution can trigger immediate asthma attacks, cause severe breathing difficulties, reduce lung function, and potentially lead to a medical emergency requiring hospitalization.
+
+**Immediate Recommendations:**
+
+*   **Stay Indoors:** Do not go outside unless it is a life-threatening emergency. Keep all windows and doors tightly closed.
+*   **Seal Your Environment:** Use tape or wet towels to seal gaps around windows and doors to prevent smoke and dust from entering.
+*   **Use Air Purifiers:** If you have an air purifier with a HEPA filter, run it on the highest setting in the room where you are staying. If you do not have one, try to stay in the smallest room with the fewest windows.
+*   **Medication Readiness:** Keep your rescue inhaler (e.g., albuterol/salbutamol) and any prescribed maintenance medications immediately accessible. Follow your asthma action plan strictly.
+*   **Avoid Physical Exertion:** Do not exercise, clean vigorously, or cook in a way that generates indoor smoke (like frying), as this adds to the particulate load indoors.
+*   **Monitor Symptoms:** If you experience increased wheezing, shortness of breath, chest tightness, or if your rescue inhaler is not providing relief, **seek emergency medical attention immediately**.
+
+Please treat this situation with the utmost urgency. Your health and safety are the top priority right now.","I thought the PM2.5 level was closer to 100, is that safe enough for me to step outside?"
+City: Delhi | PM2.5: 320 ug/m3 | PM10: 450 ug/m3 | Condition: Pediatric (Children under 10) | Language: English,"EMERGENCY CLINICAL ALERT: Delhi is experiencing acute hazardous smog with PM2.5 exceeding 320 ug/m3. Pediatric airways are at extreme risk of reactive airway distress and wheezing. Protocols: 1) Cancel all outdoor sports and physical activities immediately. 2) Monitor children for symptoms: persistent nocturnal coughing, rapid chest breathing, or nasal flaring. 3) Maintain oral hydration and administer prescribed prophylactic saline nebulization if directed by pediatrician. 4) Keep children in well-filtered indoor environments.",,"⚠️ **EMERGENCY HEALTH ALERT: HAZARDOUS AIR QUALITY** ⚠️
+
+**Location:** Delhi  
+**PM2.5:** 320 µg/m³ (Severe+ / Hazardous)  
+**PM10:** 450 µg/m³ (Severe+ / Hazardous)  
+**Target Group:** Pediatric (Children under 10)
+
+### ⚠️ Current Status: CRITICAL
+The current air quality is extremely dangerous. A PM2.5 level of 320 µg/m³ is more than 20 times higher than the World Health Organization's safe 24-hour guideline (15 µg/m³). Children are highly vulnerable to air pollution because their lungs are still developing and they breathe faster than adults, placing their airways at extreme risk of reactive distress and wheezing.
+
+### 🛑 Immediate Action Plan for Parents/Guardians
+
+**1. Stay Indoors (Strictly)**
+*   **Keep children inside:** Cancel all outdoor sports, physical activities, and park visits immediately. Do not allow outdoor play.
+*   **School Attendance:** If possible, keep children home from school. If attendance is mandatory, ensure the school has functional air purifiers and sealed windows.
+*   **Seal the Home:** Keep all windows and doors tightly closed to prevent smog from entering. Seal gaps with wet towels if necessary.
+
+**2. Create a Safe Indoor Zone**
+*   **Air Purification:** Run HEPA air purifiers continuously in the rooms where children spend the most time (bedrooms, play areas). Designate one room with the best air purifier as a ""Clean Room"" safe zone.
+*   **Avoid Indoor Pollution:** Do not fry foods, burn incense (agarbatti), light candles, or vacuum (unless using a HEPA filter vacuum) as these increase indoor particulate matter.
+*   **AC Mode:** If using air conditioning, ensure it is on ""recirculate"" mode and not drawing in outside air.
+
+**3. Outdoor Exposure (If Unavoidable)**
+*   **Minimize Time:** If you must take a child outside (e.g., medical emergency), keep the exposure time to the absolute minimum. Keep car windows closed during travel.
+*   **Protective Masks:** Standard cloth or surgical masks do not protect against PM2.5. Use well-fitted **N95 or FFP2 masks** for children over age 7. *Note: Masks are not recommended for very young children (under 4-5) due to breathing resistance; for them, strict indoor isolation is the only safety measure. Monitor older children closely while masked.*
+*   **Cover Up:** Wear full-sleeve clothing and sunglasses to reduce skin and eye contact with pollutants.
+
+**4. Health & Wellness Monitoring**
+*   **Hydration & Nutrition:** Ensure children drink plenty of water to help flush out toxins. Provide foods rich in antioxidants (fruits like oranges, guavas, and leafy vegetables) to support immune health.
+*   **Nasal Care:** Use a saline nasal spray or drops to keep nasal passages moist and clear of pollutants. Maintain oral hydration and administer prescribed prophylactic saline nebulization if directed by a pediatrician.
+*   **Watch for Symptoms:** Children may not always verbalize discomfort. Monitor closely for persistent nocturnal coughing, rapid chest breathing, nasal flaring, wheezing, eye irritation, or excessive tearing.
+
+### 🏥 When to Seek Medical Attention
+Consult a pediatrician immediately if you notice:
+*   Difficulty breathing, shortness of breath, or blue tinting around the lips.
+*   Chest pain, tightness, or severe asthma attack (if the child is asthmatic).
+*   Coughing that persists even after being indoors for several hours.
+*   Unusual fatigue, extreme lethargy, dizziness, or confusion.
+
+***
+*Disclaimer: I am an AI assistant and not a doctor. This information is based on general health guidelines for severe air pollution. It does not replace professional medical advice. Please consult a pediatrician for specific health concerns regarding your child.*","When you send the next health alert, please make sure you keep using the language preference I set in my first message."
+City: Mumbai | PM2.5: 165 ug/m3 | PM10: 210 ug/m3 | Condition: Elderly Senior Citizens | Language: Marathi,तातडीचा आरोग्य सल्ला (मुंबई): हवेतील PM2.5 पातळी सध्या अत्यंत घातक (१६५ ug/m3) आहे. ज्येष्ठ नागरिकांसाठी खबरदारी: १) पहाटे किंवा संध्याकाळी घराबाहेर पडणे टाळा. २) दमा किंवा हृदयविकार असल्यास नियमित औषधे वेळेवर घ्या आणि इनहेलर जवळ ठेवा. ३) घराबाहेर जाताना N95 मास्क वापरा. ४) छातीत जडपणा किंवा धाप लागल्यास तातडीने जवळच्या डॉक्टरांशी किंवा रुग्णालयाशी संपर्क साधा.,,"**मुंबईतील वायू प्रदूषणाची स्थिती: ज्येष्ठ नागरिकांसाठी तातडीचा सल्ला**
+
+सध्या मुंबईतील हवेची गुणवत्ता अत्यंत खराब झाली आहे.
+*   **PM2.5:** १६५ µg/m³ (हे जागतिक आरोग्य संघटनेच्या मर्यादेपेक्षा सुमारे ११ पट जास्त आहे)
+*   **PM10:** २१० µg/m³
+
+ही पातळी **'अत्यंत खराब' (Very Poor to Severe)** श्रेणीत येते. ज्येष्ठ नागरिकांसाठी ही स्थिती **अत्यंत धोकादायक** आहे, कारण त्यांची रोगप्रतिकारक शक्ती आणि फुफ्फुसांची क्षमता कमी असते.
+
+### ज्येष्ठ नागरिकांसाठी महत्त्वाच्या सूचना (मराठी):
+
+१. **घराबाहेर पडणे टाळा:**
+   सध्याच्या स्थितीत ज्येष्ठ नागरिकांनी शक्यतो घराबाहेर पडू नये. सकाळची फिरकी, व्यायाम किंवा मंदिरात जाणे तात्पुरते थांबवावे. बाहेरची हवा श्वासाद्वारे आत गेल्यास हृदयविकार, दमा आणि इतर श्वसनाच्या तक्रारी उद्भवू शकतात.
+
+२. **दारे-खिडक्या बंद ठेवा:**
+   घरातील हवा शुद्ध राहण्यासाठी दारे आणि खिडक्या बंद ठेवा. जर घरात 'एअर प्युरिफायर' (Air Purifier) असेल, तर तो चालू ठेवा. नसल्यास, ओल्या कापडाने फरशी पुसून धूळ जमिनीला चिकटवून ठेवा.
+
+३. **मास्कचा वापर (अनिवार्य असल्यास):**
+   जर वैद्यकीय गरजेस्तव किंवा अत्यंत आवश्यक कामासाठी बाहेर पडणे भाग असेल, तर साध्या कापडी मास्कऐवजी **N95 मास्क**चाच वापर करा. सामान्य मास्क या प्रदूषणापासून संरक्षण देऊ शकत नाहीत.
+
+४. **औषधांची काळजी:**
+   ज्यांना दमा (Asthma), सीओपीडी (COPD) किंवा हृदयाचे विकार आहेत, त्यांनी आपली नियमित औषधे वेळेवर घ्यावीत. श्वास घेण्यास त्रास होत असल्यास किंवा छातीत जडपण जाणवत असल्यास, लगेच डॉक्टरांचा सल्ला घ्यावा.
+
+५. **हायड्रेशन आणि आहार:**
+   भरपूर पाणी प्या. यामुळे शरीरातील विषारी घटक बाहेर काढण्यास मदत होते. हिरव्या भाज्या आणि फळे जास्त प्रमाणात खाण्याचा प्रयत्न करा.
+
+६. **लक्षणे ओळखा:**
+   जर घरातील कोणत्याही ज्येष्ठ व्यक्तीला खालील लक्षणे दिसली, तर तात्काळ वैद्यकीय मदत घ्या:
+   *   तीव्र खोकला किंवा श्वास घेण्यास त्रास.
+   *   डोळ्यांत जळजळ किंवा पाणी येणे.
+   *   चक्कर येणे किंवा थकवा जाणवणे.
+   *   छातीत दुखणे.
+
+**विनंती:** कृपया ही माहिती घरातील सर्व ज्येष्ठ सदस्यांपर्यंत पोहोचवा आणि त्यांची विशेष काळजी घ्या. हवेची गुणवत्ता सुधारण्याची वाट पाहूनच पुन्हा बाहेर पडा.
+
+*(टीप: ही माहिती सध्याच्या वाचनानुसार आहे. वैद्यकीय आणीबाणीच्या परिस्थितीत नेहमी आपल्या डॉक्टरांचा किंवा जवळच्या रुग्णालयाचा सल्ला घ्यावा.)*","मला आठवतंय की मी सुरुवातीला इंग्रजी भाषेत माहिती मागितली होती, पण हे मराठीत आलं आहे. तुम्ही चुकलात का?"
