@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Menu, Globe, ChevronDown, Check, Zap, Server } from 'lucide-react';
+import { Search, Menu, Globe, ChevronDown, Check, Zap, Server, FileText } from 'lucide-react';
 
 export default function TopHeader({ 
   cities, 
@@ -9,7 +9,8 @@ export default function TopHeader({
   selectedLanguage, 
   onSelectLanguage, 
   isLiveApi, 
-  setSidebarOpen 
+  setSidebarOpen,
+  onOpenExportModal
 }) {
   const [citySearchOpen, setCitySearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -144,6 +145,17 @@ export default function TopHeader({
               );
             })}
           </div>
+
+          {/* Export Health & GRAP Advisory Button */}
+          <button
+            onClick={onOpenExportModal}
+            className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-[#465FFF]/10 hover:bg-[#465FFF]/20 text-[#465FFF] border border-[#465FFF]/30 rounded-full text-xs font-semibold shadow-2xs transition cursor-pointer"
+            title="Export official printable hospital & citizen advisory bulletin"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Export Advisory</span>
+            <span className="sm:hidden">Bulletin</span>
+          </button>
 
           {/* Backend Connection Status Pill */}
           <div className="shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold shadow-2xs">

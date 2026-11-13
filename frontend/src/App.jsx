@@ -8,6 +8,8 @@ import WhatIfSimulator from './components/WhatIfSimulator';
 import ClinicalTriageCopilot from './components/ClinicalTriageCopilot';
 import DatasetExplorer from './components/DatasetExplorer';
 import AdaptionProof from './components/AdaptionProof';
+import ClinicalBriefingModal from './components/ClinicalBriefingModal';
+import QuickTriageDrawer from './components/QuickTriageDrawer';
 
 const DEFAULT_LANGUAGES = [
   { code: 'en', name: 'English', native: 'English' },
@@ -45,6 +47,7 @@ export default function App() {
   const [selectedCity, setSelectedCity] = useState('Delhi');
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [briefingModalOpen, setBriefingModalOpen] = useState(false);
 
   // Live state
   const [languages, setLanguages] = useState(DEFAULT_LANGUAGES);
@@ -153,6 +156,7 @@ export default function App() {
           onSelectLanguage={setSelectedLanguage}
           isLiveApi={isLiveApi}
           setSidebarOpen={setSidebarOpen}
+          onOpenExportModal={() => setBriefingModalOpen(true)}
         />
 
         {/* Workspace Body */}
@@ -207,6 +211,24 @@ export default function App() {
             <span className="text-[#465FFF] font-semibold">Adaption Labs Grounded</span>
           </div>
         </footer>
+
+        {/* Printable Health & GRAP Advisory Bulletin Modal */}
+        <ClinicalBriefingModal
+          isOpen={briefingModalOpen}
+          onClose={() => setBriefingModalOpen(false)}
+          cityData={activeCityData}
+          liveRiskData={liveRiskData}
+          selectedCity={selectedCity}
+          selectedLanguage={selectedLanguage}
+          languages={languages}
+        />
+
+        {/* Floating Quick-Triage Copilot Drawer */}
+        <QuickTriageDrawer
+          activeCity={selectedCity}
+          activeLanguage={selectedLanguage}
+          languages={languages}
+        />
 
       </div>
 
