@@ -149,6 +149,39 @@ def test_multi_turn_triage_chat():
     assert "triage_urgency" in data
     print("PASS: test_multi_turn_triage_chat (Interactive follow-up chat verified)")
 
+def test_triage_chat_marathi_auto_detection():
+    # User asks in Marathi, even if default lang was set to english
+    payload = {
+        "city": "Mumbai",
+        "lang": "english",
+        "condition": "Pediatric Asthma",
+        "messages": [
+            {"role": "user", "content": "दम्याच्या रुग्णांनी काय काळजी घ्यावी?"}
+        ]
+    }
+    response = client.post("/api/triage-chat", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "reply" in data
+    reply = data["reply"]
+    assert len(reply) > 20
+    # Assert Devanagari script presence
+    assert any('\u0900' <= ch <= '\u097F' for ch in reply), f"Expected Devanagari script, got: {reply}"
+    # Assert language resolved to mr
+    assert data["language"] == "mr"
+    print("PASS: test_triage_chat_marathi_auto_detection (Native script detected and returned)")
+
+def test_live_risk_language_alias():
+    # Test 'language' query param alias as sent by frontend aqiClient
+    response = client.get("/api/live-risk?city=Pune&language=mr")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["city"] == "Pune"
+    advisory = data["clinical_advisory"]["advisory"]
+    assert any('\u0900' <= ch <= '\u097F' for ch in advisory), f"Expected Marathi advisory, got: {advisory}"
+    assert "Marathi" in data["clinical_advisory"]["language"]
+    print("PASS: test_live_risk_language_alias (language=mr accepted and localized)")
+
 def test_adaption_7_pillars_metrics():
     response = client.get("/api/adaption-metrics")
     assert response.status_code == 200
@@ -176,5 +209,7 @@ if __name__ == "__main__":
     test_simulate_risk()
     test_datasets_endpoint()
     test_multi_turn_triage_chat()
+    test_triage_chat_marathi_auto_detection()
+    test_live_risk_language_alias()
     test_adaption_7_pillars_metrics()
-    print("\n🎉 ALL 10 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+    print("\n🎉 ALL 12 INTEGRATION TESTS PASSED SUCCESSFULLY!")

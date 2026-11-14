@@ -106,6 +106,7 @@ export const aqiClient = {
     const params = new URLSearchParams({
       city: city.toLowerCase(),
       language: language.toLowerCase(),
+      lang: language.toLowerCase(),
     });
     return await fetchJson(`/api/live-risk?${params.toString()}`);
   },
@@ -116,9 +117,14 @@ export const aqiClient = {
    * @param {Object} payload - { pm25, pm10, no2, so2, co, o3, temperature, humidity, city, language }
    */
   async simulateRisk(payload) {
+    const enrichedPayload = {
+      ...payload,
+      lang: payload.language || payload.lang || 'en',
+      language: payload.language || payload.lang || 'en',
+    };
     return await fetchJson('/api/simulate-risk', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify(enrichedPayload),
     });
   },
 
@@ -127,7 +133,7 @@ export const aqiClient = {
    * AI-powered respiratory clinical triage chat using Adaption AI (deepseek-v4-flash).
    * @param {Array} messages - [{ role: "user" | "assistant", content: string }]
    * @param {string} city - Active user city context
-   * @param {string} language - Target response language code (e.g. "hi", "en")
+   * @param {string} language - Target response language code (e.g. "hi", "en", "mr")
    */
   async triageChat(messages, city = 'Delhi', language = 'en') {
     return await fetchJson('/api/triage-chat', {
@@ -136,6 +142,7 @@ export const aqiClient = {
         messages,
         city,
         language,
+        lang: language,
       }),
     });
   },

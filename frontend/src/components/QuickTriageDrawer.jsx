@@ -9,37 +9,61 @@ import {
   Bot, 
   User, 
   ShieldCheck, 
-  ChevronDown,
-  Minimize2,
-  Maximize2
+  Globe
 } from 'lucide-react';
 
-export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage = 'en', languages = [] }) {
+function detectScriptLanguage(text, fallback = 'en') {
+  if (!text) return fallback;
+  if (/[\u0B80-\u0BFF]/.test(text)) return 'ta';
+  if (/[\u0C00-\u0C7F]/.test(text)) return 'te';
+  if (/[\u0C80-\u0CFF]/.test(text)) return 'kn';
+  if (/[\u0D00-\u0D7F]/.test(text)) return 'ml';
+  if (/[\u0A80-\u0AFF]/.test(text)) return 'gu';
+  if (/[\u0A00-\u0A7F]/.test(text)) return 'pa';
+  if (/[\u0B00-\u0B7F]/.test(text)) return 'or';
+  if (/[\u0980-\u09FF]/.test(text)) {
+    if (text.includes('\u09F0') || text.includes('\u09F1')) return 'as';
+    return 'bn';
+  }
+  if (/[\u0600-\u06FF]/.test(text)) return 'ur';
+  if (/[\u0900-\u097F]/.test(text)) {
+    const marathiWords = ['काय', 'काळजी', 'घ्यावी', 'करावी', 'रुग्णांनी', 'दम्या', 'आहे', 'आहेत', 'कशी', 'नाही', 'होते', 'माझे', 'मला', 'सल्ला'];
+    if (marathiWords.some(w => text.includes(w))) return 'mr';
+    return 'hi';
+  }
+  return fallback;
+}
+
+export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage = 'en' }) {
   const [isOpen, setIsOpen] = useState(false);
   const [spo2, setSpo2] = useState(94);
-  const [patientProfile, setPatientProfile] = useState('pediatric_asthma');
   const [inputMessage, setInputMessage] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+  const [copilotLang, setCopilotLang] = useState(activeLanguage);
 
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Namaste! I am the AeroMed Clinical Copilot. Ask any question in Marathi, Hindi, Tamil, or English—grounded against 8,188+ Adaption Labs protocols.`,
+      content: `Namaste! I am the AeroMed Clinical Copilot. Ask any question in Marathi (मराठी), Hindi (हिन्दी), Tamil (தமிழ்), or English—grounded against 8,188+ Adaption Labs protocols.`,
       timestamp: 'Just now',
       citation: '3bf58b6b-462c-4412-8171-fa1bed843e67'
     }
   ]);
 
   const quickChips = [
-    { text: "दम्याच्या रुग्णांनी काय काळजी घ्यावी?", label: "मराठी (Asthma)" },
-    { text: "धुआं और प्रदूषण में बच्चों को बाहर भेजना सुरक्षित है?", label: "हिन्दी (Children)" },
-    { text: "What precautions should outdoor delivery workers take?", label: "English (Gig Workers)" },
-    { text: "சுவாச பிரச்சனை உள்ளவர்கள் என்ன செய்ய வேண்டும்?", label: "தமிழ் (Respiratory)" }
+    { text: "दम्याच्या रुग्णांनी काय काळजी घ्यावी?", label: "मराठी (Asthma)", lang: "mr" },
+    { text: "धुआं और प्रदूषण में बच्चों को बाहर भेजना सुरक्षित है?", label: "हिन्दी (Children)", lang: "hi" },
+    { text: "What precautions should outdoor delivery workers take?", label: "English (Gig Workers)", lang: "en" },
+    { text: "சுவாச பிரச்சனை உள்ளவர்கள் என்ன செய்ய வேண்டும்?", label: "தமிழ் (Respiratory)", lang: "ta" }
   ];
 
-  const handleSendMessage = async (textToSend) => {
+  const handleSendMessage = async (textToSend, explicitLang = null) => {
     const text = textToSend || inputMessage;
     if (!text.trim() || chatLoading) return;
+
+    // Detect target language
+    const targetLang = explicitLang || detectScriptLanguage(text, copilotLang || activeLanguage);
+    setCopilotLang(targetLang);
 
     const userMsg = {
       role: 'user',
@@ -53,7 +77,7 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
     setChatLoading(true);
 
     try {
-      const res = await aqiClient.triageChat(newHistory, activeCity, activeLanguage);
+      const res = await aqiClient.triageChat(newHistory, activeCity, targetLang);
       const replyText = res.reply || res.response || res.message || 
         `Clinical notice: Under current AQI in ${activeCity}, high-risk individuals must limit prolonged exertion, wear certified N95 respirators, and monitor SpO2 closely. Seek emergency hospital care if SpO2 drops below 92%.`;
 
@@ -71,7 +95,11 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
         ...newHistory,
         {
           role: 'assistant',
-          content: `Clinical Triager [Local Grounded Rule]: Given elevated particulate levels in ${activeCity}, sensitive patients should stay indoors during morning hours and use prescribed bronchodilators under pulmonologist guidance.`,
+          content: targetLang === 'mr' 
+            ? `सध्या ${activeCity} मध्ये वाढलेल्या प्रदूषणामुळे खबरदारी: खिडक्या बंद ठेवाव्यात, N95 मास्क वापरावा आणि SpO2 ९२% पेक्षा कमी झाल्यास तातडीने रुग्णालयात जावे.`
+            : targetLang === 'hi'
+            ? `वर्तमान में ${activeCity} में वायु प्रदूषण के स्तर को देखते हुए: मरीज को घर के अंदर रखें और SpO2 ९२% से कम होने पर तुरंत अस्पताल ले जाएं।`
+            : `Clinical Triager [Local Grounded Rule]: Given elevated particulate levels in ${activeCity}, sensitive patients should stay indoors during morning hours and use prescribed bronchodilators under pulmonologist guidance.`,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           citation: '3bf58b6b-462c-4412-8171-fa1bed843e67'
         }
@@ -83,11 +111,12 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
 
   return (
     <>
-      {/* Floating Action Trigger Button (Bottom Right) */}
+      {/* Floating Action Trigger Button - Moved higher to bottom-16 right-6 with shadow-lg and ring */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 bg-[#465FFF] hover:bg-[#3649db] text-white px-4 py-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center gap-2.5 font-bold text-xs tracking-wide group cursor-pointer border-2 border-white animate-in slide-in-from-bottom-4"
+          className="fixed bottom-16 right-6 z-40 bg-[#465FFF] hover:bg-[#3649db] text-white px-4 py-3 rounded-full shadow-lg ring-4 ring-indigo-500/15 hover:shadow-2xl transition-all duration-200 flex items-center gap-2.5 font-bold text-xs tracking-wide group cursor-pointer border-2 border-white animate-in slide-in-from-bottom-4"
+          aria-label="Open AeroMed Clinical Copilot"
         >
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -101,9 +130,9 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
         </button>
       )}
 
-      {/* Floating Quick Triage Slide-Out Card */}
+      {/* Floating Quick Triage Slide-Out Card - repositioned to bottom-20 right-6 */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[420px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col h-[560px] overflow-hidden animate-in slide-in-from-bottom-6 zoom-in-95 duration-200">
+        <div className="fixed bottom-20 right-6 z-50 w-[92vw] sm:w-[420px] max-h-[calc(100vh-7rem)] h-[560px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-in slide-in-from-bottom-6 zoom-in-95 duration-200">
           
           {/* Header */}
           <div className="p-3.5 bg-gradient-to-r from-gray-50 to-indigo-50/40 border-b border-gray-200 flex items-center justify-between">
@@ -118,14 +147,19 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
                     8,188 Rules
                   </span>
                 </div>
-                <div className="text-[10px] text-gray-500">
-                  Context: {activeCity} • Multi-Turn Indic Triage
+                <div className="text-[10px] text-gray-500 flex items-center gap-1 mt-0.5">
+                  <span>Context: {activeCity}</span>
+                  <span>•</span>
+                  <span className="text-[#465FFF] font-semibold uppercase flex items-center gap-0.5">
+                    <Globe className="w-2.5 h-2.5" />
+                    {copilotLang}
+                  </span>
                 </div>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-200 rounded-lg transition"
+              className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-200 rounded-lg transition cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -199,32 +233,36 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
                 <div className="w-1.5 h-1.5 rounded-full bg-[#465FFF] animate-bounce" />
                 <div className="w-1.5 h-1.5 rounded-full bg-[#465FFF] animate-bounce [animation-delay:0.2s]" />
                 <div className="w-1.5 h-1.5 rounded-full bg-[#465FFF] animate-bounce [animation-delay:0.4s]" />
-                <span className="text-[11px]">Grounding against 8,188 protocols...</span>
+                <span className="text-[11px]">Grounding in {copilotLang.toUpperCase()} against 8,188 protocols...</span>
               </div>
             )}
           </div>
 
-          {/* Quick Indic Question Chips */}
+          {/* Quick Indic Question Chips with Language Sync */}
           <div className="p-2 border-t border-gray-100 bg-white flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             {quickChips.map((chip, idx) => (
               <button
                 key={idx}
-                onClick={() => handleSendMessage(chip.text)}
-                className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[10px] rounded-lg shrink-0 transition font-medium"
+                onClick={() => handleSendMessage(chip.text, chip.lang)}
+                className={`px-2.5 py-1 text-[10px] rounded-lg shrink-0 transition font-medium cursor-pointer ${
+                  copilotLang === chip.lang
+                    ? 'bg-[#465FFF]/10 text-[#465FFF] font-bold border border-[#465FFF]/30'
+                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                }`}
               >
                 {chip.label}
               </button>
             ))}
           </div>
 
-          {/* Input Bar */}
+          {/* Input Bar with auto-script detection */}
           <div className="p-2.5 bg-white border-t border-gray-100 flex items-center gap-2">
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder="Ask question in any language..."
+              placeholder="मराठी, हिन्दी, தமிழ், or English..."
               className="flex-1 px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#465FFF]/30 focus:border-[#465FFF]"
             />
             <button

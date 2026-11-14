@@ -144,7 +144,7 @@ export default function App() {
       />
 
       {/* Main Content Layout */}
-      <div className="flex-1 flex flex-col lg:pl-[280px] min-w-0 transition-all">
+      <div className="flex-1 flex flex-col lg:pl-72 min-w-0 transition-all">
         
         {/* Sticky Top Header */}
         <TopHeader

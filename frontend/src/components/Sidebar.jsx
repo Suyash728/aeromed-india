@@ -61,10 +61,10 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
         />
       )}
 
-      {/* Persistent Left Sidebar (280px) */}
+      {/* Persistent Left Sidebar (w-72 / 288px) */}
       <aside className={`
-        fixed top-0 bottom-0 left-0 z-50 w-[280px] bg-white border-r border-gray-200 
-        flex flex-col transition-transform duration-300 ease-in-out
+        fixed top-0 bottom-0 left-0 z-50 w-72 bg-white border-r border-gray-200 
+        flex flex-col shrink-0 transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         {/* Brand Header */}
@@ -75,14 +75,14 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-lg text-gray-900 tracking-tight font-['Outfit']">
+                <span className="font-bold text-lg text-[#101828] tracking-tight font-['Outfit']">
                   AeroMed
                 </span>
                 <span className="font-extrabold text-lg text-[#465FFF] tracking-tight font-['Outfit']">
                   India
                 </span>
               </div>
-              <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">
+              <p className="text-[11px] font-medium text-[#475467] uppercase tracking-wider">
                 Clinical Surveillance
               </p>
             </div>
@@ -111,31 +111,35 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
                   setIsOpen(false);
                 }}
                 className={`
-                  w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left transition-all duration-150
+                  w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left transition-all duration-150 cursor-pointer
                   ${isActive 
-                    ? 'bg-[#465FFF]/10 text-[#465FFF] font-semibold shadow-xs' 
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium'
+                    ? 'bg-[#465FFF]/10 text-[#465FFF] font-semibold shadow-xs border border-[#465FFF]/20' 
+                    : 'text-[#344054] hover:bg-gray-50 hover:text-[#101828] font-medium border border-transparent'
                   }
                 `}
               >
-                <div className="flex items-center gap-3 min-w-0">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
                   <div className={`
-                    p-2 rounded-lg transition-colors
-                    ${isActive ? 'bg-[#465FFF] text-white' : 'bg-gray-100 text-gray-500 group-hover:text-gray-700'}
+                    p-2 rounded-lg transition-colors shrink-0
+                    ${isActive ? 'bg-[#465FFF] text-white' : 'bg-gray-100 text-[#475467] group-hover:text-gray-900'}
                   `}>
                     <Icon className="w-4 h-4 stroke-[2]" />
                   </div>
-                  <div className="truncate">
-                    <div className="text-sm leading-tight truncate">{item.label}</div>
-                    <div className="text-[11px] text-gray-400 font-normal leading-tight mt-0.5 truncate">{item.subtitle}</div>
+                  <div className="min-w-0 flex-1 pr-1">
+                    <div className={`text-sm font-semibold leading-snug ${isActive ? 'text-[#465FFF]' : 'text-[#101828]'}`}>
+                      {item.label}
+                    </div>
+                    <div className="text-[11px] text-[#475467] font-normal leading-tight mt-0.5">
+                      {item.subtitle}
+                    </div>
                   </div>
                 </div>
                 {item.badge && (
                   <span className={`
-                    text-[10px] px-2 py-0.5 rounded-full font-semibold shrink-0 ml-2
+                    text-[10px] px-2 py-0.5 rounded-full font-semibold shrink-0 ml-1.5
                     ${isActive 
                       ? 'bg-[#465FFF] text-white' 
-                      : 'bg-gray-100 text-gray-600'
+                      : 'bg-gray-100 text-[#344054]'
                     }
                   `}>
                     {item.badge}

@@ -15,18 +15,41 @@ import {
   BadgeCheck
 } from 'lucide-react';
 
+function detectScriptLanguage(text, fallback = 'en') {
+  if (!text) return fallback;
+  if (/[\u0B80-\u0BFF]/.test(text)) return 'ta';
+  if (/[\u0C00-\u0C7F]/.test(text)) return 'te';
+  if (/[\u0C80-\u0CFF]/.test(text)) return 'kn';
+  if (/[\u0D00-\u0D7F]/.test(text)) return 'ml';
+  if (/[\u0A80-\u0AFF]/.test(text)) return 'gu';
+  if (/[\u0A00-\u0A7F]/.test(text)) return 'pa';
+  if (/[\u0B00-\u0B7F]/.test(text)) return 'or';
+  if (/[\u0980-\u09FF]/.test(text)) {
+    if (text.includes('\u09F0') || text.includes('\u09F1')) return 'as';
+    return 'bn';
+  }
+  if (/[\u0600-\u06FF]/.test(text)) return 'ur';
+  if (/[\u0900-\u097F]/.test(text)) {
+    const marathiWords = ['काय', 'काळजी', 'घ्यावी', 'करावी', 'रुग्णांनी', 'दम्या', 'आहे', 'आहेत', 'कशी', 'नाही', 'होते', 'माझे', 'मला', 'सल्ला'];
+    if (marathiWords.some(w => text.includes(w))) return 'mr';
+    return 'hi';
+  }
+  return fallback;
+}
+
 export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLanguage = 'en' }) {
   const [patientProfile, setPatientProfile] = useState('pediatric_asthma');
   const [spo2, setSpo2] = useState(94);
   const [symptoms, setSymptoms] = useState(['wheezing', 'shortness_of_breath']);
   const [inputMessage, setInputMessage] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+  const [copilotLang, setCopilotLang] = useState(activeLanguage);
 
   // Chat conversation state
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Namaste. I am AeroMed Clinical AI, grounded in Adaption Labs' 8,188+ verified Indian atmospheric-respiratory protocols. Current surveillance for ${activeCity} indicates elevated fine particulate exposure. How can I assist with patient symptoms today?`,
+      content: `Namaste. I am AeroMed Clinical AI, grounded in Adaption Labs' 8,188+ verified Indian atmospheric-respiratory protocols. Current surveillance for ${activeCity} indicates elevated fine particulate exposure. You may query in Marathi (मराठी), Hindi (हिन्दी), Tamil (தமிழ்), or English. How can I assist with patient symptoms today?`,
       timestamp: 'Just now'
     }
   ]);
@@ -50,10 +73,11 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
   ];
 
   const quickQuestions = [
-    "What precautions should outdoor delivery workers take today?",
-    "Is it safe for my asthmatic 6-year-old to go to school?",
-    "What are the emergency signs of severe bronchospasm in smog?",
-    "Should COPD patients switch to N95 masks indoors?"
+    { text: "दम्याच्या रुग्णांनी काय काळजी घ्यावी?", label: "मराठी (Asthma)", lang: "mr" },
+    { text: "धुआं और प्रदूषण में बच्चों को बाहर भेजना सुरक्षित है?", label: "हिन्दी (Children)", lang: "hi" },
+    { text: "What precautions should outdoor delivery workers take today?", label: "English (Gig Workers)", lang: "en" },
+    { text: "சுவாச பிரச்சனை உள்ளவர்கள் என்ன செய்ய வேண்டும்?", label: "தமிழ் (Respiratory)", lang: "ta" },
+    { text: "What are the emergency signs of severe bronchospasm in smog?", label: "ER Signs", lang: "en" }
   ];
 
   const toggleSymptom = (sym) => {
@@ -64,9 +88,13 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
     }
   };
 
-  const handleSendMessage = async (textToSend) => {
+  const handleSendMessage = async (textToSend, explicitLang = null) => {
     const text = textToSend || inputMessage;
     if (!text.trim() || chatLoading) return;
+
+    // Detect target language from text or chip
+    const targetLang = explicitLang || detectScriptLanguage(text, copilotLang || activeLanguage);
+    setCopilotLang(targetLang);
 
     const userMsg = {
       role: 'user',
@@ -80,7 +108,7 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
     setChatLoading(true);
 
     try {
-      const response = await aqiClient.triageChat(newHistory, activeCity, activeLanguage);
+      const response = await aqiClient.triageChat(newHistory, activeCity, targetLang);
       
       const assistantReply = response.reply || response.response || response.message || 
         "Clinical guidance: Under current atmospheric pollution in " + activeCity + ", sensitive patients should adhere strictly to prescribed maintenance inhalers, avoid outdoor physical exertion during morning temperature inversions, and seek immediate emergency department admission if SpO2 drops below 92%.";
@@ -105,12 +133,18 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
         });
       }
     } catch (err) {
-      // Local fallback clinical response
+      // Local fallback clinical response matching target script
+      const fallbackContent = targetLang === 'mr'
+        ? `क्लिनिकल ट्रायज [स्थानिक सुरक्षित सल्ला]: ${activeCity} मधील सध्याच्या PM2.5 पातळीमुळे, ${profiles.find(p => p.id === patientProfile)?.label} असलेल्या रुग्णांनी बाहेर जाणे टाळावे, N95 मास्क वापरावा आणि SpO2 तपासावा. जर ऑक्सिजन पातळी ९२% खाली गेली तर ताबडतोब आपत्कालीन रुग्णालयात संपर्क साधावा.`
+        : targetLang === 'hi'
+        ? `क्लिनिकल ट्राइएज [स्थानीय सुरक्षित परामर्श]: ${activeCity} में वर्तमान वायु प्रदूषण स्तर को देखते हुए, ${profiles.find(p => p.id === patientProfile)?.label} के मरीज घर के अंदर रहें, N95 मास्क पहनें और SpO2 92% से नीचे जाने पर तुरंत नजदीकी अस्पताल के इमरजेंसी वार्ड में जाएं।`
+        : `Clinical Triager [Local Offline Safe Fallback]: Under current PM2.5 levels in ${activeCity}, high-risk individuals (${profiles.find(p => p.id === patientProfile)?.label}) must minimize outdoor activity, wear certified N95 respirators, and check SpO2 oxygen saturation frequently. If SpO2 drops below 92%, proceed immediately to an emergency care facility.`;
+
       setMessages([
         ...newHistory,
         {
           role: 'assistant',
-          content: `Clinical Triager [Local Offline Safe Fallback]: Under current PM2.5 levels in ${activeCity}, high-risk individuals (${profiles.find(p => p.id === patientProfile)?.label}) must minimize outdoor activity, wear certified N95 respirators, and check SpO2 oxygen saturation frequently. If SpO2 drops below 92%, proceed immediately to an emergency care facility.`,
+          content: fallbackContent,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -248,33 +282,37 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
                   <div className="w-2 h-2 rounded-full bg-[#465FFF] animate-bounce" />
                   <div className="w-2 h-2 rounded-full bg-[#465FFF] animate-bounce [animation-delay:0.2s]" />
                   <div className="w-2 h-2 rounded-full bg-[#465FFF] animate-bounce [animation-delay:0.4s]" />
-                  <span>Grounding against 8,188 clinical vectors...</span>
+                  <span>Grounding in {copilotLang.toUpperCase()} against 8,188 clinical vectors...</span>
                 </div>
               )}
             </div>
 
-            {/* Quick Suggestions Strip */}
+            {/* Quick Indic & Clinical Suggestions Strip */}
             <div className="p-2 border-t border-gray-100 bg-white flex items-center gap-2 overflow-x-auto no-scrollbar">
               <span className="text-[10px] text-gray-400 font-bold uppercase shrink-0 px-1">Quick:</span>
               {quickQuestions.map((q, i) => (
                 <button
                   key={i}
-                  onClick={() => handleSendMessage(q)}
-                  className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] rounded-lg shrink-0 transition"
+                  onClick={() => handleSendMessage(q.text, q.lang)}
+                  className={`px-2.5 py-1 text-[11px] rounded-lg shrink-0 transition cursor-pointer font-medium ${
+                    copilotLang === q.lang
+                      ? 'bg-[#465FFF]/10 text-[#465FFF] border border-[#465FFF]/30 font-bold'
+                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  }`}
                 >
-                  {q}
+                  {q.label}
                 </button>
               ))}
             </div>
 
-            {/* Input Bar */}
+            {/* Input Bar with Indic script auto-detection */}
             <div className="p-3 bg-white border-t border-gray-100 flex items-center gap-2">
               <input
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder={`Ask in English, हिन्दी, मराठी, தமிழ், or any of 13 languages...`}
+                placeholder={`Ask in मराठी, हिन्दी, தமிழ், or English...`}
                 className="flex-1 px-3.5 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#465FFF]/30 focus:border-[#465FFF]"
               />
               <button

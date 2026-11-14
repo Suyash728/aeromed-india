@@ -56,22 +56,140 @@ CITY_COORDINATES = {
     "guwahati": {"name": "Guwahati", "latitude": 26.1445, "longitude": 91.7362, "state": "Assam", "region": "North-East"}
 }
 
-# 12 Indian Languages with Native Scripts (+ English)
+# 12 Indian Languages with Native Scripts (+ English) and regional tags
 SUPPORTED_LANGUAGES = [
-    {"code": "en", "name": "English", "native": "English", "script": "Latin"},
-    {"code": "hi", "name": "Hindi", "native": "हिन्दी", "script": "Devanagari"},
-    {"code": "mr", "name": "Marathi", "native": "मराठी", "script": "Devanagari"},
-    {"code": "bn", "name": "Bengali", "native": "বাংলা", "script": "Bengali"},
-    {"code": "ta", "name": "Tamil", "native": "தமிழ்", "script": "Tamil"},
-    {"code": "te", "name": "Telugu", "native": "తెలుగు", "script": "Telugu"},
-    {"code": "kn", "name": "Kannada", "native": "ಕನ್ನಡ", "script": "Kannada"},
-    {"code": "ml", "name": "Malayalam", "native": "മലയാളം", "script": "Malayalam"},
-    {"code": "gu", "name": "Gujarati", "native": "ગુજરાતી", "script": "Gujarati"},
-    {"code": "pa", "name": "Punjabi", "native": "ਪੰਜਾਬੀ", "script": "Gurmukhi"},
-    {"code": "or", "name": "Odia", "native": "ଓଡ଼ିଆ", "script": "Odia"},
-    {"code": "as", "name": "Assamese", "native": "অসমীয়া", "script": "Bengali-Assamese"},
-    {"code": "ur", "name": "Urdu", "native": "اردو", "script": "Perso-Arabic"}
+    {"code": "en", "name": "English", "native": "English", "script": "Latin", "region": "All-India"},
+    {"code": "hi", "name": "Hindi", "native": "हिन्दी", "script": "Devanagari", "region": "North / Central"},
+    {"code": "mr", "name": "Marathi", "native": "मराठी", "script": "Devanagari", "region": "Maharashtra"},
+    {"code": "bn", "name": "Bengali", "native": "বাংলা", "script": "Bengali", "region": "West Bengal"},
+    {"code": "ta", "name": "Tamil", "native": "தமிழ்", "script": "Tamil", "region": "Tamil Nadu"},
+    {"code": "te", "name": "Telugu", "native": "తెలుగు", "script": "Telugu", "region": "Telangana / AP"},
+    {"code": "kn", "name": "Kannada", "native": "ಕನ್ನಡ", "script": "Kannada", "region": "Karnataka"},
+    {"code": "ml", "name": "Malayalam", "native": "മലയാളം", "script": "Malayalam", "region": "Kerala"},
+    {"code": "gu", "name": "Gujarati", "native": "ગુજરાતી", "script": "Gujarati", "region": "Gujarat"},
+    {"code": "pa", "name": "Punjabi", "native": "ਪੰਜਾਬੀ", "script": "Gurmukhi", "region": "Punjab"},
+    {"code": "or", "name": "Odia", "native": "ଓଡ଼ିଆ", "script": "Odia", "region": "Odisha"},
+    {"code": "as", "name": "Assamese", "native": "অসমীয়া", "script": "Bengali-Assamese", "region": "Assam"},
+    {"code": "ur", "name": "Urdu", "native": "اردو", "script": "Perso-Arabic", "region": "Pan-India"}
 ]
+
+def detect_indic_language(text: Optional[str], default_lang: str = "english") -> str:
+    """
+    Auto-detects Indic language script from text characters.
+    Distinguishes Marathi from Hindi in Devanagari using characteristic lexical markers.
+    """
+    if not text or not isinstance(text, str):
+        return default_lang
+
+    # Script character counts
+    counts = {
+        "tamil": 0,
+        "telugu": 0,
+        "kannada": 0,
+        "malayalam": 0,
+        "gujarati": 0,
+        "punjabi": 0,
+        "odia": 0,
+        "bengali_assamese": 0,
+        "urdu": 0,
+        "devanagari": 0
+    }
+
+    for char in text:
+        cp = ord(char)
+        if 0x0B80 <= cp <= 0x0BFF:
+            counts["tamil"] += 1
+        elif 0x0C00 <= cp <= 0x0C7F:
+            counts["telugu"] += 1
+        elif 0x0C80 <= cp <= 0x0CFF:
+            counts["kannada"] += 1
+        elif 0x0D00 <= cp <= 0x0D7F:
+            counts["malayalam"] += 1
+        elif 0x0A80 <= cp <= 0x0AFF:
+            counts["gujarati"] += 1
+        elif 0x0A00 <= cp <= 0x0A7F:
+            counts["punjabi"] += 1
+        elif 0x0B00 <= cp <= 0x0B7F:
+            counts["odia"] += 1
+        elif 0x0980 <= cp <= 0x09FF:
+            counts["bengali_assamese"] += 1
+        elif 0x0600 <= cp <= 0x06FF:
+            counts["urdu"] += 1
+        elif 0x0900 <= cp <= 0x097F:
+            counts["devanagari"] += 1
+
+    best_script, max_count = max(counts.items(), key=lambda x: x[1])
+    if max_count == 0:
+        return default_lang
+
+    if best_script == "tamil":
+        return "tamil"
+    if best_script == "telugu":
+        return "telugu"
+    if best_script == "kannada":
+        return "kannada"
+    if best_script == "malayalam":
+        return "malayalam"
+    if best_script == "gujarati":
+        return "gujarati"
+    if best_script == "punjabi":
+        return "punjabi"
+    if best_script == "odia":
+        return "odia"
+    if best_script == "urdu":
+        return "urdu"
+    if best_script == "bengali_assamese":
+        # Check for Assamese-specific characters
+        if "\u09F0" in text or "\u09F1" in text:
+            return "assamese"
+        return "bengali"
+    if best_script == "devanagari":
+        marathi_markers = [
+            "काय", "काळजी", "घ्यावी", "करावी", "रुग्णांनी", "दम्या", "आहे", "आहेत",
+            "कशी", "करावे", "नाही", "होते", "माझे", "मला", "द्या", "सल्ला", "औषध",
+            "त्रास", "जावे", "पाहावे", "सांगा", "मुलांना", "वाढली", "झाली"
+        ]
+        for marker in marathi_markers:
+            if marker in text:
+                return "marathi"
+        # Check if default_lang was marathi
+        if default_lang and default_lang.lower().strip() in ["mr", "marathi"]:
+            return "marathi"
+        return "hindi"
+
+    return default_lang
+
+def resolve_language(lang_str: Optional[str] = None, user_text: Optional[str] = None) -> dict:
+    """
+    Resolves input language string or user text script to a canonical SUPPORTED_LANGUAGES entry.
+    """
+    candidate = (lang_str or "").strip().lower()
+
+    # If text is provided, auto-detect script
+    if user_text:
+        detected = detect_indic_language(user_text, default_lang=candidate or "english")
+        if detected and detected != "english":
+            candidate = detected
+
+    if not candidate:
+        candidate = "english"
+
+    # Match by code, name, or native script
+    for lang in SUPPORTED_LANGUAGES:
+        if candidate in [
+            lang["code"].lower(),
+            lang["name"].lower(),
+            lang["native"].lower(),
+            f"{lang['name'].lower()} ({lang['native'].lower()})"
+        ]:
+            return lang
+
+    # Substring search match
+    for lang in SUPPORTED_LANGUAGES:
+        if lang["code"].lower() in candidate or lang["name"].lower() in candidate:
+            return lang
+
+    return SUPPORTED_LANGUAGES[0]  # English default
 
 def get_adaption_client():
     global adaption_client
@@ -281,17 +399,149 @@ def fetch_live_air_quality(lat: float, lon: float):
             "humidity": 68.0
         }
 
+def build_clinical_advisory_fallback(lang_code: str, city: str, air: dict, risk_score: float, severity: str, condition: str) -> str:
+    aqi = air.get("aqi", 140)
+    pm25 = air.get("pm25", 58.0)
+    fallbacks = {
+        "mr": (
+            f"आरोग्य सल्ला ({city}): हवेतील PM2.5 पातळी {pm25} µg/m³ असून AQI {aqi} आहे. "
+            f"श्वसनविकार धोका निर्देशांक {risk_score}/100 ({severity}) आहे. "
+            f"{condition} असलेल्या व्यक्तींनी: १) पहाटे किंवा संध्याकाळी बाहेर जाणे टाळावे. "
+            f"२) बाहेर पडताना N95 मास्क वापरावा. ३) इनहेलर जवळ ठेवावे. ४) ऑक्सिजन पातळी ९२% पेक्षा कमी झाल्यास तातडीने रुग्णालयात जावे."
+        ),
+        "hi": (
+            f"स्वास्थ्य परामर्श ({city}): वायु गुणवत्ता सूचकांक AQI {aqi} और PM2.5 {pm25} µg/m³ है। "
+            f"अस्पताल भर्ती जोखिम स्कोर {risk_score}/100 ({severity}) है। "
+            f"{condition} के मरीजों के लिए निर्देश: १) सुबह की सैर बंद रखें। २) बाहर जाते समय N95 मास्क पहनें। "
+            f"३) डॉक्टर द्वारा सुझाई गई दवाएं व इनहेलर साथ रखें। ४) सांस लेने में तकलीफ या SpO2 ९२% से कम होने पर तुरंत अस्पताल जाएं।"
+        ),
+        "ta": (
+            f"மருத்துவ ஆலோசனை ({city}): தற்போதைய AQI {aqi} மற்றும் PM2.5 {pm25} µg/m³ ஆக உள்ளது. "
+            f"சுவாச ஆபத்து மதிப்பீடு {risk_score}/100 ({severity}). "
+            f"{condition} உள்ளவர்கள் வெளியில் செல்வதை தவிர்க்கவும், N95 முகக்கவசம் அணியவும், இன்ஹேலரை எப்போதும் அருகில் வைத்திருக்கவும். SpO2 92%க்கு கீழே குறைந்தால் உடனடியாக மருத்துவமனை செல்லவும்."
+        ),
+        "te": (
+            f"వైద్య సలహా ({city}): ప్రస్తుత AQI {aqi} మరియు PM2.5 {pm25} µg/m³ గా నమోదైంది. "
+            f"శ్వాసకోశ ప్రమాద స్కోరు {risk_score}/100 ({severity}). "
+            f"{condition} ఉన్నవారు బయటకు వెళ్లడం తగ్గించాలి, N95 మాస్క్ ధరించాలి, ఇన్హేలర్ సిద్ధంగా ఉంచుకోవాలి. SpO2 92% కంటే తగ్గితే వెంటనే ఆసుపత్రికి వెళ్లాలి."
+        ),
+        "bn": (
+            f"চিকিৎসা পরামর্শ ({city}): বর্তমানে AQI {aqi} এবং PM2.5 স্তর {pm25} µg/m³। "
+            f"শ্বাসযন্ত্রের ঝুঁকি স্কোর {risk_score}/100 ({severity})। "
+            f"{condition} আক্রান্ত ব্যক্তিদের জন্য নির্দেশ: বাইরে যাওয়া এড়িয়ে চলুন, N95 মাস্ক ব্যবহার করুন, ইনহেলার সঙ্গে রাখুন এবং SpO2 ৯২% এর নিচে নামলে অবিলম্বে হাসপাতালে যোগাযোগ করুন।"
+        ),
+        "kn": (
+            f"ವೈದ್ಯಕೀಯ ಸಲಹೆ ({city}): ಪ್ರಸ್ತುತ AQI {aqi} ಮತ್ತು PM2.5 {pm25} µg/m³ ಇದೆ. "
+            f"ಉಸಿರಾಟದ ಅಪಾಯದ ಅಂಕ {risk_score}/100 ({severity}). "
+            f"{condition} ಇರುವವರು ಹೊರಹೋಗುವುದನ್ನು ತಪ್ಪಿಸಿ, N95 ಮಾಸ್ಕ್ ಧರಿಸಿ, ಇನ್ಹೇಲರ್ ಜೊತೆಯಲ್ಲಿಡಿ. SpO2 92% ಕ್ಕಿಂತ ಕಡಿಮೆಯಾದರೆ ತಕ್ಷಣ ಆಸ್ಪತ್ರೆಗೆ ಭೇಟಿ ನೀಡಿ."
+        ),
+        "ml": (
+            f"ചികിത്സാ നിർദ്ദേശം ({city}): നിലവിലെ AQI {aqi} ഉം PM2.5 {pm25} µg/m³ ഉം ആണ്. "
+            f"ശ്വാസകോശ രോഗസാധ്യത {risk_score}/100 ({severity}). "
+            f"{condition} ഉള്ളവർ പുറത്തിറങ്ങുന്നത് ഒഴിവാക്കുക, N95 മാസ്ക് ധരിക്കുക, ഇൻഹേലർ കയ്യിൽ കരുതുക. SpO2 92% ൽ താഴെയായാൽ ഉടൻ ആശുപത്രിയിലെത്തുക."
+        ),
+        "gu": (
+            f"તબીબી સલાહ ({city}): વર્તમાન AQI {aqi} અને PM2.5 {pm25} µg/m³ છે. "
+            f"શ્વસન જોખમ સ્કોર {risk_score}/100 ({severity}) છે. "
+            f"{condition} ધરાવતી વ્યક્તિઓએ બહાર જવાનું ટાળવું, N95 માસ્ક પહેરવો અને ઇનહેલર સાથે રાખવું. SpO2 92% થી ઓછું થાય તો તરત જ હોસ્પિટલ જવું."
+        ),
+        "pa": (
+            f"ਸਿਹਤ ਸਲਾਹ ({city}): ਮੌਜੂਦਾ AQI {aqi} ਅਤੇ PM2.5 {pm25} µg/m³ ਹੈ। "
+            f"ਸਾਹ ਦੀ ਬਿਮਾਰੀ ਦਾ ਖ਼ਤਰਾ ਸਕੋਰ {risk_score}/100 ({severity}) ਹੈ। "
+            f"{condition} ਵਾਲੇ ਮਰੀਜ਼ ਬਾਹਰ ਜਾਣ ਤੋਂ ਬਚਣ, N95 ਮਾਸਕ ਪਾਉਣ ਅਤੇ ਇਨਹੇਲਰ ਕੋਲ ਰੱਖਣ। ਜੇਕਰ SpO2 92% ਤੋਂ ਘੱਟ ਜਾਵੇ ਤਾਂ ਤੁਰੰਤ ਹਸਪਤਾਲ ਜਾਓ।"
+        ),
+        "or": (
+            f"ସ୍ୱାସ୍ଥ୍ୟ ପରାମର୍ଶ ({city}): ବର୍ତ୍ତମାନ AQI {aqi} ଏବଂ PM2.5 {pm25} µg/m³ ରହିଛି। "
+            f"ଶ୍ୱାସକ୍ରିୟା ବିପଦ ସ୍କୋର {risk_score}/100 ({severity})। "
+            f"{condition} ଥିବା ବ୍ୟକ୍ତିମାନେ ବାହାରକୁ ଯିବା ଠାରୁ ଦୂରେଇ ରୁହନ୍ତୁ, N95 ମାସ୍କ ବ୍ୟବହାର କରନ୍ତୁ ଏବଂ ଇନହେଲର ପାଖରେ ରଖନ୍ତୁ। SpO2 92% ରୁ କମିଲେ ତୁରନ୍ତ ଡାକ୍ତରଖାନା ଯାଆନ୍ତୁ।"
+        ),
+        "as": (
+            f"স্বাস্থ্য পৰামৰ্শ ({city}): বৰ্তমান AQI {aqi} আৰু PM2.5 {pm25} µg/m³। "
+            f"শ্বাস-প্ৰশ্বাসৰ বিপদাশংকা স্ক'ৰ {risk_score}/100 ({severity})। "
+            f"{condition} থকা লোকসকলে বাহিৰলৈ ওলোৱা বন্ধ কৰক, N95 মাস্ক পিন্ধক আৰু ইনহেলাৰ লগত ৰাখক। SpO2 ৯২% তকৈ কম হ'লে ততালিকে চিকিৎসালয়লৈ যাওক।"
+        ),
+        "ur": (
+            f"طبی مشورہ ({city}): موجودہ AQI {aqi} اور PM2.5 {pm25} µg/m³ ہے۔ "
+            f"سانس کے امراض کا خطرہ اسکور {risk_score}/100 ({severity}) ہے۔ "
+            f"{condition} کے مریض باہر جانے سے گریز کریں، N95 ماسک پہنیں اور انہیلر پاس رکھیں۔ اگر SpO2 92% سے کم ہو جائے تو فوری ہسپتال رجوع کریں۔"
+        ),
+        "en": (
+            f"CLINICAL ADVISORY ({city}): Ambient PM2.5 is currently {pm25} µg/m³ with AQI {aqi}. "
+            f"Predicted Respiratory Admission Risk Score: {risk_score}/100 ({severity}). "
+            f"Directives for {condition}: 1) Avoid outdoor strenuous activities. 2) Wear certified N95 respirators. "
+            f"3) Keep rescue inhalers accessible. 4) Seek ER triage immediately if SpO2 drops below 92%."
+        )
+    }
+    return fallbacks.get(lang_code, fallbacks["en"])
+
+def build_triage_chat_fallback(lang_code: str, city: str, air: dict, grap: dict, condition: str) -> str:
+    aqi = air.get("aqi", 140)
+    stage = grap.get("stage", "Stage II")
+    fallbacks = {
+        "mr": (
+            f"सध्या {city} मध्ये AQI {aqi} ({stage}) आहे. {condition} च्या रुग्णांनी खबरदारी घ्यावी: "
+            f"घराच्या खिडक्या बंद ठेवाव्यात आणि एअर प्युरिफायर चालू ठेवावा. धुळीपासून लांब राहावे व डॉक्टरांच्या सल्ल्यानुसार इनहेलर वापरावे. "
+            f"जर छाती भरून येत असेल, धाप लागत असेल किंवा ऑक्सिजन (SpO2) ९२% खाली गेल्यास तातडीने जवळच्या रुग्णालयाच्या आपत्कालीन (ER) विभागात जावे."
+        ),
+        "hi": (
+            f"वर्तमान में {city} में AQI {aqi} ({stage}) दर्ज किया गया है। {condition} के संबंध में आवश्यक सावधानी: "
+            f"मरीज को घर के अंदर रखें, खिड़कियां बंद रखें और धूल-धुएं से बचाएं। डॉक्टर द्वारा निर्धारित इन्हेलर का समय पर उपयोग करें। "
+            f"यदि सांस तेज चल रही हो, छाती में खिंचाव हो या SpO2 92% से नीचे आए, तो बिना किसी देरी के तुरंत नजदीकी आपातकालीन वार्ड (ER) में संपर्क करें।"
+        ),
+        "ta": (
+            f"{city} நகரில் தற்போதைய AQI {aqi} ({stage}) ஆக உள்ளது. {condition} பாதிப்பு உள்ளவர்கள் உடனே வீட்டுக்குள் இருக்கவும். "
+            f"காற்று சுத்திகரிப்பானை இயக்கவும் மற்றும் மருத்துவர் பரிந்துரைத்த இன்ஹேலரை பயன்படுத்தவும். மூச்சுத்திணறல் அதிகமானாலோ அல்லது ஆக்சிஜன் அளவு 92%க்கு கீழ் குறைந்தாலோ உடனடியாக அவசர சிகிச்சைப் பிரிவை அணுகவும்."
+        ),
+        "te": (
+            f"{city} లో ప్రస్తుత AQI {aqi} ({stage}). {condition} ఉన్న రోగులు తక్షణమే ఇంట్లోనే ఉండాలి. "
+            f"కిటికీలు మూసివేసి ఎయిర్ ప్యూరిಫైయర్ వాడండి. వైద్యులు సూచించిన ఇన్హేలర్ వెంటనే తీసుకోండి. శ్వాస తీసుకోవడంలో తీవ్ర ఇబ్బంది లేదా ఆక్సిజన్ స్థాయి 92% కన్నా తగ్గితే వెంటనే అత్యవసర విభాగానికి తరలించండి."
+        ),
+        "bn": (
+            f"{city}-এ বর্তমান AQI {aqi} ({stage})। {condition}-এর জন্য অবিলম্বে রোগীকে ঘরের ভেতর রাখুন ও জানালা বন্ধ রাখুন। "
+            f"চিকিৎসকের পরামর্শ মতো ইনহেলার বা নেবুলাইজার ব্যবহার করুন। শ্বাসকষ্ট বাড়লে বা অক্সিজেনের মাত্রা ৯২%-এর নিচে নামলে এক মুহূর্তও দেরি না করে নিকটস্থ জরুরি বিভাগে নিয়ে যান।"
+        ),
+        "kn": (
+            f"{city} ನಗರದಲ್ಲಿ ಪ್ರಸ್ತುತ AQI {aqi} ({stage}) ಇದೆ. {condition} ಸಮಸ್ಯೆ ಇರುವವರು ತಕ್ಷಣ ಮನೆಯೊಳಗೆ ಇರಬೇಕು. "
+            f"ಕಿಟಕಿಗಳನ್ನು ಮುಚ್ಚಿ ಮತ್ತು ವೈದ್ಯರು ಸೂಚಿಸಿದ ಇನ್ಹೇಲರ್ ಬಳಸಿ. ಉಸಿರಾಟದ ತೊಂದರೆ ಹೆಚ್ಚಾದರೆ ಅಥವಾ ಆಮ್ಲಜನಕ 92% ಕ್ಕಿಂತ ಕಡಿಮೆಯಾದರೆ ತಕ್ಷಣ ತುರ್ತು ಚಿಕಿತ್ಸಾ ವಿಭಾಗಕ್ಕೆ ಭೇಟಿ ನೀಡಿ."
+        ),
+        "ml": (
+            f"{city} നഗരത്തിൽ നിലവിലെ AQI {aqi} ({stage}) ആണ്. {condition} ഉള്ളവർ ഉടൻ വീടിനുള്ളിൽ കഴിയുക. "
+            f"ശുദ്ധവായു ഉറപ്പാക്കുകയും ഡോക്ടർ നിർദ്ദേശിച്ച ഇൻഹേലർ ഉപയോഗിക്കുകയും ചെയ്യുക. ശ്വാസതടസ്സം കൂടുകയോ ഓക്സിജൻ 92% ൽ താഴുകയോ ചെയ്താൽ ഉടൻ എമർജൻസി വിഭാഗത്തിൽ എത്തിക്കുക."
+        ),
+        "gu": (
+            f"{city} માં વર્તમાન AQI {aqi} ({stage}) છે. {condition} ના દર્દીઓને તાત્કાલિક ઘરમાં રાખો. "
+            f"બારીઓ બંધ રાખો અને ડૉક્ટર દ્વારા સૂચવેલ ઇનહેલરનો ઉપયોગ કરો. જો શ્વાસ લેવામાં વધુ તકલીફ થાય અથવા SpO2 92% થી નીચે જાય, તો વિલંબ કર્યા વિના તરત જ ઇમરજન્સીમાં સંપર્ક કરો."
+        ),
+        "pa": (
+            f"{city} ਵਿੱਚ ਮੌਜੂਦਾ AQI {aqi} ({stage}) ਹੈ। {condition} ਦੇ ਮਰੀਜ਼ ਨੂੰ ਤੁਰੰਤ ਘਰ ਦੇ ਅੰਦਰ ਰੱਖੋ ਅਤੇ ਖਿੜਕੀਆਂ ਬੰਦ ਕਰੋ। "
+            f"ਡਾਕਟਰ ਦੁਆਰਾ ਦਿੱਤਾ ਇਨਹੇਲਰ ਵਰਤੋ। ਜੇਕਰ ਸਾਹ ਲੈਣ ਵਿੱਚ ਬਹੁਤ ਤਕਲੀਫ਼ ਹੋਵੇ ਜਾਂ ਆਕਸੀਜਨ 92% ਤੋਂ ਘੱਟ ਜਾਵੇ ਤਾਂ ਬਿਨਾਂ ਦੇਰੀ ਤੁਰੰਤ ਐਮਰਜੈਂਸੀ ਵਾਰਡ ਵਿੱਚ ਜਾਓ।"
+        ),
+        "or": (
+            f"{city} ରେ ବର୍ତ୍ତମାନ AQI {aqi} ({stage}) ଅଟେ। {condition} ରୋଗୀଙ୍କୁ ତୁରନ୍ତ ଘର ଭିତରେ ରଖନ୍ତୁ। "
+            f"ଡାକ୍ତର ଦେଇଥିବା ଇନହେଲର ବ୍ୟବହାର କରନ୍ତୁ। ଯଦି ନିଶ୍ୱାସ ନେବାରେ କଷ୍ଟ ହୁଏ କିମ୍ବା ଅକ୍ସିଜେନ 92% ରୁ କମିଯାଏ, ତେବେ ବିଳମ୍ବ ନକରି ତୁରନ୍ତ ନିକଟସ୍ଥ ଜରୁରୀକାଳୀନ ବିଭାଗରେ ଯୋଗାଯୋଗ କରନ୍ତୁ।"
+        ),
+        "as": (
+            f"{city} ত বৰ্তমান AQI {aqi} ({stage})। {condition} ত আক্ৰান্ত ব্যক্তিক তৎকালীনভাৱে ঘৰৰ ভিতৰত ৰাখক। "
+            f"চিকিৎসকৰ পৰামৰ্শ অনুসৰি ইনহেলাৰ ব্যৱহাৰ কৰক। যদি উশাহ-নিশাহ লওঁতে কষ্ট হয় বা অক্সিজেন ৯২% তললৈ নামে, তেন্তে পলম নকৰি ততালিকে জৰুৰীকালীন চিকিৎসালয়ত যোগাযোগ কৰক।"
+        ),
+        "ur": (
+            f"{city} میں موجودہ AQI {aqi} ({stage}) ہے۔ {condition} کے مریض کو فوری طور پر گھر کے اندر رکھیں اور کھڑکیاں بند رکھیں۔ "
+            f"ڈاکٹر کا تجویز کردہ انہیلر استعمال کریں۔ اگر سانس لینے میں شدید تکلیف ہو یا آکسیجن 92% سے کم ہو جائے تو فوراً ہنگامی طبی امداد حاصل کریں۔"
+        ),
+        "en": (
+            f"Given {city}'s current AQI of {aqi} ({stage}), for {condition}: "
+            f"Ensure strict indoor air filtration and follow your physician's prescribed preventive plan. "
+            f"If you notice rapid breathing, chest retractions, or SpO2 drops below 92%, seek immediate emergency hospital care."
+        )
+    }
+    return fallbacks.get(lang_code, fallbacks["en"])
+
 def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity: str, lang: str, condition: str) -> dict:
     """Invokes Adaption AI platform model for clinical respiratory advisory with robust localized fallback."""
     client = get_adaption_client()
-    lang_lower = lang.lower().strip()
-    
-    # Identify language display name
-    lang_display = "English"
-    for item in SUPPORTED_LANGUAGES:
-        if lang_lower in [item["code"].lower(), item["name"].lower(), item["native"].lower()]:
-            lang_display = f"{item['name']} ({item['native']})"
-            break
+    target_lang = resolve_language(lang)
+    lang_display = f"{target_lang['name']} ({target_lang['native']})"
+    lang_code = target_lang["code"]
 
     prompt = (
         f"You are a Senior Pulmonologist and Environmental Health Specialist in India adhering to CAQM GRAP standards. "
@@ -300,7 +550,8 @@ def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity
         f"AQI = {air['aqi']}, Temperature = {air['temperature']}°C. "
         f"Calculated Respiratory Hospital Admission Risk Score: {risk_score}/100 ({severity} Risk Level). "
         f"Patient Focus: {condition}. "
-        f"Target Language: Provide the entire advisory strictly in {lang_display}. "
+        f"CRITICAL LANGUAGE INSTRUCTION: You MUST write the ENTIRE advisory in {target_lang['name']} ({target_lang['native']}) using its native script ({target_lang['script']}). "
+        f"Do NOT write in English unless English was requested. "
         f"Include: 1) Air Quality Health Summary, 2) Specific Precautions for {condition}, "
         f"3) Medication/Inhaler guidance, 4) When to visit the ER triage (SpO2 < 92%). Keep it under 150 words."
     )
@@ -310,42 +561,24 @@ def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity
             resp = client.responses.create(
                 model="deepseek-v4-flash",
                 input=prompt,
-                max_output_tokens=400,
+                max_output_tokens=1000,
                 temperature=0.3
             )
             if resp and resp.output_text:
-                return {
-                    "advisory": resp.output_text.strip(),
-                    "language": lang_display,
-                    "model_used": "deepseek-v4-flash (Adaption AI)",
-                    "source": "live_adaption_inference"
-                }
+                candidate_text = resp.output_text.strip()
+                # Verify script if Indic was requested
+                if lang_code == "en" or detect_indic_language(candidate_text, default_lang="english") != "english":
+                    return {
+                        "advisory": candidate_text,
+                        "language": lang_display,
+                        "model_used": "deepseek-v4-flash (Adaption AI)",
+                        "source": "live_adaption_inference"
+                    }
         except Exception as e:
             logger.warning(f"Adaption live inference fallback due to: {e}")
 
-    # Robust Fallbacks for English, Hindi, and Marathi
-    if "marathi" in lang_lower or "mr" == lang_lower:
-        text = (
-            f"आरोग्य सल्ला ({city}): हवेतील PM2.5 पातळी {air['pm25']} µg/m³ असून AQI {air['aqi']} आहे. "
-            f"श्वसनविकार धोका निर्देशांक {risk_score}/100 ({severity}) आहे. "
-            f"{condition} असलेल्या व्यक्तींनी: १) पहाटे किंवा संध्याकाळी बाहेर जाणे टाळावे. "
-            f"२) बाहेर पडताना N95 मास्क वापरावा. ३) इनहेलर जवळ ठेवावे. ४) ऑक्सिजन पातळी ९२% पेक्षा कमी झाल्यास तातडीने रुग्णालयात जावे."
-        )
-    elif "hindi" in lang_lower or "hi" == lang_lower:
-        text = (
-            f"स्वास्थ्य परामर्श ({city}): वायु गुणवत्ता सूचकांक AQI {air['aqi']} और PM2.5 {air['pm25']} µg/m³ है। "
-            f"अस्पताल भर्ती जोखिम स्कोर {risk_score}/100 ({severity}) है। "
-            f"{condition} के मरीजों के लिए निर्देश: १) सुबह की सैर बंद रखें। २) बाहर जाते समय N95 मास्क पहनें। "
-            f"३) डॉक्टर द्वारा सुझाई गई दवाएं व इनहेलर साथ रखें। ४) सांस लेने में तकलीफ या SpO2 ९२% से कम होने पर तुरंत अस्पताल जाएं।"
-        )
-    else:
-        text = (
-            f"CLINICAL ADVISORY ({city}): Ambient PM2.5 is currently {air['pm25']} µg/m³ with AQI {air['aqi']}. "
-            f"Predicted Respiratory Admission Risk Score: {risk_score}/100 ({severity}). "
-            f"Directives for {condition}: 1) Avoid outdoor strenuous activities. 2) Wear certified N95 respirators. "
-            f"3) Keep rescue inhalers accessible. 4) Seek ER triage immediately if SpO2 drops below 92%."
-        )
-
+    # Fallback to verified clinical advisory in native script
+    text = build_clinical_advisory_fallback(lang_code, city, air, risk_score, severity, condition)
     return {
         "advisory": text,
         "language": lang_display,
@@ -356,7 +589,8 @@ def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity
 @app.get("/api/live-risk")
 def get_live_risk(
     city: str = Query("Mumbai", description="One of 12 Indian Metros"),
-    lang: str = Query("english", description="Any of 12 Indian Languages (e.g., marathi, hindi, tamil, bengali)"),
+    lang: Optional[str] = Query(None, description="Any of 12 Indian Languages (e.g., marathi, hindi, tamil, bengali)"),
+    language: Optional[str] = Query(None, description="Alias for lang parameter"),
     condition: str = Query("Bronchial Asthma & COPD", description="Pre-existing patient vulnerability")
 ):
     """
@@ -367,6 +601,7 @@ def get_live_risk(
     geo = CITY_COORDINATES.get(city_key, CITY_COORDINATES["mumbai"])
 
     air = fetch_live_air_quality(geo["latitude"], geo["longitude"])
+    active_lang = language or lang or "english"
 
     if "model" in ml_bundle:
         features = ml_bundle["features"]
@@ -401,7 +636,7 @@ def get_live_risk(
         air=air,
         risk_score=predicted_risk,
         severity=severity,
-        lang=lang,
+        lang=active_lang,
         condition=condition
     )
 
@@ -449,7 +684,8 @@ class CustomSimulationRequest(BaseModel):
     o3: float = Field(default=35.0, description="O3 in ug/m3")
     temperature: float = Field(default=24.0, description="Temperature in Celsius")
     humidity: float = Field(default=65.0, description="Relative Humidity %")
-    lang: str = Field(default="english")
+    lang: Optional[str] = Field(default=None)
+    language: Optional[str] = Field(default=None)
     condition: str = Field(default="Bronchial Asthma")
 
 @app.post("/api/simulate-risk")
@@ -477,12 +713,14 @@ def simulate_risk(req: CustomSimulationRequest):
     predicted_risk = round(max(5.0, min(100.0, predicted_risk)), 1)
     severity = "Critical" if predicted_risk >= 75 else ("High" if predicted_risk >= 55 else ("Moderate" if predicted_risk >= 30 else "Low"))
 
+    active_lang = req.language or req.lang or "english"
+
     advisory = generate_clinical_advisory(
         city=req.city,
         air=air,
         risk_score=predicted_risk,
         severity=severity,
-        lang=req.lang,
+        lang=active_lang,
         condition=req.condition
     )
 
@@ -500,7 +738,8 @@ class ChatMessage(BaseModel):
 
 class TriageChatRequest(BaseModel):
     city: str = Field(default="Mumbai")
-    lang: str = Field(default="english")
+    lang: Optional[str] = Field(default=None)
+    language: Optional[str] = Field(default=None)
     condition: str = Field(default="Pediatric Asthma")
     messages: List[ChatMessage]
 
@@ -526,6 +765,12 @@ def triage_chat(req: TriageChatRequest):
 
     last_user_query = req.messages[-1].content if req.messages else "What should I do?"
 
+    # Resolve target language using both requested parameter and auto-detection from query
+    requested_lang = req.language or req.lang or "english"
+    target_lang = resolve_language(requested_lang, user_text=last_user_query)
+    lang_display = f"{target_lang['name']} ({target_lang['native']})"
+    lang_code = target_lang["code"]
+
     evidence = retriever.search(f"{geo['name']} {req.condition} {last_user_query}") if retriever else None
     grounded_context_str = ""
     if evidence:
@@ -539,13 +784,14 @@ def triage_chat(req: TriageChatRequest):
         f"Context for {geo['name']} ({geo['state']}): Current AQI is {air['aqi']} (PM2.5: {air['pm25']} µg/m³, PM10: {air['pm10']} µg/m³). "
         f"Official CAQM Protocol: {grap['stage']} ({grap['category']}) - {grap['alert']}. "
         f"Patient Vulnerability: {req.condition}. {grounded_context_str}"
-        f"Language Directive: Reply strictly in {req.lang.title()} (or Hindi/Marathi if specified). "
-        f"Clinical Rules: 1) Be empathetic and clear. 2) Never prescribe prescription drug dosages. "
+        f"CRITICAL LANGUAGE INSTRUCTION: You MUST reply ENTIRELY in {target_lang['name']} ({target_lang['native']}) using its native script ({target_lang['script']}). "
+        f"DO NOT reply in English unless English was requested. "
+        f"Clinical Rules: 1) Be empathetic, direct, and clear in {target_lang['name']}. 2) Never prescribe prescription drug dosages. "
         f"3) Always advise visiting emergency room if SpO2 drops below 92% or child/elderly patient has chest retraction. "
         f"4) Answer the patient's latest question directly under 120 words."
     )
 
-    full_prompt = f"{system_instruction}\n\nConversation So Far:\n{history_transcript}\nPulmonologist Reply in {req.lang.title()}:"
+    full_prompt = f"{system_instruction}\n\nConversation So Far:\n{history_transcript}\nPulmonologist Reply in {target_lang['name']} ({target_lang['native']}):"
 
     reply_text = None
     if client:
@@ -553,39 +799,27 @@ def triage_chat(req: TriageChatRequest):
             resp = client.responses.create(
                 model="deepseek-v4-flash",
                 input=full_prompt,
-                max_output_tokens=350,
+                max_output_tokens=1000,
                 temperature=0.3
             )
             if resp and resp.output_text:
-                reply_text = resp.output_text.strip()
+                candidate_reply = resp.output_text.strip()
+                # Ensure it didn't reply in English when an Indic language was expected
+                if lang_code == "en" or detect_indic_language(candidate_reply, default_lang="english") != "english":
+                    reply_text = candidate_reply
+                else:
+                    logger.warning("Adaption model replied in English despite Indic directive, invoking localized fallback.")
         except Exception as e:
             logger.warning(f"Triage chat Adaption inference error: {e}")
 
     if not reply_text:
-        # Fallback response
-        if "marathi" in req.lang.lower():
-            reply_text = (
-                f"सध्या {geo['name']} मध्ये AQI {air['aqi']} आहे. {req.condition} साठी खबरदारी: "
-                f"घरातील एअर प्युरिफायर चालू ठेवा आणि नेब्युलायझेशन डॉक्टरांच्या सल्ल्यानुसार करा. "
-                f"श्वास घेण्यास अधिक त्रास झाल्यास किंवा ऑक्सिजन ९२% खाली गेल्यास तातडीने डॉक्टरांकडे जावे."
-            )
-        elif "hindi" in req.lang.lower():
-            reply_text = (
-                f"वर्तमान में {geo['name']} में AQI {air['aqi']} है। {req.condition} के संबंध में: "
-                f"बच्चे या मरीज को घर के अंदर रखें और धूल-धुएं से बचाएं। यदि सांस तेज चल रही हो "
-                f"या SpO2 92% से नीचे आए, तो बिना देरी तुरंत नजदीकी अस्पताल के इमरजेंसी वार्ड में संपर्क करें।"
-            )
-        else:
-            reply_text = (
-                f"Given {geo['name']}'s current AQI of {air['aqi']} ({grap['stage']}), "
-                f"for {req.condition}: Ensure strict indoor air filtration and follow your physician's prescribed preventive plan. "
-                f"If you notice rapid breathing, chest retractions, or SpO2 drops below 92%, seek immediate emergency hospital care."
-            )
+        reply_text = build_triage_chat_fallback(lang_code, geo["name"], air, grap, req.condition)
 
     response_data = {
         "reply": reply_text,
         "city": geo["name"],
-        "language": req.lang,
+        "language": lang_code,
+        "language_name": lang_display,
         "current_air_quality": air,
         "grap_protocol": grap,
         "triage_urgency": "High Alert (ER Guidance Available)" if air["aqi"] > 300 else "Standard Clinical Precaution",
