@@ -5,6 +5,8 @@ import 'leaflet/dist/leaflet.css';
 import { MapPin, RefreshCw, ZoomIn, ZoomOut, Layers, AlertCircle, ArrowUpRight } from 'lucide-react';
 
 // Exact coordinates and metadata for 12 CPCB monitoring metros
+const CARTO_API_KEY = import.meta.env.VITE_CARTO_API_KEY || 'cb1_58o3_1_a2fd168e29e816562973384e';
+
 const METRO_GEOMETRY = {
   'delhi': { lat: 28.6139, lon: 77.2090, state: 'Delhi NCR' },
   'mumbai': { lat: 19.0760, lon: 72.8777, state: 'Maharashtra' },
@@ -157,10 +159,10 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
           style={{ height: '100%', width: '100%', backgroundColor: '#f8fafc' }}
           ref={mapRef}
         >
-          {/* CartoDB Voyager Light Tiles for crisp national & state borders */}
+          {/* CartoDB Voyager Light Tiles with authenticated API key */}
           <TileLayer
             attribution='&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            url={`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png${CARTO_API_KEY ? `?api_key=${CARTO_API_KEY}` : ''}`}
             subdomains="abcd"
             maxZoom={19}
           />
