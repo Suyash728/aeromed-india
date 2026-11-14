@@ -47,7 +47,11 @@ export const translations = {
       "seed_mode": "Instant Seed Mode (0ms)",
       "instant_seed": "Seed Mode",
       "cpcb_caqm_grounding": "CPCB & CAQM Statutory Grounding",
-      "live_projection": "Live 48h Projection"
+      "live_projection": "Live 48h Projection",
+      "footer_desc": "Clinical Air Quality & Respiratory Disease Surveillance Monorepo",
+      "footer_adaption": "Adaption Labs Grounded",
+      "rules_count": "8,188 Rules",
+      "live_model_calc": "Live Model Calculation"
     },
     "nav": {
       "workspaces": "Clinical Workspaces",
@@ -132,7 +136,7 @@ export const translations = {
       "drill_up": "↑ Drill Up",
       "legend_aqi": "Average US AQI",
       "legend_admissions": "Daily Hospital Admissions",
-      "pm25_conc": "PM2.5 Concentration (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 Click any bar to drill down",
       "heatmap_title": "Pearson Epidemiological Correlation Matrix (8×8)",
       "heatmap_desc": "Pairwise correlation coefficients (r) between criteria pollutants, meteorology, and ICU admissions.",
@@ -150,7 +154,13 @@ export const translations = {
       "icu_strain": "ICU Strain",
       "priority": "Priority",
       "action": "Action",
-      "export_csv": "Export Dispatch Queue CSV"
+      "export_csv": "Export Dispatch Queue CSV",
+      "insight_years": "10-Year Decadal Trend: PM2.5 exposure shows compound annual +4.2% increase across urban corridors.",
+      "insight_quarters": "Seasonal Quarterly Analysis: Q4 (Winter Smog) records 3.4x higher particulate levels than Q3 (Monsoon).",
+      "insight_months": "Winter Inversion Peak: Nov–Jan admissions spike +240% across Indo-Gangetic Plain.",
+      "insight_weeks": "Weekly Micro-Surge: Post-crop burning weeks show acute ICU respiratory admissions.",
+      "insight_live": "Live 7-Day Rolling Horizon: Real-time correlation with CPCB monitoring stations.",
+      "r2_precision": "ML R² = 0.9879"
     },
     "copilot": {
       "floating_button": "Ask AeroMed Copilot",
@@ -158,7 +168,26 @@ export const translations = {
       "rag_live": "RAG Live",
       "title": "AeroMed Clinical Copilot",
       "ask_placeholder": "Ask in Marathi, Hindi, Tamil, or English...",
-      "send": "Send"
+      "send": "Send",
+      "rag_title": "TF-IDF Vector RAG Evidence Grounding",
+      "sub_ms": "Sub-ms Retrieval",
+      "retrieved_source": "Retrieved Knowledge Source",
+      "matched_excerpt": "Exact Matched Clinical Rule Excerpt",
+      "guardrails_verified": "Adaption Blueprint Medical Guardrails Verified",
+      "rule_1": "Rule 1: CPCB AQI Standard Compliance (0-500)",
+      "rule_2": "Rule 2: Statutory CAQM GRAP Directives (Stage I-IV)",
+      "rule_3": "Rule 3: Zero Pharmaceutical Rx Hallucination",
+      "rule_4": "Rule 4: Mandatory Triage Trigger (SpO2 < 92%)",
+      "rule_5": "Rule 5: Certified N95 & HEPA Filtration Mandate",
+      "er_warning": "SpO2 < 92%: Immediate Emergency ER Transport Required!",
+      "pulse_spo2": "Pulse SpO2:",
+      "context_label": "Context:",
+      "rule_count": "8,188 Rules",
+      "profile_pediatric": "Pediatric Asthma (Age 4–12)",
+      "profile_geriatric": "Geriatric COPD (Age 60+)",
+      "profile_worker": "Outdoor Gig/Delivery Worker",
+      "profile_maternal": "Maternal & Prenatal Care",
+      "profile_general": "General Population"
     },
     "simulator": {
       "title": "What-If Atmospheric Sensitivity & Hospital Surge Simulator",
@@ -175,7 +204,17 @@ export const translations = {
       "icu_beds": "ICU Beds Needed",
       "nebulizers": "Nebulizers",
       "oxygen_cylinders": "Emergency O₂ Units",
-      "statutory_grap_stage": "Statutory CAQM GRAP Stage:"
+      "statutory_grap_stage": "Statutory CAQM GRAP Stage:",
+      "pm25_title": "PM2.5 Concentration (Fine Respirable Smog)",
+      "pm10_title": "PM10 (Coarse Inhalable Dust)",
+      "no2_title": "NO2 (Vehicular Combustion)",
+      "so2_title": "SO2 (Industrial Emissions)",
+      "temperature_title": "Ambient Temperature",
+      "humidity_title": "Relative Humidity",
+      "live_calc": "Live Model Calculation",
+      "temp_hint": "Cold air traps winter surface inversion",
+      "humidity_hint": "High moisture condenses dense smog haze",
+      "vs_baseline": "vs Baseline"
     },
     "datasets": {
       "title": "Pan-India Adaption Labs Exported Dataset Catalog",
@@ -196,7 +235,14 @@ export const translations = {
       "view_rows": "View Rows",
       "table_view": "Table View",
       "protocol_view": "Protocol Card View",
-      "close_drawer": "Close Drawer"
+      "close_drawer": "Close Drawer",
+      "filter_grade_a": "Grade A (9.4+)",
+      "filter_invented": "Synthetic Invent",
+      "filter_forge": "Forge Extracted",
+      "samples_header": "Synthesized & Extracted Ground-Truth Rows",
+      "prompt_context": "Meteorological / Clinical Prompt Context:",
+      "protocol_truth": "Clinical Response Protocol / Ground Truth:",
+      "copy_id_title": "Copy full Adaption Dataset ID"
     },
     "jury": {
       "title": "Adaption AI Full 7-Pillar Capability Suite — Jury Proof Hub",
@@ -208,7 +254,12 @@ export const translations = {
       "verified_proof": "Verified Proof: 7 Pillars",
       "copy_id": "Copy exact Adaption ID",
       "copied": "Copied!",
-      "copy_command": "Copy Command"
+      "copy_command": "Copy Command",
+      "top_percentile": "Top 33rd Percentile Globally",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (3 Iterations)",
+      "mae_subtitle": "MAE ±1.88 daily admissions",
+      "buffer_retained": "Verified >400 Buffer Retained",
+      "verification_command_title": "Direct Adaption SDK Verification One-Liner for Jury"
     }
   },
   "hi": {
@@ -253,7 +304,11 @@ export const translations = {
       "seed_mode": "त्वरित सीड मोड (० मिलीसेकंड)",
       "instant_seed": "सीड मोड",
       "cpcb_caqm_grounding": "सीपीसीबी और सीएक्यूएम वैधानिक आधार",
-      "live_projection": "लाइव ४८ घंटे का अनुमान"
+      "live_projection": "लाइव ४८ घंटे का अनुमान",
+      "footer_desc": "चिकित्सीय वायु गुणवत्ता एवं श्वसन रोग निगरानी मोनोरेपो",
+      "footer_adaption": "अडैप्शन लैब्स द्वारा समर्थित",
+      "rules_count": "८,१८८ नियम",
+      "live_model_calc": "लाइव मॉडल गणना"
     },
     "nav": {
       "workspaces": "चिकित्सीय कार्यक्षेत्र",
@@ -338,7 +393,7 @@ export const translations = {
       "drill_up": "↑ ऊपर जाएं",
       "legend_aqi": "औसत AQI",
       "legend_admissions": "दैनिक अस्पताल भर्तियां",
-      "pm25_conc": "PM2.5 सांद्रता (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 विस्तार से देखने के लिए किसी भी बार पर क्लिक करें",
       "heatmap_title": "पियर्सन महामारी सहसंबंध मैट्रिक्स (८×८)",
       "heatmap_desc": "प्रदूषकों, मौसम विज्ञान और आईसीयू भर्तियों के बीच युग्मित सहसंबंध गुणांक (r)।",
@@ -356,7 +411,13 @@ export const translations = {
       "icu_strain": "आईसीयू दबाव",
       "priority": "प्राथमिकता",
       "action": "कार्रवाई",
-      "export_csv": "प्रेषण कतार सीएसवी निर्यात करें"
+      "export_csv": "प्रेषण कतार सीएसवी निर्यात करें",
+      "insight_years": "१०-वर्षीय प्रवृत्ति: शहरी क्षेत्रों में PM2.5 में +४.२% वार्षिक वृद्धि।",
+      "insight_quarters": "मौसमी त्रैमासिक विश्लेषण: Q4 (सर्दियों का स्मॉग) मानसून की तुलना में ३.४ गुना अधिक।",
+      "insight_months": "शीतकालीन इनवर्जन चरम: नवंबर-जनवरी में भारत-गंगा मैदान में प्रवेश में +२४०% की वृद्धि।",
+      "insight_weeks": "साप्ताहिक वृद्धि: पराली जलने के बाद के हफ्तों में आईसीयू श्वसन आपातकाल में तेज वृद्धि।",
+      "insight_live": "लाइव ७-दिवसीय चक्र: सीपीसीबी निगरानी स्टेशनों के साथ वास्तविक समय सहसंबंध।",
+      "r2_precision": "एमएल R² = ०.९८७९"
     },
     "copilot": {
       "floating_button": "एरोमेड कोपायलट से पूछें",
@@ -364,7 +425,26 @@ export const translations = {
       "rag_live": "आरएजी लाइव",
       "title": "एरोमेड क्लीनिकल कोपायलट",
       "ask_placeholder": "मराठी, हिन्दी, तमिल या अंग्रेज़ी में पूछें...",
-      "send": "भेजें"
+      "send": "भेजें",
+      "rag_title": "TF-IDF वेक्टर RAG साक्ष्य आधार",
+      "sub_ms": "उप-मिलीसेकंड पुनर्प्राप्ति",
+      "retrieved_source": "पुनर्प्राप्त ज्ञान स्रोत",
+      "matched_excerpt": "सटीक मिलान किया गया चिकित्सीय नियम उद्धरण",
+      "guardrails_verified": "अडैप्शन ब्लूप्रिंट मेडिकल सुरक्षा उपाय सत्यापित",
+      "rule_1": "नियम १: सीपीसीबी एक्यूआई मानक अनुपालन (०-५००)",
+      "rule_2": "नियम २: वैधानिक सीएक्यूएम ग्रैप निर्देश (चरण I-IV)",
+      "rule_3": "नियम ३: शून्य अनधिकृत दवा निर्माण",
+      "rule_4": "नियम ४: अनिवार्य आपातकालीन ट्रिगर (SpO2 < ९२%)",
+      "rule_5": "नियम ५: प्रमाणित N95 और HEPA निस्पंदन अनिवार्यता",
+      "er_warning": "SpO2 < ९२%: तत्काल आपातकालीन अस्पताल परिवहन आवश्यक!",
+      "pulse_spo2": "पल्स SpO2:",
+      "context_label": "संदर्भ:",
+      "rule_count": "८,१८८ नियम",
+      "profile_pediatric": "बाल अस्थमा (आयु ४–१२)",
+      "profile_geriatric": "वृद्ध सीओपीडी (आयु ६०+)",
+      "profile_worker": "आउटडोर गिग/डिलीवरी कार्यकर्ता",
+      "profile_maternal": "मातृ एवं प्रसवपूर्व देखभाल",
+      "profile_general": "सामान्य जनसंख्या"
     },
     "simulator": {
       "title": "व्हाट-इफ वायुमंडलीय संवेदनशीलता और अस्पताल वृद्धि सिम्युलेटर",
@@ -381,7 +461,17 @@ export const translations = {
       "icu_beds": "आवश्यक आईसीयू बेड",
       "nebulizers": "नेबुलाइजर",
       "oxygen_cylinders": "आपातकालीन ऑक्सीजन सिलेंडर",
-      "statutory_grap_stage": "वैधानिक सीएक्यूएम ग्रैप चरण:"
+      "statutory_grap_stage": "वैधानिक सीएक्यूएम ग्रैप चरण:",
+      "pm25_title": "PM2.5 सांद्रता (सूक्ष्म श्वसनीय स्मॉग)",
+      "pm10_title": "PM10 (स्थूल इनहेलेबल धूल)",
+      "no2_title": "NO2 (वाहन दहन)",
+      "so2_title": "SO2 (औद्योगिक उत्सर्जन)",
+      "temperature_title": "परिवेशी तापमान",
+      "humidity_title": "सापेक्ष आर्द्रता",
+      "live_calc": "लाइव मॉडल गणना",
+      "temp_hint": "ठंडी हवा सर्दियों में सतह पर प्रदूषण को रोकती है",
+      "humidity_hint": "अधिक नमी से घना स्मॉग और धुंध बनती है",
+      "vs_baseline": "बनाम आधारभूत"
     },
     "datasets": {
       "title": "अखिल भारतीय अडैप्शन लैब्स निर्यातित डेटासेट कैटलॉग",
@@ -402,19 +492,31 @@ export const translations = {
       "view_rows": "पंक्तियाँ देखें",
       "table_view": "तालिका दृश्य",
       "protocol_view": "प्रोटोकॉल कार्ड दृश्य",
-      "close_drawer": "दराज बंद करें"
+      "close_drawer": "दराज बंद करें",
+      "filter_grade_a": "ग्रेड ए (९.४+)",
+      "filter_invented": "सिंथेटिक इन्वेंट",
+      "filter_forge": "फोर्ज निष्कर्षित",
+      "samples_header": "संश्लेषित और निष्कर्षित वास्तविक पंक्तियाँ",
+      "prompt_context": "मौसम विज्ञान / नैदानिक संदर्भ:",
+      "protocol_truth": "नैदानिक प्रतिक्रिया प्रोटोकॉल / वास्तविक साक्ष्य:",
+      "copy_id_title": "पूर्ण अडैप्शन डेटासेट आईडी कॉपी करें"
     },
     "jury": {
       "title": "अडैप्शन एआई संपूर्ण ७-स्तंभ क्षमता सुइट — जूरी प्रमाण हब",
       "subtitle": "एरोमेड इंडिया के निर्माण में उपयोग किए गए सभी ७ मुख्य अडैप्शन लैब्स एसडीके स्तंभों का सत्यापन योग्य प्रमाण।",
       "quality_grade_card": "अडैप्शन गुणवत्ता ग्रेड",
       "autoscientist_gain_card": "ऑटो-साइंटिस्ट जीत दर",
-      "predictive_fit_card": "एमएल प्रिडिक्टिव फिट",
+      "predictive_fit_card": "एमएल पूर्वानुमान सटीकता",
       "credit_reserve_card": "एसडीके क्रेडिट रिज़र्व",
       "verified_proof": "सत्यापित प्रमाण: ७ स्तंभ",
       "copy_id": "सटीक अडैप्शन आईडी कॉपी करें",
       "copied": "कॉपी किया गया!",
-      "copy_command": "कमांड कॉपी करें"
+      "copy_command": "कमांड कॉपी करें",
+      "top_percentile": "वैश्विक स्तर पर शीर्ष ३३वां प्रतिशतक",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (३ पुनरावृत्तियां)",
+      "mae_subtitle": "औसत त्रुटि ±१.८८ दैनिक प्रवेश",
+      "buffer_retained": "सत्यापित >४०० क्रेडिट बफर सुरक्षित",
+      "verification_command_title": "जूरी के लिए प्रत्यक्ष अडैप्शन एसडीके सत्यापन कमांड"
     }
   },
   "mr": {
@@ -459,7 +561,11 @@ export const translations = {
       "seed_mode": "झटपट सीड मोड (० मि.से.)",
       "instant_seed": "सीड मोड",
       "cpcb_caqm_grounding": "सीपीसीबी व सीएक्यूएम वैधानिक अधिष्ठान",
-      "live_projection": "थेट ४८ तासांचा अंदाज"
+      "live_projection": "थेट ४८ तासांचा अंदाज",
+      "footer_desc": "क्लिनिकल हवा गुणवत्ता व श्वसन रोग पाळत मोनोरेपो",
+      "footer_adaption": "अडॅप्शन लॅब्स प्रमाणित",
+      "rules_count": "८,१८८ नियम",
+      "live_model_calc": "थेट मॉडेल गणना"
     },
     "nav": {
       "workspaces": "क्लिनिकल कार्यक्षेत्र",
@@ -544,7 +650,7 @@ export const translations = {
       "drill_up": "↑ वर जा",
       "legend_aqi": "सरासरी AQI",
       "legend_admissions": "दैनिक रुग्णालय भरती",
-      "pm25_conc": "PM2.5 प्रमाण (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 सविस्तर पाहण्यासाठी कोणत्याही बारवर क्लिक करा",
       "heatmap_title": "पिअर्सन रोगराई सहसंबंध मॅट्रिक्स (८×८)",
       "heatmap_desc": "प्रदूषक, हवामान आणि आयसीयू भरती यांच्यातील सहसंबंध गुणांक (r).",
@@ -562,7 +668,13 @@ export const translations = {
       "icu_strain": "आयसीयू ताण",
       "priority": "प्राधान्य",
       "action": "कृती",
-      "export_csv": "वाटप रांग सीएसव्ही निर्यात करा"
+      "export_csv": "वाटप रांग सीएसव्ही निर्यात करा",
+      "insight_years": "१०-वार्षिक कल: शहरी पट्ट्यात PM2.5 मध्ये दरवर्षी +४.२% वाढ.",
+      "insight_quarters": "हंगामी त्रैमासिक विश्लेषण: Q4 (हिवाळी धुरके) मान्सूनपेक्षा ३.४ पट जास्त.",
+      "insight_months": "हिवाळी इनव्हर्जन उच्चांक: नोव्हेंबर-जानेवारीत रुग्णालयात भरतीत +२४०% वाढ.",
+      "insight_weeks": "साप्ताहिक वाढ: शेतातील धुरानंतरच्या आठवड्यात आयसीयू प्रवेशात वाढ.",
+      "insight_live": "थेट ७-दिवसीय चक्र: सीपीसीबी केंद्रांशी थेट सहसंबंध.",
+      "r2_precision": "एमएल R² = ०.९८७९"
     },
     "copilot": {
       "floating_button": "एरोमेड कोपायलटला विचारा",
@@ -570,7 +682,26 @@ export const translations = {
       "rag_live": "आरएजी थेट",
       "title": "एरोमेड क्लिनिकल कोपायलट",
       "ask_placeholder": "मराठी, हिन्दी, तमिळ किंवा इंग्रजीत विचारा...",
-      "send": "पाठवा"
+      "send": "पाठवा",
+      "rag_title": "TF-IDF व्हेक्टर RAG पुरावा आधार",
+      "sub_ms": "उप-मिलीसेकंद पुनर्प्राप्ती",
+      "retrieved_source": "पुनर्प्राप्त ज्ञान स्रोत",
+      "matched_excerpt": "अचूक जुळलेला वैद्यकीय नियम उतारा",
+      "guardrails_verified": "अडॅप्शन ब्लूप्रिंट वैद्यकीय सुरक्षा नियम प्रमाणित",
+      "rule_1": "नियम १: सीपीसीबी एक्यूआय मानक अनुपालन (०-५००)",
+      "rule_2": "नियम २: वैधानिक सीएक्यूएम ग्रॅप निर्देश (टप्पा I-IV)",
+      "rule_3": "नियम ३: शून्य औषधोपचार कल्पितता",
+      "rule_4": "नियम ४: अनिवार्य आणीबाणी ट्रिगर (SpO2 < ९२%)",
+      "rule_5": "नियम ५: प्रमाणित N95 व HEPA फिल्टर वापरणे अनिवार्य",
+      "er_warning": "SpO2 < ९२%: त्वरित आपत्कालीन रुग्णालय ट्रान्सपोर्ट आवश्यक!",
+      "pulse_spo2": "पल्स SpO2:",
+      "context_label": "संदर्भ:",
+      "rule_count": "८,१८८ नियम",
+      "profile_pediatric": "बाल दमा (वय ४–१२)",
+      "profile_geriatric": "ज्येष्ठ सीओपीडी (वय ६०+)",
+      "profile_worker": "आउटडोअर गिग/डिलिव्हरी कामगार",
+      "profile_maternal": "मातृ आणि प्रसूतीपूर्व काळजी",
+      "profile_general": "सामान्य लोकसंख्या"
     },
     "simulator": {
       "title": "व्हॉट-इफ वातावरणीय संवेदनशीलता व रुग्णालय वाढ सिम्युलेटर",
@@ -587,7 +718,17 @@ export const translations = {
       "icu_beds": "आवश्यक आयसीयू बेड्स",
       "nebulizers": "नेब्युलायझर्स",
       "oxygen_cylinders": "आपत्कालीन ऑक्सिजन सिलिंडर",
-      "statutory_grap_stage": "वैधानिक सीएक्यूएम ग्रॅप टप्पा:"
+      "statutory_grap_stage": "वैधानिक सीएक्यूएम ग्रॅप टप्पा:",
+      "pm25_title": "PM2.5 एकाग्रता (सूक्ष्म श्वसनीय धूर)",
+      "pm10_title": "PM10 (स्थूल इनहेलेबल धूळ)",
+      "no2_title": "NO2 (वाहनांचे ज्वलन)",
+      "so2_title": "SO2 (औद्योगिक उत्सर्जन)",
+      "temperature_title": "सभोवतालचे तापमान",
+      "humidity_title": "सापेक्ष आर्द्रता",
+      "live_calc": "थेट मॉडेल गणना",
+      "temp_hint": "थंड हवा हिवाळ्यात पृष्ठभागावर प्रदूषण अडकवून ठेवते",
+      "humidity_hint": "जास्त आर्द्रतेमुळे दाट धुके आणि धूर तयार होतो",
+      "vs_baseline": "तुलनेत मूळ प्रमाण"
     },
     "datasets": {
       "title": "अखिल भारतीय अडैप्शन लॅब्स निर्यात डेटासेट कॅटलॉग",
@@ -608,19 +749,31 @@ export const translations = {
       "view_rows": "ओळी पहा",
       "table_view": "तक्ता दृश्य",
       "protocol_view": "प्रोटोकॉल कार्ड दृश्य",
-      "close_drawer": "बंद करा"
+      "close_drawer": "बंद करा",
+      "filter_grade_a": "ग्रेड ए (९.४+)",
+      "filter_invented": "सिंथेटिक इन्व्हेंट",
+      "filter_forge": "फोर्ज काढलेले",
+      "samples_header": "संश्लेषित आणि काढलेल्या मूळ ओळी",
+      "prompt_context": "हवामान / क्लिनिकल संदर्भ:",
+      "protocol_truth": "क्लिनिकल प्रतिसाद प्रोटोकॉल / मूळ सत्य:",
+      "copy_id_title": "पूर्ण अडॅप्शन डेटासेट आयडी कॉपी करा"
     },
     "jury": {
       "title": "अडैप्शन एआई संपूर्ण ७-स्तंभ क्षमता संच — ज्युरी पुरावा केंद्र",
       "subtitle": "एरोमेड इंडियाच्या निर्मितीमध्ये वापरलेल्या सर्व ७ मुख्य अडैप्शन लॅब्स एसडीके स्तंभांचा पुरावा.",
-      "quality_grade_card": "अडैप्शन गुणवत्ता श्रेणी",
+      "quality_grade_card": "अडॅप्शन गुणवत्ता ग्रेड",
       "autoscientist_gain_card": "ऑटो-सायंटिस्ट विजय दर",
-      "predictive_fit_card": "एमएल प्रेडिक्टिव्ह तंदुरुस्ती",
+      "predictive_fit_card": "एमएल अंदाज तंदुरुस्ती",
       "credit_reserve_card": "एसडीके क्रेडिट राखीव",
       "verified_proof": "सत्यापित पुरावा: ७ स्तंभ",
       "copy_id": "अडैप्शन आयडी कॉपी करा",
       "copied": "कॉपी केले!",
-      "copy_command": "कमांड कॉपी करा"
+      "copy_command": "कमांड कॉपी करा",
+      "top_percentile": "जागतिक स्तरावर शीर्ष ३३ वे पर्सेंटाइल",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (३ पुनरावृत्ती)",
+      "mae_subtitle": "सरासरी त्रुटी ±१.८८ दैनिक प्रवेश",
+      "buffer_retained": "प्रमाणित >४०० क्रेडिट राखीव",
+      "verification_command_title": "ज्युरीसाठी थेट अडॅप्शन एसडीके पडताळणी आज्ञा"
     }
   },
   "bn": {
@@ -665,7 +818,11 @@ export const translations = {
       "seed_mode": "তাত্ক্ষণিক সিড মোড (০ms)",
       "instant_seed": "সিড মোড",
       "cpcb_caqm_grounding": "সিপিসিবি ও সিএকিউএম সংবিধিবদ্ধ ভিত্তি",
-      "live_projection": "লাইভ ৪৮ ঘণ্টার পূর্বাভাস"
+      "live_projection": "লাইভ ৪৮ ঘণ্টার পূর্বাভাস",
+      "footer_desc": "ক্লিনিক্যাল বায়ু মান ও শ্বাসযন্ত্রের রোগ নজরদারি মনোরেপো",
+      "footer_adaption": "অ্যাডাপশন ল্যাবস দ্বারা সমর্থিত",
+      "rules_count": "৮,১৮৮ নিয়ম",
+      "live_model_calc": "লাইভ মডেল গণনা"
     },
     "nav": {
       "workspaces": "ক্লিনিক্যাল কর্মক্ষেত্র",
@@ -750,7 +907,7 @@ export const translations = {
       "drill_up": "↑ উপরে যান",
       "legend_aqi": "গড় একিউআই",
       "legend_admissions": "দৈনিক হাসপাতালে ভর্তি",
-      "pm25_conc": "PM2.5 ঘনত্ব (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 বিস্তারিত দেখতে যেকোনো বারে ক্লিক করুন",
       "heatmap_title": "পিয়ারসন মহামারীবিদ্যা পারস্পরিক সম্পর্ক ম্যাট্রিক্স (৮×৮)",
       "heatmap_desc": "দূষণকারী, আবহাওয়া এবং আইসিইউ ভর্তির মধ্যে পারস্পরিক সম্পর্ক সহগ (r)।",
@@ -768,7 +925,13 @@ export const translations = {
       "icu_strain": "আইসিইউ চাপ",
       "priority": "অগ্রাধিকার",
       "action": "পদক্ষেপ",
-      "export_csv": "প্রেরণ সারি সিএসভি রপ্তানি করুন"
+      "export_csv": "প্রেরণ সারি সিএসভি রপ্তানি করুন",
+      "insight_years": "১০ বছরের প্রবণতা: শহরাঞ্চলে PM2.5 প্রতি বছর +৪.২% বৃদ্ধি।",
+      "insight_quarters": "ত্রৈমাসিক বিশ্লেষণ: Q4 (শীতকালীন ধোঁয়াশা) বর্ষার তুলনায় ৩.৪ গুণ বেশি।",
+      "insight_months": "শীতকালীন ইনভার্সন শীর্ষ: নভেম্বর-জানুয়ারিতে হাসপাতালে ভর্তির সংখ্যা +২৪০% বৃদ্ধি।",
+      "insight_weeks": "সাপ্তাহিক স্পাইক: খড় পোড়ানোর পরের সপ্তাহগুলিতে আইসিইউ ভর্তি বৃদ্ধি পায়।",
+      "insight_live": "লাইভ ৭-দিনের চক্র: সিপিসিবি স্টেশনের সাথে রিয়েল-টাইম সম্পর্ক।",
+      "r2_precision": "এমএল R² = ০.৯৮৭৯"
     },
     "copilot": {
       "floating_button": "অ্যারোমেড কোপাইলটকে জিজ্ঞাসা করুন",
@@ -776,7 +939,26 @@ export const translations = {
       "rag_live": "আরএজি লাইভ",
       "title": "অ্যারোমেড ক্লিনিক্যাল কোপাইলট",
       "ask_placeholder": "মারাঠি, হিন্দি, তামিল বা ইংরেজিতে জিজ্ঞাসা করুন...",
-      "send": "পাঠান"
+      "send": "পাঠান",
+      "rag_title": "TF-IDF ভেক্টর RAG প্রমাণ ভিত্তি",
+      "sub_ms": "সাব-মিলিসেকেন্ড পুনরুদ্ধার",
+      "retrieved_source": "পুনরুদ্ধার করা জ্ঞান উৎস",
+      "matched_excerpt": "সঠিক মিলে যাওয়া ক্লিনিক্যাল নিয়ম উদ্ধৃতি",
+      "guardrails_verified": "অ্যাডাপশন ব্লুপ্রিন্ট চিকিৎসা সুরক্ষা নিয়ম যাচাইকৃত",
+      "rule_1": "নিয়ম ১: সিপিসিবি AQI মানদণ্ড মেনে চলা (০-৫০০)",
+      "rule_2": "নিয়ম ২: সংবিধিবদ্ধ সিএকিউএম GRAP নির্দেশিকা (পর্যায় I-IV)",
+      "rule_3": "নিয়ম ৩: শূন্য কাল্পনিক প্রেসক্রিপশন",
+      "rule_4": "নিয়ম ৪: বাধ্যতামূলক জরুরি ট্রিপ (SpO2 < ৯২%)",
+      "rule_5": "নিয়ম ৫: প্রত্যয়িত N95 এবং HEPA ফিল্টারিং বাধ্যতামূলক",
+      "er_warning": "SpO2 < ৯২%: অবিলম্বে জরুরি হাসপাতালে স্থানান্তর প্রয়োজন!",
+      "pulse_spo2": "পালস SpO2:",
+      "context_label": "প্রসঙ্গ:",
+      "rule_count": "৮,১৮৮ নিয়ম",
+      "profile_pediatric": "শিশুদের হাঁপানি (বয়স ৪–১২)",
+      "profile_geriatric": "বয়স্ক সিওপিডি (বয়স ৬০+)",
+      "profile_worker": "আউটডোর গিগ/ডেলিভারি কর্মী",
+      "profile_maternal": "মাতৃ ও প্রসবপূর্ব যত্ন",
+      "profile_general": "সাধারণ জনসংখ্যা"
     },
     "simulator": {
       "title": "হোয়াট-ইফ বায়ুমণ্ডলীয় সংবেদনশীলতা ও হাসপাতাল বৃদ্ধি সিমুলেটর",
@@ -793,7 +975,17 @@ export const translations = {
       "icu_beds": "প্রয়োজনীয় আইসিইউ বেড",
       "nebulizers": "নেবুলাইজার",
       "oxygen_cylinders": "জরুরি অক্সিজেন ইউনিট",
-      "statutory_grap_stage": "সংবিধিবদ্ধ সিএকিউএম গ্র্যাপ পর্যায়:"
+      "statutory_grap_stage": "সংবিধিবদ্ধ সিএকিউএম গ্র্যাপ পর্যায়:",
+      "pm25_title": "PM2.5 ঘনত্ব (সূক্ষ্ম শ্বাসযোগ্য ধোঁয়াশা)",
+      "pm10_title": "PM10 (স্থূল শ্বাসযোগ্য ধূলিকণা)",
+      "no2_title": "NO2 (যানবাহন নির্গমন)",
+      "so2_title": "SO2 (শিল্প নির্গমন)",
+      "temperature_title": "পরিবেষ্টনকারী তাপমাত্রা",
+      "humidity_title": "আপেক্ষিক আর্দ্রতা",
+      "live_calc": "লাইভ মডেল গণনা",
+      "temp_hint": "ঠান্ডা বাতাস শীতকালে ভূপৃষ্ঠের দূষণ আটকে রাখে",
+      "humidity_hint": "উচ্চ আর্দ্রতায় ঘন ধোঁয়াশা তৈরি হয়",
+      "vs_baseline": "বনাম বেসলাইন"
     },
     "datasets": {
       "title": "সর্বভারতীয় অ্যাডাপশন ল্যাবস এক্সপোর্টেড ক্যাটালগ",
@@ -813,20 +1005,32 @@ export const translations = {
       "col_preview": "প্রাকদর্শন",
       "view_rows": "সারি দেখুন",
       "table_view": "টেবিল ভিউ",
-      "protocol_view": "কার্ড ভিউ",
-      "close_drawer": "বন্ধ করুন"
+      "protocol_view": "প্রোটোকল কার্ড ভিউ",
+      "close_drawer": "বন্ধ করুন",
+      "filter_grade_a": "গ্রেড এ (৯.৪+)",
+      "filter_invented": "সিন্থেটিক ইনভেন্ট",
+      "filter_forge": "ফোর্জ নিষ্কাশিত",
+      "samples_header": "সংশ্লেষিত এবং নিষ্কাশিত সত্য সারি",
+      "prompt_context": "আবহাওয়া / ক্লিনিক্যাল প্রেক্ষাপট:",
+      "protocol_truth": "ক্লিনিক্যাল প্রতিক্রিয়া প্রোটোকল / আসল প্রমাণ:",
+      "copy_id_title": "সম্পূর্ণ অ্যাডাপশন ডেটাসেট আইডি কপি করুন"
     },
     "jury": {
       "title": "অ্যাডাপশন এআই পূর্ণ ৭-স্তম্ভ স্যুট — জুরি প্রমাণ কেন্দ্র",
       "subtitle": "অ্যারোমেড ইন্ডিয়ায় ব্যবহৃত ৭টি মূল স্তম্ভের প্রমাণ।",
-      "quality_grade_card": "গুণমান গ্রেড",
-      "autoscientist_gain_card": "বিজয় হার",
-      "predictive_fit_card": "এমএল ভবিষ্যদ্বাণী ফিট",
+      "quality_grade_card": "অ্যাডাপশন কোয়ালিটি গ্রেড",
+      "autoscientist_gain_card": "অটো-সায়েন্টিস্ট জয়ের হার",
+      "predictive_fit_card": "এমএল পূর্বাভাসের যথার্থতা",
       "credit_reserve_card": "এসডিকে ক্রেডিট রিজার্ভ",
       "verified_proof": "যাচাইকৃত প্রমাণ: ৭ স্তম্ভ",
       "copy_id": "আইডি কপি করুন",
       "copied": "কপি করা হয়েছে!",
-      "copy_command": "কমান্ড কপি করুন"
+      "copy_command": "কমান্ড কপি করুন",
+      "top_percentile": "বিশ্বব্যাপী শীর্ষ ৩৩তম পার্সেন্টাইল",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (৩টি পুনরাবৃত্তি)",
+      "mae_subtitle": "গড় ত্রুটি ±১.৮৮ দৈনিক ভর্তি",
+      "buffer_retained": "যাচাইকৃত >৪০০ ক্রেডিট সংরক্ষিত",
+      "verification_command_title": "জুরির জন্য সরাসরি অ্যাডাপশন এসডিকে যাচাই কমান্ড"
     }
   },
   "ta": {
@@ -871,7 +1075,11 @@ export const translations = {
       "seed_mode": "உடனடி விதை முறை (0ms)",
       "instant_seed": "விதை முறை",
       "cpcb_caqm_grounding": "CPCB மற்றும் CAQM சட்டப்பூர்வ அடிப்படை",
-      "live_projection": "நேரலை 48 மணிநேர கணிப்பு"
+      "live_projection": "நேரலை 48 மணிநேர கணிப்பு",
+      "footer_desc": "மருத்துவக் காற்றுத் தரம் மற்றும் சுவாச நோய் கண்காணிப்பு களஞ்சியம்",
+      "footer_adaption": "அடாப்ஷன் லேப்ஸ் ஆதரவுடன்",
+      "rules_count": "8,188 விதிகள்",
+      "live_model_calc": "நேரலை மாதிரி கணக்கீடு"
     },
     "nav": {
       "workspaces": "மருத்துவ பணிவெளிகள்",
@@ -956,7 +1164,7 @@ export const translations = {
       "drill_up": "↑ மேலே செல்",
       "legend_aqi": "சராசரி AQI",
       "legend_admissions": "தினசரி சேர்க்கைகள்",
-      "pm25_conc": "PM2.5 செறிவு (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 மேலும் விவரங்களை அறிய எந்த பட்டையையும் கிளிக் செய்க",
       "heatmap_title": "பியர்சன் தொடர்பு மேட்ரிக்ஸ் (8×8)",
       "heatmap_desc": "மாசுபடுத்திகள், வானிலை மற்றும் சேர்க்கைகளுக்கு இடையிலான தொடர்பு குணகங்கள் (r).",
@@ -974,7 +1182,13 @@ export const translations = {
       "icu_strain": "ICU அழுத்தம்",
       "priority": "முன்னுரிமை",
       "action": "நடவடிக்கை",
-      "export_csv": "வரிசையை CSV ஆக ஏற்றுமதி செய்"
+      "export_csv": "வரிசையை CSV ஆக ஏற்றுமதி செய்",
+      "insight_years": "10 ஆண்டு போக்கு: நகர்ப்புறங்களில் PM2.5 ஆண்டுக்கு +4.2% கூட்டு வளர்ச்சி.",
+      "insight_quarters": "பருவகால காலாண்டு பகுப்பாய்வு: Q4 (குளிர்கால புகைப்பனி) பருவமழையை விட 3.4 மடங்கு அதிகம்.",
+      "insight_months": "குளிர்கால தலைகீழ் உச்சம்: நவம்பர்-ஜனவரியில் மருத்துவமனை சேர்க்கை +240% அதிகரிக்கிறது.",
+      "insight_weeks": "வாராந்திர எழுச்சி: பயிர் எரிப்புக்குப் பிந்தைய வாரங்களில் தீவிர சுவாச அவசரநிலைகள்.",
+      "insight_live": "நேரலை 7-நாள் சுழற்சி: CPCB நிலையங்களுடன் நிகழ்நேர தொடர்பு.",
+      "r2_precision": "ML R² = 0.9879"
     },
     "copilot": {
       "floating_button": "ஏரோமெட் கோபைலட்டிடம் கேளுங்கள்",
@@ -982,7 +1196,26 @@ export const translations = {
       "rag_live": "RAG நேரலை",
       "title": "ஏரோமெட் மருத்துவ கோபைலட்",
       "ask_placeholder": "மராத்தி, இந்தி, தமிழ் அல்லது ஆங்கிலத்தில் கேளுங்கள்...",
-      "send": "அனுப்பு"
+      "send": "அனுப்பு",
+      "rag_title": "TF-IDF வெக்டர் RAG ஆதார அடிப்படை",
+      "sub_ms": "மில்லிசெகண்டுக்கும் குறைவான மீட்டெடுப்பு",
+      "retrieved_source": "மீட்டெடுக்கப்பட்ட அறிவு மூலம்",
+      "matched_excerpt": "துல்லியமாக பொருந்தும் மருத்துவ விதி பகுதி",
+      "guardrails_verified": "அடாப்ஷன் வரைபட மருத்துவ பாதுகாப்பு விதிகள் சரிபார்க்கப்பட்டன",
+      "rule_1": "விதி 1: CPCB AQI தரநிலை இணக்கம் (0-500)",
+      "rule_2": "விதி 2: சட்டப்பூர்வ CAQM GRAP வழிகாட்டுதல்கள் (நிலை I-IV)",
+      "rule_3": "விதி 3: போலியான மருந்துக் குறிப்புகள் முற்றிலும் இல்லை",
+      "rule_4": "விதி 4: கட்டாய அவசர சிகிச்சை தூண்டுதல் (SpO2 < 92%)",
+      "rule_5": "விதி 5: சான்றளிக்கப்பட்ட N95 மற்றும் HEPA வடிகட்டுதல் கட்டாயம்",
+      "er_warning": "SpO2 < 92%: உடனடி அவசர சிகிச்சை மருத்துவமனை போக்குவரத்து தேவை!",
+      "pulse_spo2": "துடிப்பு SpO2:",
+      "context_label": "சூழல்:",
+      "rule_count": "8,188 விதிகள்",
+      "profile_pediatric": "குழந்தைகள் ஆஸ்துமா (வயது 4–12)",
+      "profile_geriatric": "முதியோர் சிஓபிடி (வயது 60+)",
+      "profile_worker": "வெளிப்புற டெலிவரி தொழிலாளர்கள்",
+      "profile_maternal": "தாய்மை மற்றும் மகப்பேறுக்கு முந்தைய பராமரிப்பு",
+      "profile_general": "பொது மக்கள்"
     },
     "simulator": {
       "title": "வளிமண்டல உணர்திறன் & மருத்துவமனை எழுச்சி சிமுலேட்டர்",
@@ -999,7 +1232,17 @@ export const translations = {
       "icu_beds": "தேவைப்படும் ICU படுக்கைகள்",
       "nebulizers": "நெபுலைசர்கள்",
       "oxygen_cylinders": "அவசர ஆக்ஸிஜன் சிலிண்டர்கள்",
-      "statutory_grap_stage": "சட்டப்பூர்வ CAQM GRAP நிலை:"
+      "statutory_grap_stage": "சட்டப்பூர்வ CAQM GRAP நிலை:",
+      "pm25_title": "PM2.5 செறிவு (நுண்ணிய சுவாச புகைப்பனி)",
+      "pm10_title": "PM10 (சுவாசிக்கக்கூடிய தூசி)",
+      "no2_title": "NO2 (வாகன எரிப்பு)",
+      "so2_title": "SO2 (தொழில்துறை உமிழ்வு)",
+      "temperature_title": "சுற்றுப்புற வெப்பநிலை",
+      "humidity_title": "ஒப்பீட்டு ஈரப்பதம்",
+      "live_calc": "நேரலை மாதிரி கணக்கீடு",
+      "temp_hint": "குளிர்ந்த காற்று குளிர்காலத்தில் மாசுபாட்டைத் தரைமட்டத்தில் பிடித்து வைக்கிறது",
+      "humidity_hint": "அதிக ஈரப்பதம் அடர்த்தியான புகைமூட்டத்தை உருவாக்குகிறது",
+      "vs_baseline": "அடிப்படையுடன் ஒப்பிடுகையில்"
     },
     "datasets": {
       "title": "அகில இந்திய அடாப்ஷன் ஆய்வக ஏற்றுமதி அட்டவணை",
@@ -1018,21 +1261,33 @@ export const translations = {
       "col_id": "ஐடி",
       "col_preview": "முன்னோட்டம்",
       "view_rows": "வரிசைகளைக் காண்க",
-      "table_view": "அட்டவணை பார்வை",
-      "protocol_view": "அட்டை பார்வை",
-      "close_drawer": "மூடு"
+      "table_view": "அட்டவணை காட்சி",
+      "protocol_view": "நெறிமுறை அட்டை காட்சி",
+      "close_drawer": "மூடு",
+      "filter_grade_a": "தரம் A (9.4+)",
+      "filter_invented": "செயற்கை உருவாக்கம்",
+      "filter_forge": "ஃபோர்ஜ் பிரித்தெடுக்கப்பட்டது",
+      "samples_header": "உருவாக்கப்பட்ட மற்றும் பிரித்தெடுக்கப்பட்ட உண்மை வரிசைகள்",
+      "prompt_context": "வானிலை / மருத்துவ சூழல்:",
+      "protocol_truth": "மருத்துவ பதில் நெறிமுறை / உண்மை ஆதாரம்:",
+      "copy_id_title": "முழு அடாப்ஷன் தரவுத்தொகுப்பு ஐடியை நகலெடுக்கவும்"
     },
     "jury": {
       "title": "அடாப்ஷன் AI முழு 7-தூண்கள் திறன் தொகுப்பு — நடுவர் சான்று மையம்",
       "subtitle": "ஏரோமெட் இந்தியாவை உருவாக்குவதில் பயன்படுத்தப்பட்ட அனைத்து 7 தூண்களுக்கான சான்றுகள்.",
-      "quality_grade_card": "தர மதிப்பீடு",
-      "autoscientist_gain_card": "வெற்றி விகிதம்",
-      "predictive_fit_card": "ML கணிப்பு பொருத்தம்",
-      "credit_reserve_card": "SDK இருப்பு",
+      "quality_grade_card": "அடாப்ஷன் தர மதிப்பீடு",
+      "autoscientist_gain_card": "ஆட்டோ-சயின்டிஸ்ட் வெற்றி விகிதம்",
+      "predictive_fit_card": "ML முன்கணிப்பு துல்லியம்",
+      "credit_reserve_card": "SDK கிரெடிட் இருப்பு",
       "verified_proof": "சரிபார்க்கப்பட்ட ஆதாரம்: 7 தூண்கள்",
       "copy_id": "ஐடியை நகலெடு",
       "copied": "நகலெடுக்கப்பட்டது!",
-      "copy_command": "கட்டளையை நகலெடு"
+      "copy_command": "கட்டளையை நகலெடு",
+      "top_percentile": "உலகளவில் முதல் 33வது சதவீதம்",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (3 சுற்றுகள்)",
+      "mae_subtitle": "சராசரி பிழை ±1.88 தினசரி சேர்க்கைகள்",
+      "buffer_retained": "சரிபார்க்கப்பட்டது: >400 கிரெடிட்கள் கையிருப்பில்",
+      "verification_command_title": "நடுவர்களுக்கான நேரடி அடாப்ஷன் SDK சரிபார்ப்பு கட்டளை"
     }
   },
   "te": {
@@ -1077,7 +1332,11 @@ export const translations = {
       "seed_mode": "తక్షణ సీడ్ మోడ్ (0ms)",
       "instant_seed": "సీడ్ మోడ్",
       "cpcb_caqm_grounding": "CPCB & CAQM చట్టబద్ధమైన ఆధారం",
-      "live_projection": "లైవ్ 48 గంటల అంచనా"
+      "live_projection": "లైవ్ 48 గంటల అంచనా",
+      "footer_desc": "క్లినికల్ గాలి నాణ్యత మరియు శ్వాసకోశ వ్యాధుల నిఘా మోనోరెపో",
+      "footer_adaption": "అడాప్షన్ ల్యాబ్స్ ద్వారా ఆధారితం",
+      "rules_count": "8,188 నియమాలు",
+      "live_model_calc": "లైవ్ మోడల్ లెక్కింపు"
     },
     "nav": {
       "workspaces": "క్లినికల్ వర్క్‌స్పేస్‌లు",
@@ -1162,7 +1421,7 @@ export const translations = {
       "drill_up": "↑ పైకి వెళ్లండి",
       "legend_aqi": "సగటు AQI",
       "legend_admissions": "రోజువారీ చేరికలు",
-      "pm25_conc": "PM2.5 సాంద్రత (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 వివరాలను చూడటానికి ఏదైనా బార్‌పై క్లిక్ చేయండి",
       "heatmap_title": "పియర్సన్ కోరిలేషన్ మ్యాట్రిక్స్ (8×8)",
       "heatmap_desc": "కాలుష్య కారకాలు, వాతావరణం మరియు ఆసుపత్రి చేరికల మధ్య సంబంధం (r).",
@@ -1180,7 +1439,13 @@ export const translations = {
       "icu_strain": "ICU ఒత్తిడి",
       "priority": "ప్రాధాన్యత",
       "action": "చర్య",
-      "export_csv": "క్యూను CSVగా ఎగుమతి చేయండి"
+      "export_csv": "క్యూను CSVగా ఎగుమతి చేయండి",
+      "insight_years": "10 సంవత్సరాల ధోరణి: నగరాల్లో PM2.5 ఏటా +4.2% పెరుగుతోంది.",
+      "insight_quarters": "త్రైమాసిక విశ్లేషణ: Q4 (శీతాకాల పొగమంచు) వర్షాకాలం కంటే 3.4 రెట్లు ఎక్కువ.",
+      "insight_months": "శీతాకాల ఇన్వర్షన్ గరిష్టం: నవంబర్-జనవరిలో ఆసుపత్రి చేరికలు +240% పెరుగుతాయి.",
+      "insight_weeks": "వారపు పెరుగుదల: పంట వ్యర్థాల దహనం తర్వాత ఐసీయూ శ్వాసకోశ చేరికలు తీవ్రమవుతాయి.",
+      "insight_live": "లైవ్ 7-రోజుల చక్రం: CPCB కేంద్రాలతో నిజ-సమయ సహసంబంధం.",
+      "r2_precision": "ML R² = 0.9879"
     },
     "copilot": {
       "floating_button": "ఏరోమెడ్ కోపైలట్‌ను అడగండి",
@@ -1188,7 +1453,26 @@ export const translations = {
       "rag_live": "RAG లైవ్",
       "title": "ఏరోమెడ్ క్లినికల్ కోపైలట్",
       "ask_placeholder": "మరాఠీ, హిందీ, తమిళం లేదా ఇంగ్లీషులో అడగండి...",
-      "send": "పంపండి"
+      "send": "పంపండి",
+      "rag_title": "TF-IDF వెక్టర్ RAG ఆధార బలం",
+      "sub_ms": "సబ్-మిల్లీసెకన్ శోధన",
+      "retrieved_source": "సేకరించిన జ్ఞాన మూలం",
+      "matched_excerpt": "సరిపోలిన ఖచ్చితమైన క్లినికల్ నియమ సారాంశం",
+      "guardrails_verified": "అడాప్షన్ బ్లూప్రింట్ వైద్య రక్షణ నియమాలు ధృవీకరించబడ్డాయి",
+      "rule_1": "నియమం 1: CPCB AQI ప్రమాణాల పాటించటం (0-500)",
+      "rule_2": "నియమం 2: చట్టబద్ధమైన CAQM GRAP ఆదేశాలు (దశ I-IV)",
+      "rule_3": "నియమం 3: ఊహాత్మక ప్రిస్క్రిప్షన్లు సున్నా",
+      "rule_4": "నియమం 4: తప్పనిసరి అత్యవసర ట్రిగ్గర్ (SpO2 < 92%)",
+      "rule_5": "నియమం 5: సర్టిఫైడ్ N95 మరియు HEPA ఫిల్టరింగ్ తప్పనిసరి",
+      "er_warning": "SpO2 < 92%: తక్షణ అత్యవసర ఆసుపత్రి రవాణా అవసరం!",
+      "pulse_spo2": "పల్స్ SpO2:",
+      "context_label": "సందర్భం:",
+      "rule_count": "8,188 నియమాలు",
+      "profile_pediatric": "పిల్లల ఆస్తమా (వయస్సు 4–12)",
+      "profile_geriatric": "వృద్ధుల సిఓపిడి (వయస్సు 60+)",
+      "profile_worker": "బహిరంగ డెలివరీ కార్మికులు",
+      "profile_maternal": "మాతృ మరియు ప్రసవపూర్వ సంరక్షణ",
+      "profile_general": "సాధారణ జనాభా"
     },
     "simulator": {
       "title": "వాతావరణ సున్నితత్వం & ఆసుపత్రి సర్జ్ సిమ్యులేటర్",
@@ -1205,7 +1489,17 @@ export const translations = {
       "icu_beds": "అవసరమైన ICU పడకలు",
       "nebulizers": "నెబ్యులైజర్లు",
       "oxygen_cylinders": "అత్యవసర ఆక్సిజన్ యూనిట్లు",
-      "statutory_grap_stage": "చట్టబద్ధమైన CAQM GRAP దశ:"
+      "statutory_grap_stage": "చట్టబద్ధమైన CAQM GRAP దశ:",
+      "pm25_title": "PM2.5 సాంద్రత (సూక్ష్మ శ్వాసకోశ పొగమంచు)",
+      "pm10_title": "PM10 (పీల్చదగిన ధూళి)",
+      "no2_title": "NO2 (వాహనాల దహనం)",
+      "so2_title": "SO2 (పారిశ్రామిక ఉద్గారాలు)",
+      "temperature_title": "పరిసర ఉష్ణోగ్రత",
+      "humidity_title": "సాపేక్ష ఆర్ద్రత",
+      "live_calc": "లైవ్ మోడల్ లెక్కింపు",
+      "temp_hint": "చల్లని గాలి శీతాకాలంలో కాలుష్యాన్ని భూమిపైనే బంధిస్తుంది",
+      "humidity_hint": "ఎక్కువ తేమ దట్టమైన పొగమంచును ఏర్పరుస్తుంది",
+      "vs_baseline": "బేస్లైన్తో పోలిస్తే"
     },
     "datasets": {
       "title": "అఖిల భారత అడాప్షన్ ల్యాబ్స్ ఎగుమతి కేటలాగ్",
@@ -1225,20 +1519,32 @@ export const translations = {
       "col_preview": "ప్రివ్యూ",
       "view_rows": "వరుసలను వీక్షించండి",
       "table_view": "టేబుల్ వీక్షణ",
-      "protocol_view": "కార్డ్ వీక్షణ",
-      "close_drawer": "మూసివేయండి"
+      "protocol_view": "ప్రోటోకాల్ కార్డ్ వీక్షణ",
+      "close_drawer": "మూసివేయి",
+      "filter_grade_a": "గ్రేడ్ A (9.4+)",
+      "filter_invented": "సింథటిక్ ఇన్వెంట్",
+      "filter_forge": "ఫోర్జ్ ఎక్స్ట్రాక్ట్",
+      "samples_header": "సంశ్లేషణ చేయబడిన మరియు సేకరించబడిన వాస్తవ వరుసలు",
+      "prompt_context": "వాతావరణ / క్లినికల్ సందర్భం:",
+      "protocol_truth": "క్లినికల్ ప్రతిస్పందన ప్రోటోకాల్ / వాస్తవ ఆధారం:",
+      "copy_id_title": "పూర్తి అడాప్షన్ డేటాసెట్ ఐడీని కాపీ చేయండి"
     },
     "jury": {
       "title": "అడాప్షన్ AI 7-స్తంభాల సామర్థ్య సూట్ — జ్యూరీ ప్రూఫ్ హబ్",
       "subtitle": "ఏరోమెడ్ ఇండియా నిర్మాణంలో ఉపయోగించిన 7 ప్రధాన స్తంభాలకు సంబంధించిన ఆధారాలు.",
-      "quality_grade_card": "నాణ్యత గ్రేడ్",
-      "autoscientist_gain_card": "విజయాల రేటు",
-      "predictive_fit_card": "ML ప్రిడిక్టివ్ ఫిట్",
-      "credit_reserve_card": "SDK నిల్వ",
+      "quality_grade_card": "అడాప్షన్ నాణ్యత గ్రేడ్",
+      "autoscientist_gain_card": "ఆటో-సైంటిస్ట్ గెలుపు రేటు",
+      "predictive_fit_card": "ML అంచనా ఖచ్చితత్వం",
+      "credit_reserve_card": "SDK క్రెడిట్ రిజర్వ్",
       "verified_proof": "ధృవీకరించబడిన రుజువు: 7 స్తంభాలు",
       "copy_id": "IDని కాపీ చేయండి",
       "copied": "కాపీ చేయబడింది!",
-      "copy_command": "కమాండ్‌ను కాపీ చేయండి"
+      "copy_command": "కమాండ్ కాపీ చేయండి",
+      "top_percentile": "ప్రపంచవ్యాప్తంగా టాప్ 33వ పర్సంటైల్",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (3 పునరావృత్తులు)",
+      "mae_subtitle": "సగటు లోపం ±1.88 రోజువారీ చేరికలు",
+      "buffer_retained": "ధృవీకరించబడింది: >400 క్రెడిట్ల రిజర్వ్ భద్రం",
+      "verification_command_title": "జ్యూరీ కోసం ప్రత్యక్ష అడాప్షన్ SDK ధృవీకరణ ఆదేశం"
     }
   },
   "ur": {
@@ -1283,7 +1589,11 @@ export const translations = {
       "seed_mode": "فوری سیڈ موڈ (0ms)",
       "instant_seed": "سیڈ موڈ",
       "cpcb_caqm_grounding": "CPCB اور CAQM قانونی بنیاد",
-      "live_projection": "لائیو 48 گھنٹے کی پیش گوئی"
+      "live_projection": "لائیو 48 گھنٹے کی پیش گوئی",
+      "footer_desc": "کلینیکل ہوا کے معیار اور تنفسی امراض کی نگرانی مونو ریپو",
+      "footer_adaption": "اڈاپشن لیبز کے زیرِ اہتمام",
+      "rules_count": "۸،۱۸۸ قواعد",
+      "live_model_calc": "لائیو ماڈل کیلکولیشن"
     },
     "nav": {
       "workspaces": "طبی ورک اسپیس",
@@ -1368,7 +1678,7 @@ export const translations = {
       "drill_up": "↑ اوپر جائیں",
       "legend_aqi": "اوسط AQI",
       "legend_admissions": "روزانہ ہسپتال داخلے",
-      "pm25_conc": "PM2.5 ارتکاز (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 تفصیل دیکھنے کے لیے کسی بھی بار پر کلک کریں",
       "heatmap_title": "پیئرسن باہمی تعلق میٹرکس (8×8)",
       "heatmap_desc": "آلودگیوں، موسم اور داخلوں کے درمیان تعلق کے ضوابط (r)۔",
@@ -1386,7 +1696,13 @@ export const translations = {
       "icu_strain": "آئی سی یو دباؤ",
       "priority": "ترجیح",
       "action": "کارروائی",
-      "export_csv": "قطار کو CSV کے طور پر برآمد کریں"
+      "export_csv": "قطار کو CSV کے طور پر برآمد کریں",
+      "insight_years": "۱۰ سالہ رجحان: شہری راہداریوں میں PM2.5 سالانہ +۴.۲٪ بڑھ رہا ہے۔",
+      "insight_quarters": "موسمی سہ ماہی تجزیہ: Q4 (موسم سرما کا سموگ) مانسون سے ۳.۴ گنا زیادہ ہے۔",
+      "insight_months": "موسم سرما میں الٹ پلٹ کا عروج: نومبر تا جنوری ہسپتال میں داخلوں میں +۲۴۰٪ اضافہ۔",
+      "insight_weeks": "ہفتہ وار اضافہ: فصلوں کی باقیات جلانے کے بعد آئی سی یو تنفسی داخلوں میں شدت۔",
+      "insight_live": "لائیو ۷ روزہ چکر: سی پی سی بی اسٹیشنوں کے ساتھ حقیقی وقت کا تعلق۔",
+      "r2_precision": "ایم ایل R² = ۰.۹۸۷۹"
     },
     "copilot": {
       "floating_button": "ایرو میڈ کوپائلٹ سے پوچھیں",
@@ -1394,7 +1710,26 @@ export const translations = {
       "rag_live": "RAG لائیو",
       "title": "ایرو میڈ کلینیکل کوپائلٹ",
       "ask_placeholder": "مراٹھی، ہندی، تمل یا انگریزی میں پوچھیں...",
-      "send": "بھیجیں"
+      "send": "بھیجیں",
+      "rag_title": "TF-IDF ویکٹر RAG ثبوتی بنیاد",
+      "sub_ms": "سب ملی سیکنڈ بازیافت",
+      "retrieved_source": "حاصل کردہ علمی ذریعہ",
+      "matched_excerpt": "ہوبہو مطابقت پذیر کلینیکل اصول کا اقتباس",
+      "guardrails_verified": "اڈاپشن بلیو پرنٹ طبی حفاظتی اقدامات کی تصدیق شدہ",
+      "rule_1": "قاعدہ ۱: سی پی سی بی AQI معیارات کی تعمیل (۰-۵۰۰)",
+      "rule_2": "قاعدہ ۲: قانونی CAQM GRAP ہدایات (مرحلہ I-IV)",
+      "rule_3": "قاعدہ ۳: ادویات کے خود ساختہ نسخوں کی مکمل ممانعت",
+      "rule_4": "قاعدہ ۴: لازمی ہنگامی انتباہ (SpO2 < ۹۲٪)",
+      "rule_5": "قاعدہ ۵: تصدیق شدہ N95 اور HEPA فلٹریشن لازمی",
+      "er_warning": "SpO2 < ۹۲٪: فوری طور پر ہنگامی ہسپتال منتقلی درکار ہے!",
+      "pulse_spo2": "نبض SpO2:",
+      "context_label": "سیاق و سباق:",
+      "rule_count": "۸،۱۸۸ قواعد",
+      "profile_pediatric": "بچوں کا دمہ (عمر ۴–۱۲)",
+      "profile_geriatric": "بزرگ سی او پی ڈی (عمر ۶۰+)",
+      "profile_worker": "بیرونی ڈیلیوری ورکرز",
+      "profile_maternal": "زچگی اور قبل از پیدائش دیکھ بھال",
+      "profile_general": "عام آبادی"
     },
     "simulator": {
       "title": "ماحولیاتی حساسیت اور ہسپتال سرج سمیلیٹر",
@@ -1411,7 +1746,17 @@ export const translations = {
       "icu_beds": "مطلوبہ آئی سی یو بیڈز",
       "nebulizers": "نیبولائزرز",
       "oxygen_cylinders": "ہنگامی آکسیجن سلنڈر",
-      "statutory_grap_stage": "قانونی CAQM GRAP مرحلہ:"
+      "statutory_grap_stage": "قانونی CAQM GRAP مرحلہ:",
+      "pm25_title": "PM2.5 ارتکاز (باریک سانس لینے کے قابل سموگ)",
+      "pm10_title": "PM10 (موٹی سانس کے ذریعے اندر جانے والی دھول)",
+      "no2_title": "NO2 (گاڑیوں کا دھواں)",
+      "so2_title": "SO2 (صنعتی اخراج)",
+      "temperature_title": "محیط درجہ حرارت",
+      "humidity_title": "اضافی نمی",
+      "live_calc": "لائیو ماڈل کیلکولیشن",
+      "temp_hint": "سرد ہوا موسم سرما میں آلودگی کو زمین کے قریب قید رکھتی ہے",
+      "humidity_hint": "زیادہ نمی گھنے سموگ کا باعث بنتی ہے",
+      "vs_baseline": "بمقابلہ بنیادی شرح"
     },
     "datasets": {
       "title": "آل انڈیا اڈاپشن لیبز برآمد شدہ کیٹلاگ",
@@ -1431,20 +1776,32 @@ export const translations = {
       "col_preview": "پیش نظارہ",
       "view_rows": "قطاریں دیکھیں",
       "table_view": "ٹیبل ویو",
-      "protocol_view": "کارڈ ویو",
-      "close_drawer": "بند کریں"
+      "protocol_view": "پروٹوکول کارڈ ویو",
+      "close_drawer": "بند کریں",
+      "filter_grade_a": "گریڈ اے (۹.۴+)",
+      "filter_invented": "مصنوعی تخلیق",
+      "filter_forge": "فوج سے نکالا گیا",
+      "samples_header": "ترکیب شدہ اور نکالی گئی حقیقی قطاریں",
+      "prompt_context": "موسمیاتی / کلینیکل سیاق و سباق:",
+      "protocol_truth": "کلینیکل رسپانس پروٹوکول / اصل حقائق:",
+      "copy_id_title": "مکمل اڈاپشن ڈیٹا سیٹ آئی ڈی کاپی کریں"
     },
     "jury": {
       "title": "اڈاپشن اے آئی 7-ستون صلاحیت سوٹ — جیوری ثبوت مرکز",
       "subtitle": "ایرو میڈ انڈیا میں استعمال ہونے والے تمام 7 بنیادی ستونوں کا قابل تصدیق ثبوت۔",
-      "quality_grade_card": "کوالٹی گریڈ",
-      "autoscientist_gain_card": "جیت کی شرح",
-      "predictive_fit_card": "ایم ایل پیش گوئی فٹ",
+      "quality_grade_card": "اڈاپشن کوالٹی گریڈ",
+      "autoscientist_gain_card": "آٹو سائنٹسٹ جیت کی شرح",
+      "predictive_fit_card": "ایم ایل پیشین گوئی کی درستگی",
       "credit_reserve_card": "ایس ڈی کے کریڈٹ ریزرو",
       "verified_proof": "تصدیق شدہ ثبوت: 7 ستون",
       "copy_id": "آئی ڈی کاپی کریں",
       "copied": "کاپی ہو گیا!",
-      "copy_command": "کمانڈ کاپی کریں"
+      "copy_command": "کمانڈ کاپی کریں",
+      "top_percentile": "عالمی سطح پر ٹاپ ۳۳واں پرسنٹائل",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (۳ تکرار)",
+      "mae_subtitle": "اوسط غلطی ±۱.۸۸ روزانہ داخلے",
+      "buffer_retained": "تصدیق شدہ: >۴۰۰ کریڈٹ بفر محفوظ",
+      "verification_command_title": "جیوری کے لیے براہ راست اڈاپشن SDK تصدیقی کمانڈ"
     }
   },
   "kn": {
@@ -1489,7 +1846,11 @@ export const translations = {
       "seed_mode": "ತತ್ಕ್ಷಣದ ಸೀಡ್ ಮೋಡ್ (0ms)",
       "instant_seed": "ಸೀಡ್ ಮೋಡ್",
       "cpcb_caqm_grounding": "CPCB ಮತ್ತು CAQM ಶಾಸನಬದ್ಧ ಆಧಾರ",
-      "live_projection": "ಲೈವ್ 48 ಗಂಟೆಗಳ ಮುನ್ಸೂಚನೆ"
+      "live_projection": "ಲೈವ್ 48 ಗಂಟೆಗಳ ಮುನ್ಸೂಚನೆ",
+      "footer_desc": "ಕ್ಲಿನಿಕಲ್ ವಾಯು ಗುಣಮಟ್ಟ ಮತ್ತು ಉಸಿರಾಟದ ಕಾಯಿಲೆಗಳ ಕಣ್ಗಾವಲು ಮೊನೊರೆಪೋ",
+      "footer_adaption": "ಅಡಾಪ್ಟನ್ ಲ್ಯಾಬ್ಸ್ ಆಧಾರಿತ",
+      "rules_count": "೮,೧೮೮ ನಿಯಮಗಳು",
+      "live_model_calc": "ಲೈವ್ ಮಾದರಿ ಲೆಕ್ಕಾಚಾರ"
     },
     "nav": {
       "workspaces": "ಕ್ಲಿನಿಕಲ್ ಕಾರ್ಯಕ್ಷೇತ್ರಗಳು",
@@ -1574,7 +1935,7 @@ export const translations = {
       "drill_up": "↑ ಮೇಲೆ ಹೋಗಿ",
       "legend_aqi": "ಸರಾಸರಿ AQI",
       "legend_admissions": "ದೈನಂದಿನ ದಾಖಲಾತಿಗಳು",
-      "pm25_conc": "PM2.5 ಸಾಂದ್ರತೆ (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 ವಿವರಗಳನ್ನು ನೋಡಲು ಯಾವುದೇ ಬಾರ್ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ",
       "heatmap_title": "ಪಿಯರ್ಸನ್ ಸಹಸಂಬಂಧ ಮ್ಯಾಟ್ರಿಕ್ಸ್ (8×8)",
       "heatmap_desc": "ಮಾಲಿನ್ಯಕಾರಕಗಳು, ಹವಾಮಾನ ಮತ್ತು ದಾಖಲಾತಿಗಳ ನಡುವಿನ ಸಹಸಂಬಂಧ ಗುಣಾಂಕಗಳು (r).",
@@ -1592,7 +1953,13 @@ export const translations = {
       "icu_strain": "ICU ಒತ್ತಡ",
       "priority": "ಆದ್ಯತೆ",
       "action": "ಕ್ರಮ",
-      "export_csv": "ಸರದಿಯನ್ನು CSV ಆಗಿ ರಫ್ತು ಮಾಡಿ"
+      "export_csv": "ಸರದಿಯನ್ನು CSV ಆಗಿ ರಫ್ತು ಮಾಡಿ",
+      "insight_years": "೧೦-ವರ್ಷಗಳ ಪ್ರವೃತ್ತಿ: ನಗರಗಳಲ್ಲಿ PM2.5 ವಾರ್ಷಿಕ +೪.೨% ಹೆಚ್ಚಳ.",
+      "insight_quarters": "ತ್ರೈಮಾಸಿಕ ವಿಶ್ಲೇಷಣೆ: Q4 (ಚಳಿಗಾಲದ ಹೊಗೆ) ಮಾನ್ಸೂನ್‌ಗಿಂತ ೩.೪ ಪಟ್ಟು ಹೆಚ್ಚು.",
+      "insight_months": "ಚಳಿಗಾಲದ ಇನ್ವರ್ಶನ್ ಗರಿಷ್ಠ: ನವೆಂಬರ್-ಜನವರಿಯಲ್ಲಿ ಆಸ್ಪತ್ರೆ ದಾಖಲಾತಿ +೨೪೦% ಏರಿಕೆ.",
+      "insight_weeks": "ವಾರದ ಏರಿಕೆ: ಬೆಳೆ ಸುಡುವ ನಂತರದ ವಾರಗಳಲ್ಲಿ ತೀವ್ರ ಐಸಿಯು ದಾಖಲಾತಿ.",
+      "insight_live": "ಲೈವ್ ೭-ದಿನಗಳ ಚಕ್ರ: CPCB ಕೇಂದ್ರಗಳೊಂದಿಗೆ ನೈಜ-ಸಮಯದ ಪರಸ್ಪರ ಸಂಬಂಧ.",
+      "r2_precision": "ML R² = ೦.೯೮೭೯"
     },
     "copilot": {
       "floating_button": "ಏರೋಮೆಡ್ ಕೋಪೈಲಟ್ ಅನ್ನು ಕೇಳಿ",
@@ -1600,7 +1967,26 @@ export const translations = {
       "rag_live": "RAG ಲೈವ್",
       "title": "ಏರೋಮೆಡ್ ಕ್ಲಿನಿಕಲ್ ಕೋಪೈಲಟ್",
       "ask_placeholder": "ಮರಾಠಿ, ಹಿಂದಿ, ತಮಿಳು ಅಥವಾ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಕೇಳಿ...",
-      "send": "ಕಳುಹಿಸಿ"
+      "send": "ಕಳುಹಿಸಿ",
+      "rag_title": "TF-IDF ವೆಕ್ಟರ್ RAG ಪುರಾವೆ ಆಧಾರ",
+      "sub_ms": "ಉಪ-ಮಿಲಿಸೆಕೆಂಡ್ ಮರುಪಡೆಯುವಿಕೆ",
+      "retrieved_source": "ಮರುಪಡೆಯಲಾದ ಜ್ಞಾನ ಮೂಲ",
+      "matched_excerpt": "ನಿಖರವಾಗಿ ಹೊಂದಾಣಿಕೆಯಾದ ಕ್ಲಿನಿಕಲ್ ನಿಯಮದ ಸಾರಾಂಶ",
+      "guardrails_verified": "ಅಡಾಪ್ಟನ್ ವೈದ್ಯಕೀಯ ರಕ್ಷಣಾ ನಿಯಮಗಳನ್ನು ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+      "rule_1": "ನಿಯಮ ೧: CPCB AQI ಮಾನದಂಡ ಪಾಲನೆ (೦-೫೦೦)",
+      "rule_2": "ನಿಯಮ ೨: ಶಾಸನಬದ್ಧ CAQM GRAP ನಿರ್ದೇಶನಗಳು (ಹಂತ I-IV)",
+      "rule_3": "ನಿಯಮ ೩: ಯಾವುದೇ ಔಷಧಿ ಕಲ್ಪಿತ ಬರವಣಿಗೆ ಇಲ್ಲ",
+      "rule_4": "ನಿಯಮ ೪: ಕಡ್ಡಾಯ ತುರ್ತು ಎಚ್ಚರಿಕೆ (SpO2 < ೯೨%)",
+      "rule_5": "ನಿಯಮ ೫: ಪ್ರಮಾಣೀಕೃತ N95 ಮತ್ತು HEPA ಶೋಧನೆ ಕಡ್ಡಾಯ",
+      "er_warning": "SpO2 < ೯೨%: ತಕ್ಷಣದ ತುರ್ತು ಆಸ್ಪತ್ರೆ ಸಾಗಣೆ ಅಗತ್ಯವಿದೆ!",
+      "pulse_spo2": "ನಾಡಿ SpO2:",
+      "context_label": "ಸಂದರ್ಭ:",
+      "rule_count": "೮,೧೮೮ ನಿಯಮಗಳು",
+      "profile_pediatric": "ಮಕ್ಕಳ ಆಸ್ತಮಾ (ವಯಸ್ಸು ೪–೧೨)",
+      "profile_geriatric": "ಹಿರಿಯ ಸಿಒಪಿಡಿ (ವಯಸ್ಸು ೬೦+)",
+      "profile_worker": "ಹೊರಾಂಗಣ ಡೆಲಿವರಿ ಕಾರ್ಮಿಕರು",
+      "profile_maternal": "ತಾಯಂದಿರ ಮತ್ತು ಹೆರಿಗೆ ಪೂರ್ವ ಆರೈಕೆ",
+      "profile_general": "ಸಾಮಾನ್ಯ ಜನಸಂಖ್ಯೆ"
     },
     "simulator": {
       "title": "ವಾತಾವರಣದ ಸೂಕ್ಷ್ಮತೆ ಮತ್ತು ಆಸ್ಪತ್ರೆ ಏರಿಕೆ ಸಿಮ್ಯುಲೇಟರ್",
@@ -1617,7 +2003,17 @@ export const translations = {
       "icu_beds": "ಅಗತ್ಯವಿರುವ ICU ಹಾಸಿಗೆಗಳು",
       "nebulizers": "ನೆಬ್ಯುಲೈಜರ್‌ಗಳು",
       "oxygen_cylinders": "ತುರ್ತು ಆಮ್ಲಜನಕ ಸಿಲಿಂಡರ್‌ಗಳು",
-      "statutory_grap_stage": "ಶಾಸನಬದ್ಧ CAQM GRAP ಹಂತ:"
+      "statutory_grap_stage": "ಶಾಸನಬದ್ಧ CAQM GRAP ಹಂತ:",
+      "pm25_title": "PM2.5 ಸಾಂದ್ರತೆ (ಸೂಕ್ಷ್ಮ ಉಸಿರಾಟದ ಹೊಗೆ)",
+      "pm10_title": "PM10 (ಉಸಿರಾಡಬಹುದಾದ ಧೂಳು)",
+      "no2_title": "NO2 (ವಾಹನ ದಹನ)",
+      "so2_title": "SO2 (ಕೈಗಾರಿಕಾ ಹೊರಸೂಸುವಿಕೆ)",
+      "temperature_title": "ಪರಿಸರದ ತಾಪಮಾನ",
+      "humidity_title": "ಸಾಪೇಕ್ಷ ಆರ್ದ್ರತೆ",
+      "live_calc": "ಲೈವ್ ಮಾದರಿ ಲೆಕ್ಕಾಚಾರ",
+      "temp_hint": "ತಂಪಾದ ಗಾಳಿ ಚಳಿಗಾಲದಲ್ಲಿ ಮಾಲಿನ್ಯವನ್ನು ನೆಲದ ಹತ್ತಿರವೇ ಹಿಡಿದಿಡುತ್ತದೆ",
+      "humidity_hint": "ಹೆಚ್ಚಿನ ತೇವಾಂಶವು ದಟ್ಟವಾದ ಹೊಗೆಮಂಜನ್ನು ಉಂಟುಮಾಡುತ್ತದೆ",
+      "vs_baseline": "ಮೂಲಕ್ಕೆ ಹೋಲಿಸಿದರೆ"
     },
     "datasets": {
       "title": "ಅಖಿಲ ಭಾರತ ಅಡಾಪ್ಟನ್ ಲ್ಯಾಬ್ಸ್ ರಫ್ತು ಕ್ಯಾಟಲಾಗ್",
@@ -1636,21 +2032,33 @@ export const translations = {
       "col_id": "ID",
       "col_preview": "ಮುನ್ನೋಟ",
       "view_rows": "ಸಾಲುಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
-      "table_view": "ಕೋಷ್ಟಕ ನೋಟ",
-      "protocol_view": "ಕಾರ್ಡ್ ನೋಟ",
-      "close_drawer": "ಮುಚ್ಚಿ"
+      "table_view": "ಕೋಷ್ಟಕ ವೀಕ್ಷಣೆ",
+      "protocol_view": "ಪ್ರೋಟೋಕಾಲ್ ಕಾರ್ಡ್ ವೀಕ್ಷಣೆ",
+      "close_drawer": "ಮುಚ್ಚಿ",
+      "filter_grade_a": "ಗ್ರೇಡ್ ಎ (೯.೪+)",
+      "filter_invented": "ಸಿಂಥೆಟಿಕ್ ಇನ್ವೆಂಟ್",
+      "filter_forge": "ಫೋರ್ಜ್ ಹೊರತೆಗೆದ",
+      "samples_header": "ಸಂಶ್ಲೇಷಿತ ಮತ್ತು ಹೊರತೆಗೆಯಲಾದ ನೈಜ ಸಾಲುಗಳು",
+      "prompt_context": "ಹವಾಮಾನ / ಕ್ಲಿನಿಕಲ್ ಸಂದರ್ಭ:",
+      "protocol_truth": "ಕ್ಲಿನಿಕಲ್ ಪ್ರತಿಕ್ರಿಯೆ ಪ್ರೋಟೋಕಾಲ್ / ನೈಜ ಪುರಾವೆ:",
+      "copy_id_title": "ಸಂಪೂರ್ಣ ಅಡಾಪ್ಟನ್ ಡೇಟಾಸೆಟ್ ಐಡಿ ನಕಲಿಸಿ"
     },
     "jury": {
       "title": "ಅಡಾಪ್ಟನ್ AI 7-ಸ್ತಂಭ ಸಾಮರ್ಥ್ಯ ಸೂಟ್ — ತೀರ್ಪುಗಾರರ ಪುರಾವೆ ಕೇಂದ್ರ",
       "subtitle": "ಏರೋಮೆಡ್ ಭಾರತವನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ಬಳಸಲಾದ ಎಲ್ಲಾ 7 ಪ್ರಮುಖ ಸ್ತಂಭಗಳ ಪುರಾವೆಗಳು.",
-      "quality_grade_card": "ಗುಣಮಟ್ಟ ಗ್ರೇಡ್",
-      "autoscientist_gain_card": "ಗೆಲುವಿನ ದರ",
-      "predictive_fit_card": "ML ಮುನ್ಸೂಚಕ ಫಿಟ್",
-      "credit_reserve_card": "SDK ಮೀಸಲು",
+      "quality_grade_card": "ಅಡಾಪ್ಟನ್ ಗುಣಮಟ್ಟ ಗ್ರೇಡ್",
+      "autoscientist_gain_card": "ಆಟೋ-ಸೈಂಟಿಸ್ಟ್ ಗೆಲುವಿನ ದರ",
+      "predictive_fit_card": "ML ಮುನ್ಸೂಚನೆ ನಿಖರತೆ",
+      "credit_reserve_card": "SDK ಕ್ರೆಡಿಟ್ ಮೀಸಲು",
       "verified_proof": "ಪರಿಶೀಲಿಸಿದ ಪುರಾವೆ: 7 ಸ್ತಂಭಗಳು",
       "copy_id": "ID ನಕಲಿಸಿ",
       "copied": "ನಕಲಿಸಲಾಗಿದೆ!",
-      "copy_command": "ಆಜ್ಞೆಯನ್ನು ನಕಲಿಸಿ"
+      "copy_command": "ಆಜ್ಞೆಯನ್ನು ನಕಲಿಸಿ",
+      "top_percentile": "ಜಾಗತಿಕವಾಗಿ ಅಗ್ರ ೩೩ನೇ ಪರ್ಸೆಂಟೈಲ್",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (೩ ಪುನರಾವರ್ತನೆಗಳು)",
+      "mae_subtitle": "ಸರಾಸರಿ ದೋಷ ±೧.೮೮ ದೈನಂದಿನ ದಾಖಲಾತಿಗಳು",
+      "buffer_retained": "ಪರಿಶೀಲಿಸಲಾಗಿದೆ: >೪೦೦ ಕ್ರೆಡಿಟ್‌ಗಳು ಸುರಕ್ಷಿತವಾಗಿವೆ",
+      "verification_command_title": "ಜ್ಯೂರಿಗಾಗಿ ನೇರ ಅಡಾಪ್ಟನ್ SDK ಪರಿಶೀಲನಾ ಆಜ್ಞೆ"
     }
   },
   "ml": {
@@ -1695,7 +2103,11 @@ export const translations = {
       "seed_mode": "തൽക്ഷണ സീഡ് മോഡ് (0ms)",
       "instant_seed": "സീഡ് മോഡ്",
       "cpcb_caqm_grounding": "CPCB & CAQM നിയമപരമായ അടിത്തറ",
-      "live_projection": "തത്സമയ 48 മണിക്കൂർ പ്രവചനം"
+      "live_projection": "തത്സമയ 48 മണിക്കൂർ പ്രവചനം",
+      "footer_desc": "ക്ലിനിക്കൽ വായു നിലവാരവും ശ്വാസകോശ രോഗ നിരീക്ഷണ കേന്ദ്രവും",
+      "footer_adaption": "അഡാപ്ഷൻ ലാബ്സ് പിന്തുണയോടെ",
+      "rules_count": "8,188 നിയമങ്ങൾ",
+      "live_model_calc": "തത്സമയ മോഡൽ കണക്കുകൂട്ടൽ"
     },
     "nav": {
       "workspaces": "ക്ലിനിക്കൽ വർക്ക്‌സ്‌പേസുകൾ",
@@ -1780,7 +2192,7 @@ export const translations = {
       "drill_up": "↑ മുകളിലേക്ക്",
       "legend_aqi": "ശരാശരി AQI",
       "legend_admissions": "പ്രതിദിന പ്രവേശനങ്ങൾ",
-      "pm25_conc": "PM2.5 സാന്ദ്രത (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 കൂടുതൽ വിവരങ്ങൾക്ക് ഏതെങ്കിലും ബാറിൽ ക്ലിക്ക് ചെയ്യുക",
       "heatmap_title": "പിയേഴ്സൺ പരസ്പരബന്ധ മാട്രിക്സ് (8×8)",
       "heatmap_desc": "മലിനീകരണങ്ങൾ, കാലാവസ്ഥ, പ്രവേശനങ്ങൾ എന്നിവ തമ്മിലുള്ള പരസ്പരബന്ധ ഗുണകങ്ങൾ (r).",
@@ -1798,7 +2210,13 @@ export const translations = {
       "icu_strain": "ICU സമ്മർദ്ദം",
       "priority": "മുൻഗണന",
       "action": "നടപടി",
-      "export_csv": "ക്യൂ CSV ആയി എക്സ്പോർട്ട് ചെയ്യുക"
+      "export_csv": "ക്യൂ CSV ആയി എക്സ്പോർട്ട് ചെയ്യുക",
+      "insight_years": "10 വർഷത്തെ പ്രവണത: നഗരങ്ങളിൽ PM2.5 വർഷം തോറും +4.2% വർദ്ധിക്കുന്നു.",
+      "insight_quarters": "ത്രൈമാസ വിശകലനം: Q4 (ശൈത്യകാല പുകമഞ്ഞ്) മൺസൂണിനേക്കാൾ 3.4 മടങ്ങ് കൂടുതൽ.",
+      "insight_months": "ശൈത്യകാല ഇൻവേർഷൻ പീക്ക്: നവംബർ-ജനുവരിയിൽ ആശുപത്രി പ്രവേശനം +240% വർദ്ധിക്കുന്നു.",
+      "insight_weeks": "വാരാന്ത്യ സ്പൈക്ക്: കൃഷി അവശിഷ്ടങ്ങൾ കത്തിച്ചതിനു ശേഷമുള്ള ആഴ്ചകളിൽ ഐസിയു അഡ്മിഷൻ വർദ്ധനവ്.",
+      "insight_live": "തത്സമയ 7-ദിവസ സൈക്കിൾ: CPCB സ്റ്റേഷനുകളുമായി തത്സമയ പരസ്പരബന്ധം.",
+      "r2_precision": "ML R² = 0.9879"
     },
     "copilot": {
       "floating_button": "എയറോമെഡ് കോപൈലറ്റിനോട് ചോദിക്കുക",
@@ -1806,7 +2224,26 @@ export const translations = {
       "rag_live": "RAG തത്സമയം",
       "title": "എയറോമെഡ് ക്ലിനിക്കൽ കോപൈലറ്റ്",
       "ask_placeholder": "മറാഠി, ഹിന്ദി, തമിഴ് അല്ലെങ്കിൽ ഇംഗ്ലീഷിൽ ചോദിക്കുക...",
-      "send": "അയക്കുക"
+      "send": "അയക്കുക",
+      "rag_title": "TF-IDF വെക്റ്റർ RAG തെളിവ് അടിത്തറ",
+      "sub_ms": "സബ്-മില്ലിസെക്കൻഡ് വീണ്ടെടുക്കൽ",
+      "retrieved_source": "വീണ്ടെടുത്ത വിജ്ഞാന ഉറവിടം",
+      "matched_excerpt": "കൃത്യമായി പൊരുത്തപ്പെടുന്ന ക്ലിനിക്കൽ നിയമ ഉദ്ധരണി",
+      "guardrails_verified": "അഡാപ്ഷൻ ബ്ലൂപ്രിന്റ് മെഡിക്കൽ സുരക്ഷാ നിയമങ്ങൾ പരിശോധിച്ചു",
+      "rule_1": "നിയമം 1: CPCB AQI മാനദണ്ഡങ്ങൾ പാലിക്കൽ (0-500)",
+      "rule_2": "നിയമം 2: നിയമാനുസൃത CAQM GRAP നിർദ്ദേശങ്ങൾ (ഘട്ടം I-IV)",
+      "rule_3": "നിയമം 3: വ്യാജ കുറിപ്പടികൾ പൂർണ്ണമായി ഒഴിവാക്കൽ",
+      "rule_4": "നിയമം 4: അടിയന്തിര ഹോസ്പിറ്റൽ ട്രിഗർ (SpO2 < 92%)",
+      "rule_5": "നിയമം 5: സാക്ഷ്യപ്പെടുത്തിയ N95, HEPA ഫിൽട്ടറുകൾ നിർബന്ധം",
+      "er_warning": "SpO2 < 92%: അടിയന്തിരമായി ആശുപത്രിയിലേക്ക് മാറ്റേണ്ടതുണ്ട്!",
+      "pulse_spo2": "പൾസ് SpO2:",
+      "context_label": "സന്ദർഭം:",
+      "rule_count": "8,188 നിയമങ്ങൾ",
+      "profile_pediatric": "കുട്ടികളിലെ ആസ്ത്മ (പ്രായം 4–12)",
+      "profile_geriatric": "മുതിർന്നവരിലെ സിഒപിഡി (പ്രായം 60+)",
+      "profile_worker": "ഡെലിവറി തൊഴിലാളികൾ",
+      "profile_maternal": "മാതൃ-പ്രസവപൂർവ പരിചരണം",
+      "profile_general": "സാധാരണ ജനങ്ങൾ"
     },
     "simulator": {
       "title": "അന്തരീക്ഷ സംവേദനക്ഷമതയും ആശുപത്രി സർജ് സിമുലേറ്ററും",
@@ -1823,7 +2260,17 @@ export const translations = {
       "icu_beds": "ആവശ്യമായ ICU കിടക്കകൾ",
       "nebulizers": "നെബുലൈസറുകൾ",
       "oxygen_cylinders": "അടിയന്തര ഓക്സിജൻ സിലിണ്ടറുകൾ",
-      "statutory_grap_stage": "നിയമപരമായ CAQM GRAP ഘട്ടം:"
+      "statutory_grap_stage": "നിയമപരമായ CAQM GRAP ഘട്ടം:",
+      "pm25_title": "PM2.5 സാന്ദ്രത (ശ്വസനയോഗ്യമായ പുകമഞ്ഞ്)",
+      "pm10_title": "PM10 (ശ്വസിക്കാവുന്ന പൊടിപടലങ്ങൾ)",
+      "no2_title": "NO2 (വാഹന പുക)",
+      "so2_title": "SO2 (വ്യാവസായിക ഉദ്വമനം)",
+      "temperature_title": "അന്തരീക്ഷ താപനില",
+      "humidity_title": "ആപേക്ഷിക ആർദ്രത",
+      "live_calc": "തത്സമയ മോഡൽ കണക്കുകൂട്ടൽ",
+      "temp_hint": "തണുത്ത വായു ശൈത്യകാലത്ത് മലിനീകരണത്തെ നിലത്തുതന്നെ തടഞ്ഞുനിർത്തുന്നു",
+      "humidity_hint": "കൂടുതൽ ഈർപ്പം കട്ടിയുള്ള പുകമഞ്ഞിന് കാരണമാകുന്നു",
+      "vs_baseline": "ബേസ്‌ലൈനുമായി താരതമ്യം ചെയ്യുമ്പോൾ"
     },
     "datasets": {
       "title": "പാൻ-ഇന്ത്യ അഡാപ്ഷൻ ലാബ്സ് എക്സ്പോർട്ട് കാറ്റലോഗ്",
@@ -1843,20 +2290,32 @@ export const translations = {
       "col_preview": "പ്രിവ്യൂ",
       "view_rows": "വരികൾ കാണുക",
       "table_view": "പട്ടിക കാഴ്ച",
-      "protocol_view": "കാർഡ് കാഴ്ച",
-      "close_drawer": "അടയ്ക്കുക"
+      "protocol_view": "പ്രോട്ടോക്കോൾ കാർഡ് കാഴ്ച",
+      "close_drawer": "അടയ്ക്കുക",
+      "filter_grade_a": "ഗ്രേഡ് എ (9.4+)",
+      "filter_invented": "സിന്തറ്റിക് ഇൻവെന്റ്",
+      "filter_forge": "ഫോർജ് എക്‌സ്ട്രാക്റ്റുചെയ്‌തത്",
+      "samples_header": "സമാഹരിച്ചതും വേർതിരിച്ചതുമായ യഥാർത്ഥ വരികൾ",
+      "prompt_context": "കാലാവസ്ഥ / ക്ലിനിക്കൽ പശ്ചാത്തലം:",
+      "protocol_truth": "ക്ലിനിക്കൽ പ്രതികരണ പ്രോട്ടോക്കോൾ / യഥാർത്ഥ തെളിവ്:",
+      "copy_id_title": "പൂർണ്ണ അഡാപ്ഷൻ ഡാറ്റാസെറ്റ് ഐഡി പകർത്തുക"
     },
     "jury": {
       "title": "അഡാപ്ഷൻ AI 7-സ്തംഭ ശേഷി സ്യൂട്ട് — ജൂറി തെളിവ് ഹബ്",
       "subtitle": "എയറോമെഡ് ഇന്ത്യ നിർമ്മിക്കുന്നതിൽ ഉപയോഗിച്ച എല്ലാ 7 പ്രധാന തൂണുകൾക്കുമുള്ള തെളിവുകൾ.",
-      "quality_grade_card": "ഗുണനിലവാര ഗ്രേഡ്",
-      "autoscientist_gain_card": "വിജയ നിരക്ക്",
-      "predictive_fit_card": "ML പ്രവചന ഫിറ്റ്",
-      "credit_reserve_card": "SDK കരുതൽ ധനം",
+      "quality_grade_card": "അഡാപ്ഷൻ ഗുണനിലവാര ഗ്രേഡ്",
+      "autoscientist_gain_card": "ഓട്ടോ-സയന്റിസ്റ്റ് വിജയ നിരക്ക്",
+      "predictive_fit_card": "ML പ്രവചന കൃത്യത",
+      "credit_reserve_card": "SDK ക്രെഡിറ്റ് കരുതൽ ധനം",
       "verified_proof": "പരിശോധിച്ച തെളിവ്: 7 തൂണുകൾ",
       "copy_id": "ID പകർപ്പുക",
       "copied": "പകർത്തി!",
-      "copy_command": "കമാൻഡ് പകർപ്പുക"
+      "copy_command": "കമാൻഡ് പകർത്തുക",
+      "top_percentile": "ആഗോളതലത്തിൽ മികച്ച 33-ാം പെർസെന്റൈൽ",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (3 ആവർത്തനങ്ങൾ)",
+      "mae_subtitle": "ശരാശരി പിശക് ±1.88 പ്രതിദിന അഡ്മിഷനുകൾ",
+      "buffer_retained": "സ്ഥിരീകരിച്ചത്: >400 ക്രെഡിറ്റുകൾ കരുതൽ ശേഖരത്തിൽ",
+      "verification_command_title": "ജൂറിക്കായുള്ള നേരിട്ടുള്ള അഡാപ്ഷൻ SDK സ്ഥിരീകരണ കമാൻഡ്"
     }
   },
   "gu": {
@@ -1901,7 +2360,11 @@ export const translations = {
       "seed_mode": "ઝડપી સીડ મોડ (0ms)",
       "instant_seed": "સીડ મોડ",
       "cpcb_caqm_grounding": "CPCB અને CAQM કાનૂની આધાર",
-      "live_projection": "લાઇવ 48 કલાકનું અનુમાન"
+      "live_projection": "લાઇવ 48 કલાકનું અનુમાન",
+      "footer_desc": "ક્લિનિકલ હવા ગુણવત્તા અને શ્વસન રોગ સર્વેલન્સ મોનોરેપો",
+      "footer_adaption": "અડેપ્શન લેબ્સ આધારિત",
+      "rules_count": "૮,૧૮૮ નિયમો",
+      "live_model_calc": "લાઇવ મોડેલ ગણતરી"
     },
     "nav": {
       "workspaces": "ક્લિનિકલ વર્કસ્પેસ",
@@ -1986,7 +2449,7 @@ export const translations = {
       "drill_up": "↑ ઉપર જાઓ",
       "legend_aqi": "સરેરાશ AQI",
       "legend_admissions": "દૈનિક એડમિશન",
-      "pm25_conc": "PM2.5 સાંદ્રતા (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 વિગતો જોવા માટે કોઈપણ બાર પર ક્લિક કરો",
       "heatmap_title": "પિયર્સન સહસંબંધ મેટ્રિક્સ (8×8)",
       "heatmap_desc": "પ્રદૂષકો, હવામાન અને એડમિશન વચ્ચેના સહસંબંધ ગુણાંક (r).",
@@ -2004,7 +2467,13 @@ export const translations = {
       "icu_strain": "ICU તણાવ",
       "priority": "પ્રાથમિકતા",
       "action": "પગલાં",
-      "export_csv": "કતાર CSV નિકાસ કરો"
+      "export_csv": "કતાર CSV નિકાસ કરો",
+      "insight_years": "૧૦-વર્ષનો ટ્રેન્ડ: શહેરી વિસ્તારોમાં PM2.5 માં વાર્ષિક +૪.૨% વધારો.",
+      "insight_quarters": "મોસમી ત્રિમાસિક વિશ્લેષણ: Q4 (શિયાળુ સ્મોગ) ચોમાસા કરતાં ૩.૪ ગણું વધારે.",
+      "insight_months": "શિયાળુ ઇન્વર્ઝન ટોચ: નવેમ્બર-જાન્યુઆરીમાં હોસ્પિટલ પ્રવેશમાં +૨૪૦% વધારો.",
+      "insight_weeks": "સાપ્તાહિક વધારો: પરાળી સળગાવ્યા પછીના અઠવાડિયામાં આઈસીયુ શ્વસન કટોકટી.",
+      "insight_live": "લાઇવ ૭-દિવસીય ચક્ર: સીપીસીબી સ્ટેશનો સાથે રીઅલ-ટાઇમ સંબંધ.",
+      "r2_precision": "ML R² = ૦.૯૮૭૯"
     },
     "copilot": {
       "floating_button": "એરોમેડ કોપાયલટને પૂછો",
@@ -2012,7 +2481,26 @@ export const translations = {
       "rag_live": "RAG લાઇવ",
       "title": "એરોમેડ ક્લિનિકલ કોપાયલટ",
       "ask_placeholder": "મરાઠી, હિન્દી, તમિલ અથવા અંગ્રેજીમાં પૂછો...",
-      "send": "મોકલો"
+      "send": "મોકલો",
+      "rag_title": "TF-IDF વેક્ટર RAG પુરાવા આધાર",
+      "sub_ms": "સબ-મિલિસેકન્ડ પુનઃપ્રાપ્તિ",
+      "retrieved_source": "પુનઃપ્રાપ્ત જ્ઞાન સ્ત્રોત",
+      "matched_excerpt": "ચોક્કસ મેળ ખાતો ક્લિનિકલ નિયમનો અંશ",
+      "guardrails_verified": "અડેપ્શન બ્લૂપ્રિન્ટ મેડિકલ સુરક્ષા નિયમો ચકાસાયેલ",
+      "rule_1": "નિયમ ૧: સીપીસીબી AQI ધોરણોનું પાલન (૦-૫૦૦)",
+      "rule_2": "નિયમ ૨: કાનૂની CAQM GRAP નિર્દેશો (તબક્કો I-IV)",
+      "rule_3": "નિયમ ૩: કાલ્પનિક દવાઓ લખવાની સંપૂર્ણ મનાઈ",
+      "rule_4": "નિયમ ૪: ફરજિયાત કટોકટી ચેતવણી (SpO2 < ૯૨%)",
+      "rule_5": "નિયમ ૫: પ્રમાણિત N95 અને HEPA ફિલ્ટરેશન ફરજિયાત",
+      "er_warning": "SpO2 < ૯૨%: તાત્કાલિક ઇમરજન્સી હોસ્પિટલ પરિવહન જરૂરી!",
+      "pulse_spo2": "પલ્સ SpO2:",
+      "context_label": "સંદર્ભ:",
+      "rule_count": "૮,૧૮૮ નિયમો",
+      "profile_pediatric": "બાળ અસ્થમા (ઉંમર ૪–૧૨)",
+      "profile_geriatric": "વૃદ્ધ સીઓપીડી (ઉંમર ૬૦+)",
+      "profile_worker": "આઉટડોર ડિલિવરી વર્કર્સ",
+      "profile_maternal": "માતૃત્વ અને પૂર્વપ્રસૂતિ સંભાળ",
+      "profile_general": "સામાન્ય વસ્તી"
     },
     "simulator": {
       "title": "વાતાવરણીય સંવેદનશીલતા અને હોસ્પિટલ સર્જ સિમ્યુલેટર",
@@ -2029,7 +2517,17 @@ export const translations = {
       "icu_beds": "જરૂરી ICU બેડ",
       "nebulizers": "નેબ્યુલાઇઝર્સ",
       "oxygen_cylinders": "ઇમરજન્સી ઓક્સિજન સિલિન્ડર્સ",
-      "statutory_grap_stage": "કાનૂની CAQM GRAP તબક્કો:"
+      "statutory_grap_stage": "કાનૂની CAQM GRAP તબક્કો:",
+      "pm25_title": "PM2.5 સાંદ્રતા (ઝીણો શ્વાસમાં જતો સ્મોગ)",
+      "pm10_title": "PM10 (શ્વાસમાં જતી ધૂળ)",
+      "no2_title": "NO2 (વાહનોનું ઉત્સર્જન)",
+      "so2_title": "SO2 (ઔદ્યોગિક ઉત્સર્જન)",
+      "temperature_title": "વાતાવરણનું તાપમાન",
+      "humidity_title": "સાપેક્ષ ભેજ",
+      "live_calc": "લાઇવ મોડેલ ગણતરી",
+      "temp_hint": "ઠંડી હવા શિયાળામાં પ્રદૂષણને જમીન નજીક રોકી રાખે છે",
+      "humidity_hint": "વધુ ભેજથી ગાઢ ધુમ્મસ અને સ્મોગ બને છે",
+      "vs_baseline": "બેઝલાઇનની સરખામણીમાં"
     },
     "datasets": {
       "title": "ઓલ ઇન્ડિયા એડેપ્શન લેબ્સ નિકાસ કેટલોગ",
@@ -2048,21 +2546,33 @@ export const translations = {
       "col_id": "ID",
       "col_preview": "પૂર્વાવલોકન",
       "view_rows": "પંક્તિઓ જુઓ",
-      "table_view": "ટેબલ વ્યૂ",
-      "protocol_view": "કાર્ડ વ્યૂ",
-      "close_drawer": "બંધ કરો"
+      "table_view": "કોષ્ટક દૃશ્ય",
+      "protocol_view": "પ્રોટોકોલ કાર્ડ દૃશ્ય",
+      "close_drawer": "બંધ કરો",
+      "filter_grade_a": "ગ્રેડ એ (૯.૪+)",
+      "filter_invented": "સિન્થેટિક ઇન્વેન્ટ",
+      "filter_forge": "ફોર્જ નિષ્કર્ષિત",
+      "samples_header": "સંશ્લેષિત અને કાઢવામાં આવેલી સત્ય પંક્તિઓ",
+      "prompt_context": "હવામાન / ક્લિનિકલ સંદર્ભ:",
+      "protocol_truth": "ક્લિનિકલ પ્રતિસાદ પ્રોટોકોલ / વાસ્તવિક પુરાવો:",
+      "copy_id_title": "સંપૂર્ણ અડેપ્શન ડેટાસેટ આઈડી કોપી કરો"
     },
     "jury": {
       "title": "એડેપ્શન AI 7-સ્તંભ ક્ષમતા સ્યુટ — જ્યુરી પુરાવા કેન્દ્ર",
       "subtitle": "એરોમેડ ઇન્ડિયા બનાવવા માટે વપરાયેલા તમામ 7 મુખ્ય સ્તંભો માટેના પુરાવા.",
-      "quality_grade_card": "ગુણવત્તા ગ્રેડ",
-      "autoscientist_gain_card": "જીતનો દર",
-      "predictive_fit_card": "ML પ્રિડિક્ટિવ ફિટ",
-      "credit_reserve_card": "SDK અનામત",
+      "quality_grade_card": "અડેપ્શન ગુણવત્તા ગ્રેડ",
+      "autoscientist_gain_card": "ઓટો-સાયન્ટિસ્ટ જીતનો દર",
+      "predictive_fit_card": "ML આગાહી ચોકસાઈ",
+      "credit_reserve_card": "SDK ક્રેડિટ અનામત",
       "verified_proof": "ચકાસાયેલ પુરાવો: 7 સ્તંભો",
       "copy_id": "ID કૉપિ કરો",
       "copied": "કૉપિ કર્યું!",
-      "copy_command": "કમાન્ડ કૉપિ કરો"
+      "copy_command": "આદેશ કોપી કરો",
+      "top_percentile": "વૈશ્વિક સ્તરે ટોચના ૩૩મા પર્સેન્ટાઇલ",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (૩ પુનરાવર્તનો)",
+      "mae_subtitle": "સરેરાશ ભૂલ ±૧.૮૮ દૈનિક પ્રવેશ",
+      "buffer_retained": "ચકાસાયેલ: >૪૦૦ ક્રેડિટ્સ અનામત સુરક્ષિત",
+      "verification_command_title": "જ્યુરી માટે સીધો અડેપ્શન SDK ચકાસણી આદેશ"
     }
   },
   "pa": {
@@ -2107,7 +2617,11 @@ export const translations = {
       "seed_mode": "ਤਤਕਾਲ ਸੀਡ ਮੋਡ (0ms)",
       "instant_seed": "ਸੀਡ ਮੋਡ",
       "cpcb_caqm_grounding": "CPCB ਅਤੇ CAQM ਕਾਨੂੰਨੀ ਆਧਾਰ",
-      "live_projection": "ਲਾਈਵ 48 ਘੰਟੇ ਦਾ ਅਨੁਮਾਨ"
+      "live_projection": "ਲਾਈਵ 48 ਘੰਟੇ ਦਾ ਅਨੁਮਾਨ",
+      "footer_desc": "ਕਲੀਨਿਕਲ ਹਵਾ ਗੁਣਵੱਤਾ ਅਤੇ ਸਾਹ ਦੀਆਂ ਬਿਮਾਰੀਆਂ ਦੀ ਨਿਗਰਾਨੀ ਮੋਨੋਰੇਪੋ",
+      "footer_adaption": "ਅਡੈਪਸ਼ਨ ਲੈਬਜ਼ ਦੁਆਰਾ ਸੰਚਾਲਿਤ",
+      "rules_count": "੮,੧੮੮ ਨਿਯਮ",
+      "live_model_calc": "ਲਾਈਵ ਮਾਡਲ ਗਣਨਾ"
     },
     "nav": {
       "workspaces": "ਕਲੀਨਿਕਲ ਵਰਕਸਪੇਸ",
@@ -2192,7 +2706,7 @@ export const translations = {
       "drill_up": "↑ ਉੱਪਰ ਜਾਓ",
       "legend_aqi": "ਔਸਤ AQI",
       "legend_admissions": "ਰੋਜ਼ਾਨਾ ਦਾਖਲੇ",
-      "pm25_conc": "PM2.5 ਇਕਾਗਰਤਾ (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 ਵੇਰਵੇ ਦੇਖਣ ਲਈ ਕਿਸੇ ਵੀ ਬਾਰ 'ਤੇ ਕਲਿੱਕ ਕਰੋ",
       "heatmap_title": "ਪੀਅਰਸਨ ਸਹਿਸੰਬੰਧ ਮੈਟ੍ਰਿਕਸ (8×8)",
       "heatmap_desc": "ਪ੍ਰਦੂਸ਼ਕਾਂ, ਮੌਸਮ ਅਤੇ ਦਾਖਲਿਆਂ ਵਿਚਕਾਰ ਸੰਬੰਧ ਗੁਣਾਂਕ (r)।",
@@ -2210,7 +2724,13 @@ export const translations = {
       "icu_strain": "ICU ਦਬਾਅ",
       "priority": "ਤਰਜੀਹ",
       "action": "ਕਾਰਵਾਈ",
-      "export_csv": "ਕਤਾਰ CSV ਨਿਰਯਾਤ ਕਰੋ"
+      "export_csv": "ਕਤਾਰ CSV ਨਿਰਯਾਤ ਕਰੋ",
+      "insight_years": "੧੦-ਸਾਲਾ ਰੁਝਾਨ: ਸ਼ਹਿਰੀ ਖੇਤਰਾਂ ਵਿੱਚ PM2.5 ਵਿੱਚ ਸਾਲਾਨਾ +੪.੨% ਵਾਧਾ।",
+      "insight_quarters": "ਤਿਮਾਹੀ ਵਿਸ਼ਲੇਸ਼ਣ: Q4 (ਸਰਦੀਆਂ ਦਾ ਸਮੋਗ) ਮਾਨਸੂਨ ਨਾਲੋਂ ੩.੪ ਗੁਣਾ ਵੱਧ ਹੈ।",
+      "insight_months": "ਸਰਦੀਆਂ ਦਾ ਸਿਖਰ: ਨਵੰਬਰ-ਜਨਵਰੀ ਵਿੱਚ ਹਸਪਤਾਲ ਦਾਖਲਿਆਂ ਵਿੱਚ +੨੪੦% ਵਾਧਾ।",
+      "insight_weeks": "ਹਫ਼ਤਾਵਾਰੀ ਵਾਧਾ: ਪਰਾਲੀ ਸਾੜਨ ਤੋਂ ਬਾਅਦ ਦੇ ਹਫ਼ਤਿਆਂ ਵਿੱਚ ਆਈਸੀਯੂ ਸਾਹ ਸੰਕਟ।",
+      "insight_live": "ਲਾਈਵ ੭-ਦਿਨਾਂ ਚੱਕਰ: ਸੀਪੀਸੀਬੀ ਸਟੇਸ਼ਨਾਂ ਨਾਲ ਰੀਅਲ-ਟਾਈਮ ਸਬੰਧ।",
+      "r2_precision": "ML R² = ੦.੯੮੭੯"
     },
     "copilot": {
       "floating_button": "ਐਰੋਮੈੱਡ ਕੋਪਾਇਲਟ ਨੂੰ ਪੁੱਛੋ",
@@ -2218,7 +2738,26 @@ export const translations = {
       "rag_live": "RAG ਲਾਈਵ",
       "title": "ਐਰੋਮੈੱਡ ਕਲੀਨਿਕਲ ਕੋਪਾਇਲਟ",
       "ask_placeholder": "ਮਰਾਠੀ, ਹਿੰਦੀ, ਤਮਿਲ ਜਾਂ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਪੁੱਛੋ...",
-      "send": "ਭੇਜੋ"
+      "send": "ਭੇਜੋ",
+      "rag_title": "TF-IDF ਵੈਕਟਰ RAG ਸਬੂਤ ਆਧਾਰ",
+      "sub_ms": "ਸਬ-ਮਿਲੀਸਕਿੰਟ ਪ੍ਰਾਪਤੀ",
+      "retrieved_source": "ਪ੍ਰਾਪਤ ਕੀਤਾ ਗਿਆ ਗਿਆਨ ਸਰੋਤ",
+      "matched_excerpt": "ਸਹੀ ਮੇਲ ਖਾਂਦਾ ਕਲੀਨਿਕਲ ਨਿਯਮ",
+      "guardrails_verified": "ਅਡੈਪਸ਼ਨ ਮੈਡੀਕਲ ਸੁਰੱਖਿਆ ਨਿਯਮ ਪ੍ਰਮਾਣਿਤ",
+      "rule_1": "ਨਿਯਮ ੧: ਸੀਪੀਸੀਬੀ AQI ਮਾਪਦੰਡਾਂ ਦੀ ਪਾਲਣਾ (੦-੫੦੦)",
+      "rule_2": "ਨਿਯਮ ੨: ਕਾਨੂੰਨੀ CAQM GRAP ਨਿਰਦੇਸ਼ (ਪੜਾਅ I-IV)",
+      "rule_3": "ਨਿਯਮ ੩: ਮਨਘੜਤ ਦਵਾਈਆਂ ਲਿਖਣ ਦੀ ਪੂਰੀ ਮਨਾਹੀ",
+      "rule_4": "ਨਿਯਮ ੪: ਲਾਜ਼ਮੀ ਐਮਰਜੈਂਸੀ ਚੇਤਾਵਨੀ (SpO2 < ੯੨%)",
+      "rule_5": "ਨਿਯਮ ੫: ਪ੍ਰਮਾਣਿਤ N95 ਅਤੇ HEPA ਫਿਲਟਰ ਲਾਜ਼ਮੀ",
+      "er_warning": "SpO2 < ੯੨%: ਤੁਰੰਤ ਐਮਰਜੈਂਸੀ ਹਸਪਤਾਲ ਲਿਜਾਣ ਦੀ ਲੋੜ ਹੈ!",
+      "pulse_spo2": "ਪਲਸ SpO2:",
+      "context_label": "ਸੰਦਰਭ:",
+      "rule_count": "੮,੧੮੮ ਨਿਯਮ",
+      "profile_pediatric": "ਬੱਚਿਆਂ ਦਾ ਦਮਾ (ਉਮਰ ੪–੧੨)",
+      "profile_geriatric": "ਬਜ਼ੁਰਗ ਸੀਓਪੀਡੀ (ਉਮਰ ੬੦+)",
+      "profile_worker": "ਬਾਹਰੀ ਡਿਲੀਵਰੀ ਵਰਕਰ",
+      "profile_maternal": "ਮਾਵਾਂ ਅਤੇ ਜਣੇਪੇ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਦੇਖਭਾਲ",
+      "profile_general": "ਆਮ ਆਬਾਦੀ"
     },
     "simulator": {
       "title": "ਵਾਯੂਮੰਡਲੀ ਸੰਵੇਦਨਸ਼ੀਲਤਾ ਅਤੇ ਹਸਪਤਾਲ ਸਰਜ ਸਿਮੂਲੇਟਰ",
@@ -2235,7 +2774,17 @@ export const translations = {
       "icu_beds": "ਲੋੜੀਂਦੇ ICU ਬੈੱਡ",
       "nebulizers": "ਨੈਬੂਲਾਈਜ਼ਰ",
       "oxygen_cylinders": "ਐਮਰਜੈਂਸੀ ਆਕਸੀਜਨ ਸਿਲੰਡਰ",
-      "statutory_grap_stage": "ਕਾਨੂੰਨੀ CAQM GRAP ਪੜਾਅ:"
+      "statutory_grap_stage": "ਕਾਨੂੰਨੀ CAQM GRAP ਪੜਾਅ:",
+      "pm25_title": "PM2.5 ਗਾੜ੍ਹਾਪਣ (ਬਰੀਕ ਸਾਹ ਲੈਣ ਯੋਗ ਸਮੋਗ)",
+      "pm10_title": "PM10 (ਸਾਹ ਰਾਹੀਂ ਅੰਦਰ ਜਾਣ ਵਾਲੀ ਧੂੜ)",
+      "no2_title": "NO2 (ਵਾਹਨਾਂ ਦਾ ਧੂੰਆਂ)",
+      "so2_title": "SO2 (ਉਦਯੋਗਿਕ ਨਿਕਾਸ)",
+      "temperature_title": "ਆਲੇ ਦੁਆਲੇ ਦਾ ਤਾਪਮਾਨ",
+      "humidity_title": "ਨਮੀ ਦੀ ਦਰ",
+      "live_calc": "ਲਾਈਵ ਮਾਡਲ ਗਣਨਾ",
+      "temp_hint": "ਠੰਡੀ ਹਵਾ ਸਰਦੀਆਂ ਵਿੱਚ ਪ੍ਰਦੂਸ਼ਣ ਨੂੰ ਜ਼ਮੀਨ ਨੇੜੇ ਰੋਕਦੀ ਹੈ",
+      "humidity_hint": "ਵੱਧ ਨਮੀ ਸੰਘਣਾ ਧੂੰਆਂ ਅਤੇ ਧੁੰਦ ਬਣਾਉਂਦੀ ਹੈ",
+      "vs_baseline": "ਬੇਸਲਾਈਨ ਦੇ ਮੁਕਾਬਲੇ"
     },
     "datasets": {
       "title": "ਸਰਬ ਭਾਰਤੀ ਅਡੈਪਸ਼ਨ ਲੈਬਜ਼ ਨਿਰਯਾਤ ਕੈਟਾਲਾਗ",
@@ -2254,21 +2803,33 @@ export const translations = {
       "col_id": "ID",
       "col_preview": "ਪੂਰਵਦਰਸ਼ਨ",
       "view_rows": "ਕਤਾਰਾਂ ਦੇਖੋ",
-      "table_view": "ਟੇਬਲ ਵਿਊ",
-      "protocol_view": "ਕਾਰਡ ਵਿਊ",
-      "close_drawer": "ਬੰਦ ਕਰੋ"
+      "table_view": "ਸਾਰਣੀ ਦ੍ਰਿਸ਼",
+      "protocol_view": "ਪ੍ਰੋਟੋਕੋਲ ਕਾਰਡ ਦ੍ਰਿਸ਼",
+      "close_drawer": "ਬੰਦ ਕਰੋ",
+      "filter_grade_a": "ਗ੍ਰੇਡ ਏ (੯.੪+)",
+      "filter_invented": "ਸਿੰਥੈਟਿਕ ਇਨਵੈਂਟ",
+      "filter_forge": "ਫੋਰਜ ਤੋਂ ਕੱਢਿਆ ਗਿਆ",
+      "samples_header": "ਸੰਸ਼ਲੇਸ਼ਿਤ ਅਤੇ ਕੱਢੀਆਂ ਗਈਆਂ ਸੱਚੀਆਂ ਕਤਾਰਾਂ",
+      "prompt_context": "ਮੌਸਮ / ਕਲੀਨਿਕਲ ਸੰਦਰਭ:",
+      "protocol_truth": "ਕਲੀਨਿਕਲ ਜਵਾਬ ਪ੍ਰੋਟੋਕੋਲ / ਅਸਲ ਸਬੂਤ:",
+      "copy_id_title": "ਪੂਰੀ ਅਡੈਪਸ਼ਨ ਡਾਟਾਸੈੱਟ ਆਈਡੀ ਕਾਪੀ ਕਰੋ"
     },
     "jury": {
       "title": "ਅਡੈਪਸ਼ਨ AI 7-ਥੰਮ੍ਹ ਸਮਰੱਥਾ ਸੂਟ — ਜਿਊਰੀ ਸਬੂਤ ਕੇਂਦਰ",
       "subtitle": "ਐਰੋਮੈੱਡ ਇੰਡੀਆ ਬਣਾਉਣ ਵਿੱਚ ਵਰਤੇ ਗਏ ਸਾਰੇ 7 ਮੁੱਖ ਥੰਮ੍ਹਾਂ ਦੇ ਸਬੂਤ।",
-      "quality_grade_card": "ਗੁਣਵੱਤਾ ਗ੍ਰੇਡ",
-      "autoscientist_gain_card": "ਜਿੱਤ ਦਰ",
-      "predictive_fit_card": "ML ਅਨੁਮਾਨਿਤ ਫਿੱਟ",
-      "credit_reserve_card": "SDK ਰਿਜ਼ਰਵ",
+      "quality_grade_card": "ਅਡੈਪਸ਼ਨ ਗੁਣਵੱਤਾ ਗ੍ਰੇਡ",
+      "autoscientist_gain_card": "ਆਟੋ-ਸਾਇੰਟਿਸਟ ਜਿੱਤ ਦਰ",
+      "predictive_fit_card": "ML ਭਵਿੱਖਬਾਣੀ ਸ਼ੁੱਧਤਾ",
+      "credit_reserve_card": "SDK ਕ੍ਰੈਡਿਟ ਰਿਜ਼ਰਵ",
       "verified_proof": "ਪ੍ਰਮਾਣਿਤ ਸਬੂਤ: 7 ਥੰਮ੍ਹ",
       "copy_id": "ID ਕਾਪੀ ਕਰੋ",
       "copied": "ਕਾਪੀ ਹੋ ਗਿਆ!",
-      "copy_command": "ਕਮਾਂਡ ਕਾਪੀ ਕਰੋ"
+      "copy_command": "ਕਮਾਂਡ ਕਾਪੀ ਕਰੋ",
+      "top_percentile": "ਵਿਸ਼ਵ ਪੱਧਰ 'ਤੇ ਚੋਟੀ ਦੇ ੩੩ਵੇਂ ਪ੍ਰਤੀਸ਼ਤ ਵਿੱਚ",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (੩ ਦੁਹਰਾਓ)",
+      "mae_subtitle": "ਔਸਤ ਗਲਤੀ ±੧.੮੮ ਰੋਜ਼ਾਨਾ ਦਾਖਲੇ",
+      "buffer_retained": "ਪ੍ਰਮਾਣਿਤ: >੪੦੦ ਕ੍ਰੈਡਿਟ ਬਫਰ ਸੁਰੱਖਿਅਤ",
+      "verification_command_title": "ਜਿਊਰੀ ਲਈ ਸਿੱਧੀ ਅਡੈਪਸ਼ਨ SDK ਪੁਸ਼ਟੀਕਰਨ ਕਮਾਂਡ"
     }
   },
   "or": {
@@ -2313,7 +2874,11 @@ export const translations = {
       "seed_mode": "ତତକ୍ଷଣାତ୍ ସିଡ୍ ମୋଡ୍ (0ms)",
       "instant_seed": "ସିଡ୍ ମୋଡ୍",
       "cpcb_caqm_grounding": "CPCB ଏବଂ CAQM ଆଇନଗତ ଆଧାର",
-      "live_projection": "ଲାଇଭ୍ ୪୮ ଘଣ୍ଟାର ପୂର୍ବାନୁମାନ"
+      "live_projection": "ଲାଇଭ୍ ୪୮ ଘଣ୍ଟାର ପୂର୍ବାନୁମାନ",
+      "footer_desc": "କ୍ଲିନିକାଲ୍ ବାୟୁ ଗୁଣବତ୍ତା ଏବଂ ଶ୍ୱାସରୋଗ ନିରୀକ୍ଷଣ ମୋନୋରେପୋ",
+      "footer_adaption": "ଆଡାପ୍ସନ୍ ଲ୍ୟାବ୍ସ ଦ୍ୱାରା ପରିଚାଳିତ",
+      "rules_count": "୮,୧୮୮ ନିୟମ",
+      "live_model_calc": "ଲାଇଭ୍ ମଡେଲ୍ ଗଣନା"
     },
     "nav": {
       "workspaces": "କ୍ଲିନିକାଲ୍ କାର୍ଯ୍ୟକ୍ଷେତ୍ର",
@@ -2398,7 +2963,7 @@ export const translations = {
       "drill_up": "↑ ଉପରକୁ ଯାଆନ୍ତୁ",
       "legend_aqi": "ହାରାହାରି AQI",
       "legend_admissions": "ଦୈନିକ ଭର୍ତ୍ତି",
-      "pm25_conc": "PM2.5 ସାନ୍ଦ୍ରତା (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 ବିବରଣୀ ଦେଖିବାକୁ ଯେକୌଣସି ବାର୍ ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ",
       "heatmap_title": "ପିଅରସନ୍ ସହସମ୍ବନ୍ଧ ମ୍ୟାଟ୍ରିକ୍ସ (୮×୮)",
       "heatmap_desc": "ପ୍ରଦୂଷକ, ପାଣିପାଗ ଏବଂ ଭର୍ତ୍ତି ମଧ୍ୟରେ ସହସମ୍ବନ୍ଧ ଗୁଣାଙ୍କ (r)।",
@@ -2416,7 +2981,13 @@ export const translations = {
       "icu_strain": "ICU ଚାପ",
       "priority": "ପ୍ରାଥମିକତା",
       "action": "ପଦକ୍ଷେପ",
-      "export_csv": "ଧାଡ଼ି CSV ରପ୍ତାନି କରନ୍ତୁ"
+      "export_csv": "ଧାଡ଼ି CSV ରପ୍ତାନି କରନ୍ତୁ",
+      "insight_years": "୧୦-ବର୍ଷର ଧାରା: ସହରାଞ୍ଚଳରେ PM2.5 ବାର୍ଷିକ +୪.୨% ବୃଦ୍ଧି ପାଉଛି।",
+      "insight_quarters": "ଋତୁକାଳୀନ ବିଶ୍ଳେଷଣ: Q4 (ଶୀତକାଳୀନ ଧୂଆଁ) ମୌସୁମୀ ତୁଳନାରେ ୩.୪ ଗୁଣ ଅଧିକ।",
+      "insight_months": "ଶୀତକାଳୀନ ଇନଭର୍ସନ୍ ଶୀର୍ଷ: ନଭେମ୍ବର-ଜାନୁଆରୀରେ ଡାକ୍ତରଖାନା ଭର୍ତ୍ତି +୨୪୦% ବୃଦ୍ଧି।",
+      "insight_weeks": "ସାପ୍ତାହିକ ବୃଦ୍ଧି: ନଡ଼ା ପୋଡ଼ିବା ପରେ ଆଇସିୟୁ ଶ୍ୱାସରୋଗ ଭର୍ତ୍ତି ବୃଦ୍ଧି।",
+      "insight_live": "ଲାଇଭ୍ ୭-ଦିନିଆ ଚକ୍ର: ସିପିସିବି କେନ୍ଦ୍ରଗୁଡ଼ିକ ସହିତ ବାସ୍ତବ ସମ୍ପର୍କ।",
+      "r2_precision": "ML R² = ୦.୯୮୭୯"
     },
     "copilot": {
       "floating_button": "ଏରୋମେଡ୍ କୋପାଇଲଟ୍‌ଙ୍କୁ ପଚାରନ୍ତୁ",
@@ -2424,7 +2995,26 @@ export const translations = {
       "rag_live": "RAG ଲାଇଭ୍",
       "title": "ଏରୋମେଡ୍ କ୍ଲିନିକାଲ୍ କୋପାଇଲଟ୍",
       "ask_placeholder": "ମରାଠୀ, ହିନ୍ଦୀ, ତାମିଲ କିମ୍ବା ଇଂରାଜୀରେ ପଚାରନ୍ତୁ...",
-      "send": "ପଠାନ୍ତୁ"
+      "send": "ପଠାନ୍ତୁ",
+      "rag_title": "TF-IDF ଭେକ୍ଟର RAG ପ୍ରମାଣ ଆଧାର",
+      "sub_ms": "ସବ୍-ମିଲିସେକେଣ୍ଡ୍ ପ୍ରାପ୍ତି",
+      "retrieved_source": "ପ୍ରାପ୍ତ ଜ୍ଞାନ ଉତ୍ସ",
+      "matched_excerpt": "ସଠିକ୍ ମେଳ ଖାଉଥିବା କ୍ଲିନିକାଲ୍ ନିୟମ",
+      "guardrails_verified": "ଆଡାପ୍ସନ୍ ବ୍ଲୁପ୍ରିଣ୍ଟ୍ ମେଡିକାଲ୍ ସୁରକ୍ଷା ନିୟମ ଯାଞ୍ଚ ହୋଇଛି",
+      "rule_1": "ନିୟମ ୧: ସିପିସିବି AQI ମାନକ ପାଳନ (୦-୫୦୦)",
+      "rule_2": "ନିୟମ ୨: ଆଇନଗତ CAQM GRAP ନିର୍ଦ୍ଦେଶାବଳୀ (ପର୍ଯ୍ୟାୟ I-IV)",
+      "rule_3": "ନିୟମ ୩: କାଳ୍ପନିକ ଔଷଧ ସମ୍ପୂର୍ଣ୍ଣ ନିଷେଧ",
+      "rule_4": "ନିୟମ ୪: ବାଧ୍ୟତାମୂଳକ ଜରୁରୀକାଳୀନ ସତର୍କତା (SpO2 < ୯୨%)",
+      "rule_5": "ନିୟମ ୫: ପ୍ରମାଣିତ N95 ଏବଂ HEPA ଫିଲ୍ଟରେସନ୍ ବାଧ୍ୟତାମୂଳକ",
+      "er_warning": "SpO2 < ୯୨%: ତୁରନ୍ତ ଜରୁରୀକାଳୀନ ଡାକ୍ତରଖାନା ସ୍ଥାନାନ୍ତର ଆବଶ୍ୟକ!",
+      "pulse_spo2": "ପଲ୍ସ SpO2:",
+      "context_label": "ପ୍ରସଙ୍ଗ:",
+      "rule_count": "୮,୧୮୮ ନିୟମ",
+      "profile_pediatric": "ଶିଶୁ ଆଜ୍‌ମା (ବୟସ ୪–୧୨)",
+      "profile_geriatric": "ବୃଦ୍ଧ ସିଓପିଡି (ବୟସ ୬୦+)",
+      "profile_worker": "ବାହ୍ୟ ଡେଲିଭରି କର୍ମଚାରୀ",
+      "profile_maternal": "ମାତୃତ୍ୱ ଏବଂ ପ୍ରସବପୂର୍ବ ଯତ୍ନ",
+      "profile_general": "ସାଧାରଣ ଜନସଂଖ୍ୟା"
     },
     "simulator": {
       "title": "ବାୟୁମଣ୍ଡଳୀୟ ସମ୍ବେଦନଶୀଳତା ଏବଂ ହସ୍ପିଟାଲ୍ ସର୍ଜ୍ ସିମୁଲେଟର୍",
@@ -2441,7 +3031,17 @@ export const translations = {
       "icu_beds": "ଆବଶ୍ୟକ ICU ବେଡ୍",
       "nebulizers": "ନେବୁଲାଇଜର୍",
       "oxygen_cylinders": "ଜରୁରୀକାଳୀନ ଅକ୍ସିଜେନ୍ ସିଲିଣ୍ଡର୍",
-      "statutory_grap_stage": "ଆଇନଗତ CAQM GRAP ପର୍ଯ୍ୟାୟ:"
+      "statutory_grap_stage": "ଆଇନଗତ CAQM GRAP ପର୍ଯ୍ୟାୟ:",
+      "pm25_title": "PM2.5 ସାନ୍ଦ୍ରତା (ସୂକ୍ଷ୍ମ ଶ୍ୱାସକ୍ରିୟା ଧୂଆଁ)",
+      "pm10_title": "PM10 (ଶ୍ୱାସକ୍ରିୟା ଧୂଳିକଣା)",
+      "no2_title": "NO2 (ଯାନବାହାନ ନିର୍ଗମନ)",
+      "so2_title": "SO2 (ଶିଳ୍ପ ନିର୍ଗମନ)",
+      "temperature_title": "ପରିବେଶ ତାପମାତ୍ରା",
+      "humidity_title": "ଆପେକ୍ଷିକ ଆର୍ଦ୍ରତା",
+      "live_calc": "ଲାଇଭ୍ ମଡେଲ୍ ଗଣନା",
+      "temp_hint": "ଥଣ୍ଡା ପବନ ଶୀତଦିନେ ପ୍ରଦୂଷଣକୁ ଭୂମି ନିକଟରେ ଧରି ରଖେ",
+      "humidity_hint": "ଅଧିକ ଆର୍ଦ୍ରତା ଘନ ଧୂଆଁ ସୃଷ୍ଟି କରେ",
+      "vs_baseline": "ବେସଲାଇନ୍ ତୁଳନାରେ"
     },
     "datasets": {
       "title": "ସର୍ବଭାରତୀୟ ଆଡାପ୍ସନ୍ ଲ୍ୟାବ୍ସ ରପ୍ତାନି କାଟାଲଗ୍",
@@ -2460,21 +3060,33 @@ export const translations = {
       "col_id": "ID",
       "col_preview": "ପୂର୍ବାବଲୋକନ",
       "view_rows": "ଧାଡ଼ି ଦେଖନ୍ତୁ",
-      "table_view": "ଟେବୁଲ୍ ଭ୍ୟୁ",
-      "protocol_view": "କାର୍ଡ ଭ୍ୟୁ",
-      "close_drawer": "ବନ୍ଦ କରନ୍ତୁ"
+      "table_view": "ଟେବୁଲ୍ ଦୃଶ୍ୟ",
+      "protocol_view": "ପ୍ରୋଟୋକଲ୍ କାର୍ଡ ଦୃଶ୍ୟ",
+      "close_drawer": "ବନ୍ଦ କରନ୍ତୁ",
+      "filter_grade_a": "ଗ୍ରେଡ୍ ଏ (୯.୪+)",
+      "filter_invented": "ସିନ୍ଥେଟିକ୍ ଉଦ୍ଭାବନ",
+      "filter_forge": "ଫୋର୍ଜ୍ ପ୍ରାପ୍ତ",
+      "samples_header": "ସଂଶ୍ଳେଷିତ ଏବଂ ପ୍ରାପ୍ତ ପ୍ରକୃତ ଧାଡ଼ି",
+      "prompt_context": "ପାଣିପାଗ / କ୍ଲିନିକାଲ୍ ପ୍ରସଙ୍ଗ:",
+      "protocol_truth": "କ୍ଲିନିକାଲ୍ ପ୍ରତିକ୍ରିୟା ପ୍ରୋଟୋକଲ୍ / ପ୍ରକୃତ ପ୍ରମାଣ:",
+      "copy_id_title": "ସମ୍ପୂର୍ଣ୍ଣ ଆଡାପ୍ସନ୍ ଡାଟାସେଟ୍ ଆଇଡି କପି କରନ୍ତୁ"
     },
     "jury": {
       "title": "ଆଡାପ୍ସନ୍ AI ୭-ସ୍ତମ୍ଭ ସୁଇଟ୍ — ଜୁରୀ ପ୍ରମାଣ କେନ୍ଦ୍ର",
       "subtitle": "ଏରୋମେଡ୍ ଇଣ୍ଡିଆ ନିର୍ମାଣରେ ବ୍ୟବହୃତ ସମସ୍ତ ୭ଟି ମୁଖ୍ୟ ସ୍ତମ୍ଭର ପ୍ରମାଣ।",
-      "quality_grade_card": "ଗୁଣବତ୍ତା ଗ୍ରେଡ୍",
-      "autoscientist_gain_card": "ବିଜୟ ହାର",
-      "predictive_fit_card": "ML ପୂର୍ବାନୁମାନ ଫିଟ୍",
-      "credit_reserve_card": "SDK ରିଜର୍ଭ",
+      "quality_grade_card": "ଆଡାପ୍ସନ୍ ଗୁଣବତ୍ତା ଗ୍ରେଡ୍",
+      "autoscientist_gain_card": "ଅଟୋ-ସାଇଣ୍ଟିଷ୍ଟ ବିଜୟ ହାର",
+      "predictive_fit_card": "ML ପୂର୍ବାନୁମାନ ସଠିକତା",
+      "credit_reserve_card": "SDK କ୍ରେଡିଟ୍ ସଂରକ୍ଷଣ",
       "verified_proof": "ଯାଞ୍ଚ ହୋଇଥିବା ପ୍ରମାଣ: ୭ ସ୍ତମ୍ଭ",
       "copy_id": "ID କପି କରନ୍ତୁ",
       "copied": "କପି ହୋଇଛି!",
-      "copy_command": "କମାଣ୍ଡ କପି କରନ୍ତୁ"
+      "copy_command": "ନିର୍ଦ୍ଦେଶ କପି କରନ୍ତୁ",
+      "top_percentile": "ବିଶ୍ୱସ୍ତରରେ ଶୀର୍ଷ ୩୩ତମ ପରସେଣ୍ଟାଇଲ୍",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (୩ଟି ପୁନରାବୃତ୍ତି)",
+      "mae_subtitle": "ହାରାହାରି ତ୍ରୁଟି ±୧.୮୮ ଦୈନିକ ଭର୍ତ୍ତି",
+      "buffer_retained": "ଯାଞ୍ଚ ହୋଇଛି: >୪୦୦ କ୍ରେଡିଟ୍ ସୁରକ୍ଷିତ",
+      "verification_command_title": "ଜୁରୀଙ୍କ ପାଇଁ ପ୍ରତ୍ୟକ୍ଷ ଆଡାପ୍ସନ୍ SDK ଯାଞ୍ଚ ନିର୍ଦ୍ଦେଶ"
     }
   },
   "as": {
@@ -2519,7 +3131,11 @@ export const translations = {
       "seed_mode": "তাত্ক্ষণিক সীড ম'ড (0ms)",
       "instant_seed": "সীড ম'ড",
       "cpcb_caqm_grounding": "CPCB আৰু CAQM আইনী ভিত্তি",
-      "live_projection": "লাইভ ৪৮ ঘণ্টাৰ পূৰ্বাভাস"
+      "live_projection": "লাইভ ৪৮ ঘণ্টাৰ পূৰ্বাভাস",
+      "footer_desc": "ক্লিনিকেল বায়ু মান আৰু শ্বাসতন্ত্ৰ ৰোগ নিৰীক্ষণ মনোকেন্দ্ৰ",
+      "footer_adaption": "এডাপশ্যন লেব্ছ দ্বাৰা চালিত",
+      "rules_count": "৮,১৮৮ নিয়ম",
+      "live_model_calc": "লাইভ মডেল গণনা"
     },
     "nav": {
       "workspaces": "ক্লিনিকেল কৰ্মক্ষেত্ৰ",
@@ -2604,7 +3220,7 @@ export const translations = {
       "drill_up": "↑ ওপৰলৈ যাওক",
       "legend_aqi": "গড় AQI",
       "legend_admissions": "দৈনিক ভৰ্তি",
-      "pm25_conc": "PM2.5 ঘনত্ব (µg/m³)",
+      "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 বিৱৰণ চাবলৈ যিকোনো বাৰত ক্লিক কৰক",
       "heatmap_title": "পিয়াৰচন সহসম্বন্ধ মেট্ৰিক্স (৮×৮)",
       "heatmap_desc": "প্ৰদূষক, বতৰ আৰু ভৰ্তিৰ মাজৰ সহসম্বন্ধ গুণাংক (r)।",
@@ -2622,7 +3238,13 @@ export const translations = {
       "icu_strain": "ICU চাপ",
       "priority": "প্ৰাথমিকতা",
       "action": "পদক্ষেপ",
-      "export_csv": "শাৰী CSV ৰপ্তানি কৰক"
+      "export_csv": "শাৰী CSV ৰপ্তানি কৰক",
+      "insight_years": "১০-বছৰীয়া ধাৰা: নগৰাঞ্চলত PM2.5 বাৰ্ষিক +৪.২% হাৰত বৃদ্ধি পাইছে।",
+      "insight_quarters": "ঋতুকালীন বিশ্লেষণ: Q4 (শীতকালীন ধোঁৱাশা) বাৰিষাতকৈ ৩.৪ গুণ অধিক।",
+      "insight_months": "শীতকালীন ইনভাৰ্চন শিখৰ: নৱেম্বৰ-জানুৱাৰীত চিকিৎসালয়ত ভৰ্তি +২৪০% বৃদ্ধি।",
+      "insight_weeks": "সাপ্তাহিক বৃদ্ধি: খেতিৰ নৰা পোৰাৰ পিছৰ সপ্তাহবোৰত আইচিইউ শ্বাসতন্ত্ৰ সংকট।",
+      "insight_live": "লাইভ ৭-দিনীয়া চক্ৰ: চিপিচিবি কেন্দ্ৰসমূহৰ সৈতে লাইভ সম্পৰ্ক।",
+      "r2_precision": "ML R² = ০.৯৮৭৯"
     },
     "copilot": {
       "floating_button": "এৰোমেড ক'পাইলটক সোধক",
@@ -2630,7 +3252,26 @@ export const translations = {
       "rag_live": "RAG লাইভ",
       "title": "এৰোমেড ক্লিনিকেল ক'পাইলট",
       "ask_placeholder": "মাৰাঠী, হিন্দী, তামিল বা ইংৰাজীত সোধক...",
-      "send": "প্ৰেৰণ কৰক"
+      "send": "প্ৰেৰণ কৰক",
+      "rag_title": "TF-IDF ভেক্টৰ RAG প্ৰমাণ ভিত্তি",
+      "sub_ms": "উপ-মিলিছেকেণ্ড উদ্ধাৰ",
+      "retrieved_source": "উদ্ধাৰ কৰা জ্ঞানৰ উৎস",
+      "matched_excerpt": "সঠিক মিল থকা ক্লিনিকেল নিয়মৰ অংশ",
+      "guardrails_verified": "এডাপশ্যন ব্লুপ্ৰিণ্ট চিকিৎসা সুৰক্ষা নিয়ম পৰীক্ষিত",
+      "rule_1": "নিয়ম ১: চিপিচিবি AQI মানদণ্ড মানি চলা (০-৫০০)",
+      "rule_2": "নিয়ম ২: আইনী CAQM GRAP নিৰ্দেশনা (পৰ্যায় I-IV)",
+      "rule_3": "নিয়ম ৩: কাল্পনিক ঔষধ সম্পূৰ্ণ নিষিদ্ধ",
+      "rule_4": "নিয়ম ৪: বাধ্যতামূলক জৰুৰীকালীন সতৰ্কতা (SpO2 < ৯২%)",
+      "rule_5": "নিয়ম ৫: প্ৰমাণিত N95 আৰু HEPA ফিল্টাৰ বাধ্যতামূলক",
+      "er_warning": "SpO2 < ৯২%: তাৎক্ষণিকভাৱে জৰুৰীকালীন চিকিৎসালয় স্থানান্তৰ প্ৰয়োজন!",
+      "pulse_spo2": "পালছ SpO2:",
+      "context_label": "প্ৰসংগ:",
+      "rule_count": "৮,১৮৮ নিয়ম",
+      "profile_pediatric": "শিশু হাঁপানি (বয়স ৪–১২)",
+      "profile_geriatric": "বয়োজ্যেষ্ঠ চিঅ'পিডি (বয়স ৬০+)",
+      "profile_worker": "বাহিৰৰ ডেলিভাৰী কৰ্মী",
+      "profile_maternal": "মাতৃত্ব আৰু প্ৰসৱপূৰ্ব যত্ন",
+      "profile_general": "সাধাৰণ জনসংখ্যা"
     },
     "simulator": {
       "title": "বায়ুমণ্ডলীয় সংবেদনশীলতা আৰু চিকিৎসালয় বৃদ্ধি চিমুলেটৰ",
@@ -2647,7 +3288,17 @@ export const translations = {
       "icu_beds": "প্ৰয়োজনীয় ICU বিছনা",
       "nebulizers": "নেবুলাইজাৰ",
       "oxygen_cylinders": "জৰুਰীকালীন অক্সিজেন চিলিণ্ডাৰ",
-      "statutory_grap_stage": "আইনী CAQM GRAP পৰ্যায়:"
+      "statutory_grap_stage": "আইনী CAQM GRAP পৰ্যায়:",
+      "pm25_title": "PM2.5 ঘনত্ব (সূক্ষ্ম শ্বাসযোগ্য ধোঁৱাশা)",
+      "pm10_title": "PM10 (স্থূল শ্বাসযোগ্য ধূলিকণা)",
+      "no2_title": "NO2 (যান-বাহনৰ ধোঁৱা)",
+      "so2_title": "SO2 (ঔদ্যোগিক নিৰ্গমন)",
+      "temperature_title": "পৰিৱেশৰ উষ্ণতা",
+      "humidity_title": "আপেক্ষিক আৰ্দ্ৰতা",
+      "live_calc": "লাইভ মডেল গণনা",
+      "temp_hint": "শীতকালত ঠাণ্ডা বতাহে প্ৰদূষণক মাটিৰ ওচৰতে আবদ্ধ কৰি ৰাখে",
+      "humidity_hint": "অধিক আৰ্দ্ৰতাই ঘন কুঁৱলী আৰু ধোঁৱাশা সৃষ্টি কৰে",
+      "vs_baseline": "বেচলাইনৰ তুলনাত"
     },
     "datasets": {
       "title": "সৰ্বভাৰতীয় এডাপশ্যন লেব্ছ ৰপ্তানি ক্যাটালগ",
@@ -2667,20 +3318,32 @@ export const translations = {
       "col_preview": "পূৰ্বদৰ্শন",
       "view_rows": "শাৰী চাওক",
       "table_view": "টেবুল ভিউ",
-      "protocol_view": "কাৰ্ড ভিউ",
-      "close_drawer": "বন্ধ কৰক"
+      "protocol_view": "প্ৰট'কল কাৰ্ড ভিউ",
+      "close_drawer": "বন্ধ কৰক",
+      "filter_grade_a": "গ্ৰেড এ (৯.৪+)",
+      "filter_invented": "সিন্থেটিক উদ্ভাৱন",
+      "filter_forge": "ফৰ্জ নিষ্কাশিত",
+      "samples_header": "সংশ্লেষিত আৰু নিষ্কাশিত প্ৰকৃত শাৰী",
+      "prompt_context": "বতৰ / ক্লিনিকেল প্ৰসংগ:",
+      "protocol_truth": "ক্লিনিকেল প্ৰতিক্ৰিয়া প্ৰট'কল / প্ৰকৃত প্ৰমাণ:",
+      "copy_id_title": "সম্পূৰ্ণ এডাপশ্যন ডাটাছেট আইডি কপি কৰক"
     },
     "jury": {
       "title": "এডাপশ্যন AI ৭-স্তম্ভ সংহতি — জুৰী প্ৰমাণ কেন্দ্ৰ",
       "subtitle": "এৰোমেড ইণ্ডিয়া নিৰ্মাণত ব্যৱহাৰ কৰা সকলো ৭টা মূল স্তম্ভৰ প্ৰমাণ।",
-      "quality_grade_card": "গুণমান গ্ৰেড",
-      "autoscientist_gain_card": "জয়ৰ হাৰ",
-      "predictive_fit_card": "ML পূৰ্বানুমান ফিট",
-      "credit_reserve_card": "SDK সংৰক্ষণ",
+      "quality_grade_card": "এডাপশ্যন গুণমান গ্ৰেড",
+      "autoscientist_gain_card": "অট'-বিজ্ঞানী জয়ৰ হাৰ",
+      "predictive_fit_card": "ML ভৱিষ্যদ্বাণীৰ নিখুঁততা",
+      "credit_reserve_card": "SDK ক্ৰেডিট সংৰক্ষণ",
       "verified_proof": "পৰীক্ষিত প্ৰমাণ: ৭টা স্তম্ভ",
       "copy_id": "ID কপি কৰক",
       "copied": "কপি কৰা হ'ল!",
-      "copy_command": "কমাণ্ড কপি কৰক"
+      "copy_command": "আদেশ কপি কৰক",
+      "top_percentile": "বিশ্বজুৰি শীৰ্ষ ৩৩তম শতাংশত",
+      "qwen_lora": "Qwen/Qwen3.5-2B LoRA (৩টা পুনৰাবৃত্তি)",
+      "mae_subtitle": "গড় ত্ৰুটি ±১.৮৮ দৈনিক ভৰ্তি",
+      "buffer_retained": "পৰীক্ষিত: >৪০০ ক্ৰেডিট সুৰক্ষিত",
+      "verification_command_title": "জুৰীৰ বাবে প্ৰত্যক্ষ এডাপশ্যন SDK পৰীক্ষণ আদেশ"
     }
   }
 };

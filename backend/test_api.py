@@ -230,6 +230,26 @@ def test_live_risk_language_alias():
     assert "Marathi" in data["clinical_advisory"]["language"]
     print("PASS: test_live_risk_language_alias (language=mr accepted and localized)")
 
+def test_live_risk_amritsar_hindi_sentence_boundary():
+    # Explicit requirement: assert /api/live-risk?city=Amritsar&lang=hi returns complete, un-truncated Hindi ending with proper punctuation । or ., not cut off mid-character
+    response = client.get("/api/live-risk?city=Amritsar&lang=hi")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["city"] == "Amritsar"
+    assert "clinical_advisory" in data
+    advisory = data["clinical_advisory"]["advisory"]
+    assert len(advisory) > 30, f"Expected non-empty advisory, got: {advisory}"
+    # Assert Devanagari script presence
+    assert any('\u0900' <= ch <= '\u097F' for ch in advisory), f"Expected Devanagari script, got: {advisory}"
+    # Assert no raw markdown asterisks
+    assert "**" not in advisory, f"Advisory contains raw markdown asterisks: {advisory}"
+    # Assert sentence ends with proper boundary punctuation (Devanagari danda । or Western .)
+    stripped = advisory.strip()
+    assert stripped.endswith('।') or stripped.endswith('.') or stripped.endswith('!') or stripped.endswith('?'), (
+        f"Advisory does not end at clean sentence boundary: ...{stripped[-25:]}"
+    )
+    print("PASS: test_live_risk_amritsar_hindi_sentence_boundary (Complete Hindi advisory ending cleanly with '।' and 0 asterisks)")
+
 def test_adaption_7_pillars_metrics():
     response = client.get("/api/adaption-metrics")
     assert response.status_code == 200
@@ -254,6 +274,7 @@ if __name__ == "__main__":
     test_overview()
     test_live_map()
     test_live_risk_mumbai_marathi()
+    test_live_risk_amritsar_hindi_sentence_boundary()
     test_live_risk_guwahati_assamese()
     test_simulate_risk()
     test_datasets_endpoint()
@@ -261,4 +282,4 @@ if __name__ == "__main__":
     test_triage_chat_marathi_auto_detection()
     test_live_risk_language_alias()
     test_adaption_7_pillars_metrics()
-    print("\n🎉 ALL 13 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+    print("\n🎉 ALL 14 INTEGRATION TESTS PASSED SUCCESSFULLY!")

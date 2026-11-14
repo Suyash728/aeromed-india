@@ -183,14 +183,14 @@ function DashboardContent() {
           <div className="flex items-center gap-2">
             <span className="font-bold text-gray-800 font-['Outfit']">AeroMed India</span>
             <span>•</span>
-            <span>Clinical Air Quality & Respiratory Disease Surveillance Monorepo</span>
+            <span>{t('chrome.footer_desc', 'Clinical Air Quality & Respiratory Disease Surveillance Monorepo')}</span>
           </div>
           <div className="flex items-center gap-4 text-gray-400 font-mono text-[11px]">
             <span>Model R²: 0.9879</span>
             <span>•</span>
             <span>AutoScientist Gain: +55.8%</span>
             <span>•</span>
-            <span className="text-[#465FFF] font-semibold">Adaption Labs Grounded</span>
+            <span className="text-[#465FFF] font-semibold">{t('chrome.footer_adaption', 'Adaption Labs Grounded')}</span>
           </div>
         </footer>
 

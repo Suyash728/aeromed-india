@@ -197,7 +197,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
             <div className="flex justify-between items-center text-xs mb-1.5">
               <span className="font-bold text-gray-900 flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#465FFF]" />
-                PM2.5 Concentration (Fine Respirable Smog)
+                {t('simulator.pm25_title', 'PM2.5 Concentration (Fine Respirable Smog)')}
                 <span className="text-[10px] font-semibold text-[#465FFF] bg-[#465FFF]/10 px-1.5 py-0.5 rounded">
                   {t('simulator.pm25_weight', '96.5% ML Weight')}
                 </span>
@@ -215,17 +215,17 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
               className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#465FFF]"
             />
             <div className="flex justify-between text-[10px] text-gray-400 mt-1">
-              <span>Good (0–30)</span>
-              <span>Moderate (61–90)</span>
-              <span>Severe (121–250)</span>
-              <span>Emergency (250+)</span>
+              <span>{t('overview.good', 'Good')} (0–30)</span>
+              <span>{t('overview.moderate', 'Moderate')} (61–90)</span>
+              <span>{t('overview.severe', 'Severe')} (121–250)</span>
+              <span>{t('overview.critical_surge_alert', 'Emergency')} (250+)</span>
             </div>
           </div>
 
           {/* Slider 2: PM10 */}
           <div>
             <div className="flex justify-between items-center text-xs mb-1.5">
-              <span className="font-semibold text-gray-800">PM10 (Coarse Inhalable Dust)</span>
+              <span className="font-semibold text-gray-800">{t('simulator.pm10_title', 'PM10 (Coarse Inhalable Dust)')}</span>
               <span className="font-bold text-sm text-gray-900 font-mono tabular-nums">
                 {inputs.pm10} <span className="text-xs font-normal text-gray-400">µg/m³</span>
               </span>
@@ -244,7 +244,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
-                <span className="font-semibold text-gray-800">NO2 (Vehicular Combustion)</span>
+                <span className="font-semibold text-gray-800">{t('simulator.no2_title', 'NO2 (Vehicular Combustion)')}</span>
                 <span className="font-bold text-sm text-gray-900 font-mono tabular-nums">{inputs.no2} µg/m³</span>
               </div>
               <input
@@ -258,7 +258,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
             </div>
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
-                <span className="font-semibold text-gray-800">SO2 (Industrial Emissions)</span>
+                <span className="font-semibold text-gray-800">{t('simulator.so2_title', 'SO2 (Industrial Emissions)')}</span>
                 <span className="font-bold text-sm text-gray-900 font-mono tabular-nums">{inputs.so2} µg/m³</span>
               </div>
               <input
@@ -276,7 +276,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-gray-100">
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
-                <span className="font-semibold text-gray-800">Ambient Temperature</span>
+                <span className="font-semibold text-gray-800">{t('simulator.temperature_title', 'Ambient Temperature')}</span>
                 <span className="font-bold text-sm text-gray-900 font-mono tabular-nums">{inputs.temperature} °C</span>
               </div>
               <input
@@ -287,11 +287,11 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                 onChange={(e) => handleSliderChange('temperature', e.target.value)}
                 className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#F04438]"
               />
-              <span className="text-[10px] text-gray-400">Cold air traps winter surface inversion</span>
+              <span className="text-[10px] text-gray-400">{t('simulator.temp_hint', 'Cold air traps winter surface inversion')}</span>
             </div>
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
-                <span className="font-semibold text-gray-800">Relative Humidity</span>
+                <span className="font-semibold text-gray-800">{t('simulator.humidity_title', 'Relative Humidity')}</span>
                 <span className="font-bold text-sm text-gray-900 font-mono tabular-nums">{inputs.humidity} %</span>
               </div>
               <input
@@ -302,7 +302,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                 onChange={(e) => handleSliderChange('humidity', e.target.value)}
                 className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#0EA5E9]"
               />
-              <span className="text-[10px] text-gray-400">High moisture condenses dense smog haze</span>
+              <span className="text-[10px] text-gray-400">{t('simulator.humidity_hint', 'High moisture condenses dense smog haze')}</span>
             </div>
           </div>
         </div>
@@ -317,7 +317,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                 {t('simulator.hospital_surge_forecast', 'Hospital Surge Forecast')}
               </span>
               <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                Live Model Calculation
+                {t('simulator.live_calc', 'Live Model Calculation')}
               </span>
             </div>
 
@@ -341,7 +341,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                   {simResult.delta_percent}
                 </span>
                 <div className="text-[10px] text-gray-400 mt-1 font-mono">
-                  {simResult.delta_admissions > 0 ? `+${simResult.delta_admissions}` : simResult.delta_admissions} vs Baseline
+                  {simResult.delta_admissions > 0 ? `+${simResult.delta_admissions}` : simResult.delta_admissions} {t('simulator.vs_baseline', 'vs Baseline')}
                 </div>
               </div>
             </div>

@@ -146,11 +146,11 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
                 <div className="font-bold text-gray-900 text-xs font-['Outfit'] flex items-center gap-1.5">
                   {t('copilot.title', 'AeroMed Clinical Copilot')}
                   <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.2 rounded font-mono">
-                    8,188 Rules
+                    {t('chrome.rules_count', '8,188 Rules')}
                   </span>
                 </div>
                 <div className="text-[10px] text-gray-500 flex items-center gap-1 mt-0.5">
-                  <span>Context: {activeCity}</span>
+                  <span>{t('copilot.context_label', 'Context:')} {t('cities.' + activeCity.toLowerCase(), activeCity)}</span>
                   <span>•</span>
                   <span className="text-[#465FFF] font-semibold uppercase flex items-center gap-0.5">
                     <Globe className="w-2.5 h-2.5" />
@@ -169,7 +169,7 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
 
           {/* SpO2 Quick Check Strip */}
           <div className="px-3.5 py-2 bg-gray-50 border-b border-gray-100 flex items-center justify-between text-xs">
-            <span className="text-gray-500 text-[11px] font-semibold">Pulse SpO2:</span>
+            <span className="text-gray-500 text-[11px] font-semibold">{t('copilot.pulse_spo2', 'Pulse SpO2:')}</span>
             <div className="flex items-center gap-2">
               <input
                 type="range"
@@ -194,7 +194,7 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
             <div className="px-3 py-2 bg-rose-50 border-b border-rose-200 flex items-center gap-2 text-[11px] text-rose-800 animate-in fade-in">
               <AlertOctagon className="w-4 h-4 text-rose-600 shrink-0" />
               <div className="leading-tight font-semibold">
-                SpO2 &lt; 92%: Immediate Emergency ER Transport Required!
+                {t('copilot.er_warning', 'SpO2 < 92%: Immediate Emergency ER Transport Required!')}
               </div>
             </div>
           )}

@@ -288,7 +288,7 @@ export default function DatasetExplorer() {
               selectedFilter === 'grade_a' ? 'bg-[#465FFF] text-white shadow-xs' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
-            Grade A (9.4+)
+            {t('datasets.filter_grade_a', 'Grade A (9.4+)')}
           </button>
           <button
             onClick={() => setSelectedFilter('invented')}
@@ -296,7 +296,7 @@ export default function DatasetExplorer() {
               selectedFilter === 'invented' ? 'bg-[#465FFF] text-white shadow-xs' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
-            Synthetic Invent
+            {t('datasets.filter_invented', 'Synthetic Invent')}
           </button>
           <button
             onClick={() => setSelectedFilter('forge')}
@@ -304,7 +304,7 @@ export default function DatasetExplorer() {
               selectedFilter === 'forge' ? 'bg-[#465FFF] text-white shadow-xs' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
-            Forge Extracted
+            {t('datasets.filter_forge', 'Forge Extracted')}
           </button>
         </div>
       </div>
@@ -425,7 +425,7 @@ export default function DatasetExplorer() {
                     }`}
                   >
                     <TableIcon className="w-3.5 h-3.5" />
-                    Table View
+                    {t('datasets.table_view', 'Table View')}
                   </button>
                   <button
                     onClick={() => setModalViewMode('protocol')}
@@ -434,7 +434,7 @@ export default function DatasetExplorer() {
                     }`}
                   >
                     <FileText className="w-3.5 h-3.5" />
-                    Protocol Card View
+                    {t('datasets.protocol_view', 'Protocol Card View')}
                   </button>
                 </div>
 
@@ -491,7 +491,7 @@ export default function DatasetExplorer() {
                 <div className="space-y-4">
                   <div className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#465FFF]" />
-                    Synthesized & Extracted Ground-Truth Rows ({getPreviewRows().length} Samples)
+                    {t('datasets.samples_header', 'Synthesized & Extracted Ground-Truth Rows')} ({getPreviewRows().length} Samples)
                   </div>
 
                   {getPreviewRows().map((sample, idx) => {
@@ -504,7 +504,7 @@ export default function DatasetExplorer() {
                         <div>
                           <div className="flex items-center justify-between mb-1">
                             <span className="font-bold text-gray-700 uppercase tracking-wide text-[10px]">
-                              Meteorological / Clinical Prompt Context:
+                              {t('datasets.prompt_context', 'Meteorological / Clinical Prompt Context:')}
                             </span>
                             {sample.target_language && (
                               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#465FFF]/10 text-[#465FFF]">
@@ -521,7 +521,7 @@ export default function DatasetExplorer() {
                         {completionVal && (
                           <div>
                             <span className="font-bold text-[#465FFF] uppercase tracking-wide text-[10px] block mb-1">
-                              Clinical Response Protocol / Ground Truth:
+                              {t('datasets.protocol_truth', 'Clinical Response Protocol / Ground Truth:')}
                             </span>
                             <div className="p-3 bg-white rounded-lg border border-gray-200 text-gray-800 leading-relaxed whitespace-pre-wrap">
                               {completionVal}
@@ -545,7 +545,7 @@ export default function DatasetExplorer() {
                 onClick={() => setPreviewDataset(null)}
                 className="px-4 py-1.5 bg-[#465FFF] hover:bg-[#3649db] text-white rounded-xl font-semibold shadow-xs transition cursor-pointer"
               >
-                Close Drawer
+                {t('datasets.close_drawer', 'Close Drawer')}
               </button>
             </div>
 

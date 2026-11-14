@@ -337,18 +337,18 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
               <div className="flex items-center gap-2">
                 <Database className="w-4 h-4 text-[#465FFF]" />
                 <h3 className="font-bold text-gray-900 text-sm font-['Outfit']">
-                  TF-IDF Vector RAG Evidence Grounding
+                  {t('copilot.rag_title', 'TF-IDF Vector RAG Evidence Grounding')}
                 </h3>
               </div>
               <span className="text-[11px] font-bold text-[#465FFF] bg-[#465FFF]/10 px-2.5 py-0.5 rounded-full">
-                Sub-ms Retrieval
+                {t('copilot.sub_ms', 'Sub-ms Retrieval')}
               </span>
             </div>
 
             {/* Grounded Dataset Metadata Pill */}
             <div className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
               <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                Retrieved Knowledge Source
+                {t('copilot.retrieved_source', 'Retrieved Knowledge Source')}
               </div>
               <div className="font-bold text-gray-900 text-xs flex items-center justify-between">
                 <span>{ragEvidence.grounded_dataset_name}</span>
@@ -372,7 +372,7 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
             <div>
               <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                 <FileText className="w-3.5 h-3.5 text-[#465FFF]" />
-                Exact Matched Clinical Rule Excerpt
+                {t('copilot.matched_excerpt', 'Exact Matched Clinical Rule Excerpt')}
               </div>
               <div className="p-3 bg-white rounded-xl border border-gray-200 text-xs text-gray-700 font-sans leading-relaxed border-l-4 border-l-[#465FFF] shadow-2xs">
                 "{ragEvidence.matched_protocol}"
@@ -383,28 +383,28 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
             <div className="space-y-2 border-t border-gray-100 pt-3">
               <div className="text-xs font-bold text-gray-900 flex items-center gap-1.5">
                 <BadgeCheck className="w-4 h-4 text-[#12B76A]" />
-                Adaption Blueprint Medical Guardrails Verified
+                {t('copilot.guardrails_verified', 'Adaption Blueprint Medical Guardrails Verified')}
               </div>
               <div className="space-y-1.5 text-xs text-gray-600">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A] shrink-0" />
-                  <span>Rule 1: CPCB AQI Standard Compliance (0-500)</span>
+                  <span>{t('copilot.rule_1', 'Rule 1: CPCB AQI Standard Compliance (0-500)')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A] shrink-0" />
-                  <span>Rule 2: Statutory CAQM GRAP Directives (Stage I-IV)</span>
+                  <span>{t('copilot.rule_2', 'Rule 2: Statutory CAQM GRAP Directives (Stage I-IV)')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A] shrink-0" />
-                  <span className="font-semibold text-gray-800">Rule 3: Zero Pharmaceutical Rx Hallucination</span>
+                  <span className="font-semibold text-gray-800">{t('copilot.rule_3', 'Rule 3: Zero Pharmaceutical Rx Hallucination')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A] shrink-0" />
-                  <span>Rule 4: Mandatory Triage Trigger (SpO2 &lt; 92%)</span>
+                  <span>{t('copilot.rule_4', 'Rule 4: Mandatory Triage Trigger (SpO2 < 92%)')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A] shrink-0" />
-                  <span>Rule 5: Certified N95 & HEPA Filtration Mandate</span>
+                  <span>{t('copilot.rule_5', 'Rule 5: Certified N95 & HEPA Filtration Mandate')}</span>
                 </div>
               </div>
             </div>

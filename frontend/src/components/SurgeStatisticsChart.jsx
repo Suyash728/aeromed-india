@@ -426,7 +426,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
                 yAxisId="left"
                 type="monotone" 
                 dataKey="pm25" 
-                name="PM2.5 (µg/m³)" 
+                name={t('overview.pm25_conc', 'PM2.5 (µg/m³)')} 
                 stroke="#12B76A" 
                 strokeWidth={2}
                 dot={{ r: 3, fill: '#12B76A' }}
@@ -450,8 +450,8 @@ export default function SurgeStatisticsChart({ overviewData }) {
                 }} 
               />
               <Legend verticalAlign="top" height={32} iconType="circle" wrapperStyle={{ fontSize: '11px', fontWeight: 600 }} />
-              <Bar dataKey="pm25" name="PM2.5 Concentration (µg/m³)" fill="#465FFF" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="admissions" name="Projected Hospital Admissions" fill="#F79009" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="pm25" name={t('overview.pm25_conc', 'PM2.5 (µg/m³)')} fill="#465FFF" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="admissions" name={t('overview.projected_admissions', 'Projected Admissions')} fill="#F79009" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         )}
@@ -480,11 +480,11 @@ export default function SurgeStatisticsChart({ overviewData }) {
       <div className="mt-3 pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-500 gap-1.5">
         <span className="flex items-center gap-1.5 font-medium">
           <TrendingUp className="w-3.5 h-3.5 text-[#12B76A]" />
-          {granularity === 'years' && "10-Year Decadal Trend: PM2.5 exposure shows compound annual +4.2% increase across urban corridors."}
-          {granularity === 'quarters' && "Seasonal Quarterly Analysis: Q4 (Winter Smog) records 3.4x higher particulate levels than Q3 (Monsoon)."}
-          {granularity === 'months' && "Winter Inversion Peak: Nov–Jan admissions spike +240% across Indo-Gangetic Plain."}
-          {granularity === 'weeks' && `Weekly Micro-Surge in ${selectedMonth}: Post-crop burning weeks show acute ICU respiratory admissions.`}
-          {granularity === 'live_7day' && "Live 7-Day Rolling Horizon: Real-time correlation with CPCB monitoring stations."}
+          {granularity === 'years' && t('overview.insight_years', '10-Year Decadal Trend: PM2.5 exposure shows compound annual +4.2% increase across urban corridors.')}
+          {granularity === 'quarters' && t('overview.insight_quarters', 'Seasonal Quarterly Analysis: Q4 (Winter Smog) records 3.4x higher particulate levels than Q3 (Monsoon).')}
+          {granularity === 'months' && t('overview.insight_months', 'Winter Inversion Peak: Nov–Jan admissions spike +240% across Indo-Gangetic Plain.')}
+          {granularity === 'weeks' && t('overview.insight_weeks', `Weekly Micro-Surge in ${selectedMonth}: Post-crop burning weeks show acute ICU respiratory admissions.`)}
+          {granularity === 'live_7day' && t('overview.insight_live', 'Live 7-Day Rolling Horizon: Real-time correlation with CPCB monitoring stations.')}
         </span>
         <div className="flex items-center gap-2">
           {activeTab === 'telemetry' && (
@@ -493,7 +493,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
             </span>
           )}
           <span className="text-[11px] font-bold text-[#465FFF] tabular-nums">
-            ML R² = 0.9879
+            {t('overview.r2_precision', 'ML R² = 0.9879')}
           </span>
         </div>
       </div>

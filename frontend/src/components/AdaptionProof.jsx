@@ -139,56 +139,56 @@ export default function AdaptionProof() {
           {/* Win 1: Quality Grade */}
           <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-2xs">
             <div className="flex items-center justify-between text-xs font-semibold text-gray-400 mb-1">
-              <span>Adaption Quality Grade</span>
+              <span>{t('jury.quality_grade_card', 'Adaption Quality Grade')}</span>
               <Award className="w-4 h-4 text-[#12B76A]" />
             </div>
             <div className="text-2xl font-extrabold text-gray-900 font-['Outfit']">
               Grade A (9.4 / 10)
             </div>
             <div className="text-[11px] text-[#12B76A] font-semibold mt-1">
-              Top 33rd Percentile Globally
+              {t('jury.top_percentile', 'Top 33rd Percentile Globally')}
             </div>
           </div>
 
           {/* Win 2: AutoScientist Gain */}
           <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-2xs">
             <div className="flex items-center justify-between text-xs font-semibold text-gray-400 mb-1">
-              <span>AutoScientist Win Rate</span>
+              <span>{t('jury.autoscientist_gain_card', 'AutoScientist Win Rate')}</span>
               <Cpu className="w-4 h-4 text-[#465FFF]" />
             </div>
             <div className="text-2xl font-extrabold text-[#465FFF] font-['Outfit'] tabular-nums">
               +55.8% Gain
             </div>
             <div className="text-[11px] text-gray-500 font-medium mt-1">
-              Qwen/Qwen3.5-2B LoRA (3 Iterations)
+              {t('jury.qwen_lora', 'Qwen/Qwen3.5-2B LoRA (3 Iterations)')}
             </div>
           </div>
 
           {/* Win 3: Model Precision */}
           <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-2xs">
             <div className="flex items-center justify-between text-xs font-semibold text-gray-400 mb-1">
-              <span>ML Predictive Fit</span>
+              <span>{t('jury.predictive_fit_card', 'ML Predictive Fit')}</span>
               <TrendingUp className="w-4 h-4 text-[#12B76A]" />
             </div>
             <div className="text-2xl font-extrabold text-gray-900 font-['Outfit'] tabular-nums">
               R² = 0.9879
             </div>
             <div className="text-[11px] text-gray-500 font-medium mt-1">
-              MAE ±1.88 daily admissions
+              {t('jury.mae_subtitle', 'MAE ±1.88 daily admissions')}
             </div>
           </div>
 
           {/* Win 4: Credit Reserve */}
           <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-2xs">
             <div className="flex items-center justify-between text-xs font-semibold text-gray-400 mb-1">
-              <span>SDK Credit Reserve</span>
+              <span>{t('jury.credit_reserve_card', 'SDK Credit Reserve')}</span>
               <Zap className="w-4 h-4 text-[#F79009]" />
             </div>
             <div className="text-2xl font-extrabold text-gray-900 font-['Outfit'] tabular-nums">
               464.0 <span className="text-xs font-semibold text-gray-400">/ 1,000</span>
             </div>
             <div className="text-[11px] text-[#12B76A] font-semibold mt-1">
-              Verified &gt;400 Buffer Retained
+              {t('jury.buffer_retained', 'Verified >400 Buffer Retained')}
             </div>
           </div>
 
@@ -258,7 +258,7 @@ export default function AdaptionProof() {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2 text-xs font-bold text-gray-300 uppercase tracking-wider">
             <Cpu className="w-4 h-4 text-[#465FFF]" />
-            Direct Adaption SDK Verification One-Liner for Jury
+            {t('jury.verification_command_title', 'Direct Adaption SDK Verification One-Liner for Jury')}
           </div>
           <button
             onClick={() => handleCopy(
@@ -268,7 +268,7 @@ export default function AdaptionProof() {
             className="flex items-center gap-1 text-xs text-[#465FFF] hover:text-white transition font-semibold cursor-pointer"
           >
             {copiedKey === 'cli' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-            Copy Command
+            {copiedKey === 'cli' ? t('jury.copied', 'Copied!') : t('jury.copy_command', 'Copy Command')}
           </button>
         </div>
         <pre className="text-xs font-mono text-emerald-400 bg-black/50 p-3 rounded-xl overflow-x-auto">
