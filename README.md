@@ -4,7 +4,7 @@
 > **Target Category**: $1,000 Best Use of Adaption AI Award  
 > **Live Production Backend**: [`https://innovate-aqi-backend.onrender.com`](https://innovate-aqi-backend.onrender.com)  
 > **Interactive Swagger UI**: [`https://innovate-aqi-backend.onrender.com/docs`](https://innovate-aqi-backend.onrender.com/docs)  
-> **Frontend Web App**: [`https://innovate-aqi-frontend.vercel.app`](https://innovate-aqi-frontend.vercel.app) *(or deploy your own via `frontend/`)*  
+> **Frontend Web App**: [`[https://innovate-aqi-frontend.vercel.app`](https://innovate-aqi-frontend.vercel.app](https://aeromed-india.vercel.app/))
 > **GitHub Repository**: [`https://github.com/Suyash728/aeromed-india`](https://github.com/Suyash728/aeromed-india)  
 > **3-Minute Pitch Video**: [Demo Video Script](submission/DEMO_VIDEO_SCRIPT.md) • [Slide Deck Outline](submission/SLIDE_DECK_OUTLINE.md) • [Jury Proof Summary](submission/JURY_PROOF_SUMMARY.md)
 
