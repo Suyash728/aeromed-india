@@ -16,8 +16,10 @@ import {
   TrendingUp,
   HardHat
 } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function AdaptionProof() {
+  const { t } = useTranslation();
   const [copiedKey, setCopiedKey] = useState(null);
 
   const handleCopy = (text, key) => {
@@ -123,10 +125,10 @@ export default function AdaptionProof() {
       <div>
         <h2 className="text-xl font-bold text-gray-900 font-['Outfit'] flex items-center gap-2">
           <Award className="w-5 h-5 text-[#465FFF]" />
-          Adaption AI Full 7-Pillar Capability Suite — Jury Proof Hub
+          {t('jury.title', 'Adaption AI Full 7-Pillar Capability Suite — Jury Proof Hub')}
         </h2>
         <p className="text-xs text-gray-500 mt-1">
-          Verifiable evidence of all 7 core Adaption Labs SDK pillars utilized in building AeroMed India. Every Dataset ID, Run ID, and Quality Evaluation is live and verifiable via the SDK.
+          {t('jury.subtitle', 'Verifiable evidence of all 7 core Adaption Labs SDK pillars utilized in building AeroMed India. Every Dataset ID, Run ID, and Quality Evaluation is live and verifiable via the SDK.')}
         </p>
       </div>
 
@@ -236,7 +238,7 @@ export default function AdaptionProof() {
                   <button
                     onClick={() => handleCopy(p.datasetId, p.id)}
                     className="p-1 hover:bg-gray-200 rounded text-gray-500 hover:text-gray-900 transition cursor-pointer"
-                    title="Copy exact Adaption ID"
+                    title={t('jury.copy_id', 'Copy exact Adaption ID')}
                   >
                     {copiedKey === p.id ? (
                       <Check className="w-3.5 h-3.5 text-emerald-600" />

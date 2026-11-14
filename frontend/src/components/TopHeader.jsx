@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Menu, Globe, ChevronDown, Check, Zap, FileText } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function TopHeader({ 
   cities, 
@@ -12,6 +13,7 @@ export default function TopHeader({
   setSidebarOpen,
   onOpenExportModal
 }) {
+  const { t } = useTranslation();
   const [citySearchOpen, setCitySearchOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,7 +73,7 @@ export default function TopHeader({
               <div className="w-2.5 h-2.5 rounded-full bg-[#465FFF] animate-pulse" />
               <div>
                 <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider leading-none">
-                  Active Metro
+                  {t('chrome.active_metro', 'Active Metro')}
                 </div>
                 <div className="text-sm font-bold text-gray-900 leading-tight flex items-center gap-1.5 mt-0.5 font-['Outfit']">
                   {activeCityObj?.name || 'Delhi'}
@@ -93,11 +95,12 @@ export default function TopHeader({
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search 12 Indian Metros..."
+                    placeholder={t('chrome.search_metros', 'Search 12 Indian Metros...')}
                     className="w-full pl-9 pr-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#465FFF]/30 focus:border-[#465FFF]"
                     autoFocus
                   />
                 </div>
+
                 <div className="max-h-60 overflow-y-auto space-y-1 pr-1">
                   {filteredCities.map((city) => {
                     const isSelected = city.id.toLowerCase() === selectedCity.toLowerCase();
@@ -183,10 +186,10 @@ export default function TopHeader({
                   <div>
                     <div className="font-bold text-gray-900 text-xs font-['Outfit'] flex items-center gap-1.5">
                       <Globe className="w-3.5 h-3.5 text-[#465FFF]" />
-                      Select Surveillance Language
+                      {t('chrome.select_language', 'Select Surveillance Language')}
                     </div>
                     <div className="text-[10px] text-gray-400">
-                      13 Indic scripts with verified medical lexicons
+                      {t('chrome.indic_scripts_note', '13 Indic scripts with verified medical lexicons')}
                     </div>
                   </div>
                   <span className="text-[10px] font-bold text-[#465FFF] bg-[#465FFF]/10 px-2 py-0.5 rounded-full">
@@ -240,8 +243,8 @@ export default function TopHeader({
             title="Export official printable hospital & citizen advisory bulletin"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Export Advisory</span>
-            <span className="sm:hidden">Bulletin</span>
+            <span className="hidden sm:inline">{t('chrome.export_advisory', 'Export Advisory')}</span>
+            <span className="sm:hidden">{t('chrome.bulletin', 'Bulletin')}</span>
           </button>
 
           {/* Backend Connection Status Pill */}
@@ -252,13 +255,13 @@ export default function TopHeader({
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="hidden sm:inline">Render API Connected • R² = 0.988</span>
+                <span className="hidden sm:inline">{t('chrome.render_connected', 'Render API Connected • R² = 0.988')}</span>
                 <span className="sm:hidden">Live API</span>
               </div>
             ) : (
               <div className="flex items-center gap-1.5 text-amber-700">
                 <Zap className="w-3.5 h-3.5 text-amber-500" />
-                <span className="hidden sm:inline">Instant Seed Mode (0ms)</span>
+                <span className="hidden sm:inline">{t('chrome.seed_mode', 'Instant Seed Mode (0ms)')}</span>
                 <span className="sm:hidden">Seed Mode</span>
               </div>
             )}

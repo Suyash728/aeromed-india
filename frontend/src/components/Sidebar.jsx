@@ -11,41 +11,44 @@ import {
   Building2,
   X
 } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, metrics }) {
+  const { t } = useTranslation();
+
   const navItems = [
     {
       id: 'surveillance',
-      label: 'Surveillance Overview',
-      subtitle: 'Bento Grid & Telemetry',
+      label: t('nav.surveillance', 'Surveillance Overview'),
+      subtitle: t('nav.surveillance_sub', 'Bento Grid & Telemetry'),
       icon: Activity,
       badge: 'Live'
     },
     {
       id: 'simulator',
-      label: 'What-If Simulator',
-      subtitle: 'ML Sensitivity Lab',
+      label: t('nav.simulator', 'What-If Simulator'),
+      subtitle: t('nav.simulator_sub', 'ML Sensitivity Lab'),
       icon: Sliders,
       badge: 'R² 0.988'
     },
     {
       id: 'triage',
-      label: 'Clinical Triage Copilot',
-      subtitle: 'Vector RAG Grounding',
+      label: t('nav.triage', 'Clinical Triage Copilot'),
+      subtitle: t('nav.triage_sub', 'Vector RAG Grounding'),
       icon: Stethoscope,
       badge: '5.1k+ Rules'
     },
     {
       id: 'datasets',
-      label: 'Dataset Explorer',
-      subtitle: '10 Materialized CSVs',
+      label: t('nav.datasets', 'Dataset Explorer'),
+      subtitle: t('nav.datasets_sub', '10 Materialized CSVs'),
       icon: Database,
       badge: 'Grade A'
     },
     {
       id: 'jury',
-      label: 'Adaption AI 7-Pillar Proof',
-      subtitle: 'Hackathon Award Suite',
+      label: t('nav.jury', 'Adaption AI 7-Pillar Proof'),
+      subtitle: t('nav.jury_sub', 'Hackathon Award Suite'),
       icon: Award,
       badge: '+55.8% Gain'
     }
@@ -76,20 +79,20 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-lg text-[#101828] tracking-tight font-['Outfit']">
-                  AeroMed
+                  {t('chrome.brand_name', 'AeroMed')}
                 </span>
                 <span className="font-extrabold text-lg text-[#465FFF] tracking-tight font-['Outfit']">
-                  India
+                  {t('chrome.brand_suffix', 'India')}
                 </span>
               </div>
               <p className="text-[11px] font-medium text-[#475467] uppercase tracking-wider">
-                Clinical Surveillance
+                {t('chrome.brand_sub', 'Clinical Surveillance')}
               </p>
             </div>
           </div>
           <button 
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
+            className="lg:hidden p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -98,7 +101,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
         {/* Navigation Workspaces */}
         <div className="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
           <div className="px-3 pb-2 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
-            Clinical Workspaces
+            {t('nav.workspaces', 'Clinical Workspaces')}
           </div>
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -155,7 +158,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
           <div className="flex items-center justify-between mb-2">
             <span className="text-[11px] font-bold text-gray-700 uppercase tracking-wider flex items-center gap-1.5">
               <TrendingUp className="w-3.5 h-3.5 text-[#12B76A]" />
-              Model Precision
+              {t('nav.precision_title', 'Model Precision')}
             </span>
             <span className="text-[11px] font-bold text-[#12B76A] bg-[#12B76A]/10 px-2 py-0.5 rounded-full tabular-nums">
               R² = 0.9879
@@ -163,21 +166,21 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
           </div>
           <div className="space-y-1.5 text-xs text-gray-600">
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Mean Abs Error</span>
+              <span className="text-gray-500">{t('nav.mae_label', 'Mean Abs Error')}</span>
               <span className="font-semibold text-gray-800 tabular-nums">±1.88 pts/day</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">AutoScientist Win</span>
+              <span className="text-gray-500">{t('nav.autoscientist_win', 'AutoScientist Win')}</span>
               <span className="font-semibold text-[#465FFF] tabular-nums">+55.8% Gain</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-gray-500">Adaption Eval</span>
+              <span className="text-gray-500">{t('nav.adaption_eval', 'Adaption Eval')}</span>
               <span className="font-semibold text-emerald-700">Grade A (9.4/10)</span>
             </div>
           </div>
           <div className="mt-3 pt-2.5 border-t border-gray-200/60 flex items-center gap-1.5 text-[10px] text-gray-400 font-medium">
             <CheckCircle2 className="w-3.5 h-3.5 text-[#12B76A]" />
-            CPCB & CAQM Statutory Grounding
+            {t('chrome.cpcb_caqm_grounding', 'CPCB & CAQM Statutory Grounding')}
           </div>
         </div>
       </aside>

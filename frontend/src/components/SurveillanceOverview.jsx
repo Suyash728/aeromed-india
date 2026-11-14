@@ -17,6 +17,7 @@ import SurgeStatisticsChart from './SurgeStatisticsChart';
 import IndiaSvgMap from './IndiaSvgMap';
 import CorrelationHeatmap from './CorrelationHeatmap';
 import HospitalDispatchTable from './HospitalDispatchTable';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function SurveillanceOverview({ 
   activeCity, 
@@ -27,6 +28,8 @@ export default function SurveillanceOverview({
   onSelectCity,
   onNavigateTab
 }) {
+  const { t } = useTranslation();
+
   // Extract metrics from live API or seed fallback
   const aqi = liveRiskData?.aqi || cityData?.aqi || 245;
   const pm25 = liveRiskData?.pm25 || cityData?.pm25 || 173;
@@ -66,7 +69,7 @@ export default function SurveillanceOverview({
         <div className="tailadmin-card p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-              Atmospheric AQI Index
+              {t('overview.kpi_current_aqi', 'Atmospheric AQI Index')}
             </span>
             <div className="w-8 h-8 rounded-xl bg-[#465FFF]/10 text-[#465FFF] flex items-center justify-center">
               <Wind className="w-4 h-4" />
@@ -92,7 +95,7 @@ export default function SurveillanceOverview({
         <div className="tailadmin-card p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-              48h Surge Risk Score
+              {t('overview.kpi_surge_risk', '48h Surge Risk Score')}
             </span>
             <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
               <Activity className="w-4 h-4" />
@@ -109,7 +112,7 @@ export default function SurveillanceOverview({
               </span>
             </div>
             <div className="flex items-center justify-between text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100">
-              <span>Projected Admissions:</span>
+              <span>{t('overview.projected_admissions', 'Projected Admissions')}:</span>
               <strong className="text-gray-900 font-mono tabular-nums">{admissions} pts/day</strong>
             </div>
           </div>
@@ -119,7 +122,7 @@ export default function SurveillanceOverview({
         <div className="tailadmin-card p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-              Statutory GRAP Stage
+              {t('overview.kpi_grap_stage', 'Statutory GRAP Stage')}
             </span>
             <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
               <ShieldAlert className="w-4 h-4" />
@@ -144,7 +147,7 @@ export default function SurveillanceOverview({
         <div className="tailadmin-card p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-              Dominant Trigger & Temp
+              {t('overview.kpi_dominant_trigger', 'Dominant Trigger & Temp')}
             </span>
             <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Thermometer className="w-4 h-4" />
@@ -171,7 +174,7 @@ export default function SurveillanceOverview({
       {/* Row 2: 8-Col + 4-Col Bento Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        {/* Left 8 Cols: Dual-Axis Recharts Chart */}
+        {/* Left 8 Cols: Dual-Axis Recharts Chart with Temporal Drill-Down */}
         <div className="lg:col-span-8">
           <SurgeStatisticsChart overviewData={overviewData} />
         </div>
@@ -181,7 +184,7 @@ export default function SurveillanceOverview({
           <div className="tailadmin-card p-5 flex flex-col justify-between">
             <div className="border-b border-gray-100 pb-3">
               <h3 className="font-bold text-gray-900 text-sm font-['Outfit']">
-                Capacity Target & Hospital Strain
+                {t('overview.capacity_strain', 'Capacity Target & Hospital Strain')}
               </h3>
               <p className="text-xs text-gray-400 mt-0.5">
                 48-hour projected ICU & emergency bed threshold
@@ -196,7 +199,7 @@ export default function SurveillanceOverview({
               <div className="flex items-center justify-between text-xs mb-1.5">
                 <span className="font-bold text-gray-800 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#465FFF]" />
-                  Localized Clinical Advisory
+                  {t('overview.localized_advisory', 'Localized Clinical Advisory')}
                 </span>
                 <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                   RAG {groundingSimilarity}% Match
@@ -208,10 +211,10 @@ export default function SurveillanceOverview({
 
               {/* Vector RAG Citation Pill */}
               <div className="mt-2.5 flex items-center justify-between text-[10px] text-gray-400 font-mono">
-                <span>Vector Source:</span>
+                <span>{t('overview.vector_source', 'Vector Source')}:</span>
                 <button
                   onClick={() => onNavigateTab && onNavigateTab('triage')}
-                  className="text-[#465FFF] hover:underline font-bold flex items-center gap-0.5"
+                  className="text-[#465FFF] hover:underline font-bold flex items-center gap-0.5 cursor-pointer"
                 >
                   ID: {groundedDatasetId.slice(0, 14)}...
                   <ChevronRight className="w-3 h-3" />
@@ -226,7 +229,7 @@ export default function SurveillanceOverview({
       {/* Row 3: 6-Col + 6-Col Bento Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        {/* Left 6 Cols: Interactive SVG Map of India with 12 Metros & Leaderboard */}
+        {/* Left 6 Cols: Interactive Esri Light Canvas Map of India with 12 Metros & Leaderboard */}
         <div className="lg:col-span-6">
           <IndiaSvgMap 
             citiesData={allCitiesData} 

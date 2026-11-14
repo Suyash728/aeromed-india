@@ -1,6 +1,7 @@
 """
 Comprehensive Integration Test Suite for Pan-India AQI Respiratory Surveillance API.
-Verifies all 9 endpoints, 12 cities, 12 Indian languages, and multi-turn triage chat.
+Verifies all endpoints, 12 cities, 13 Indian languages, live Open-Meteo batch map,
+telemetry hierarchy drill-down, datasets schema-adaptive catalog, and multi-turn triage chat.
 """
 
 import sys
@@ -65,7 +66,37 @@ def test_overview():
     assert "Guwahati" in data["cities"]
     assert "correlation_matrix" in data
     assert "monthly_seasonal_trends" in data
-    print("PASS: test_overview (12-city correlation & 10-year trends verified)")
+    
+    # Assert telemetry hierarchy with drill-down layers
+    assert "telemetry_hierarchy" in data, "telemetry_hierarchy must be present in overview"
+    th = data["telemetry_hierarchy"]
+    assert "yearly" in th
+    assert "quarterly" in th
+    assert "monthly" in th
+    assert "weekly" in th
+    assert "live_7day" in th
+    assert len(th["yearly"]["all_metros"]) >= 10
+    assert len(th["live_7day"]) == 7
+    print("PASS: test_overview (12-city correlation, 10-year trends & telemetry hierarchy verified)")
+
+def test_live_map():
+    response = client.get("/api/live-map")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert data["total_cities"] == 12
+    assert "Live Open-Meteo Synced" in data["source"]
+    assert "cities" in data
+    assert len(data["cities"]) == 12
+    for city_obj in data["cities"]:
+        assert "name" in city_obj
+        assert "aqi" in city_obj
+        assert "pm25" in city_obj
+        assert "pm10" in city_obj
+        assert "lat" in city_obj
+        assert "lon" in city_obj
+        assert "severity" in city_obj
+    print("PASS: test_live_map (Live Open-Meteo batch 12-metro endpoint verified)")
 
 def test_live_risk_mumbai_marathi():
     response = client.get("/api/live-risk?city=Mumbai&lang=marathi")
@@ -77,11 +108,21 @@ def test_live_risk_mumbai_marathi():
     assert "predicted_risk" in data
     assert "clinical_advisory" in data
     assert len(data["clinical_advisory"]["advisory"]) > 10
+    
+    # Verify top-level flattened keys for TailAdmin frontend consumption
+    assert "aqi" in data
+    assert "pm25" in data
+    assert "predicted_risk_score" in data
+    assert "predicted_admissions" in data
+    assert "cpcb_category" in data
+    assert "grap_stage" in data
+    assert "localized_advisory" in data
+
     # Verify TF-IDF RAG clinical evidence grounding
     assert "grounded_dataset_id" in data
     assert "matched_clinical_protocol" in data
     assert data["grounding_similarity_score"] > 0
-    print("PASS: test_live_risk_mumbai_marathi (with RAG clinical grounding)")
+    print("PASS: test_live_risk_mumbai_marathi (with RAG clinical grounding & flattened keys)")
 
 def test_live_risk_guwahati_assamese():
     response = client.get("/api/live-risk?city=Guwahati&lang=assamese")
@@ -123,10 +164,17 @@ def test_datasets_endpoint():
     assert data["total_datasets"] >= 5
     assert data["total_rows"] > 5000
     assert len(data["catalog"]) >= 5
+    
+    # Verify each dataset has size_mb, non-empty columns, and sample_rows
+    for ds in data["catalog"]:
+        assert "size_mb" in ds and ds["size_mb"] > 0, f"size_mb must be > 0 for {ds.get('dataset_name')}"
+        assert "columns" in ds and len(ds["columns"]) > 0, f"columns must be non-empty for {ds.get('dataset_name')}"
+        assert "sample_rows" in ds and len(ds["sample_rows"]) > 0, f"sample_rows must be non-empty for {ds.get('dataset_name')}"
+
     dataset_names = [d["dataset_name"] for d in data["catalog"]]
     assert any("2,050 Rows" in n or "Master" in n for n in dataset_names)
     assert any("2,000 Rows" in n or "Grade A" in n for n in dataset_names)
-    print("PASS: test_datasets_endpoint (Live catalog & preview confirmed)")
+    print("PASS: test_datasets_endpoint (Live catalog, size_mb, columns, sample_rows confirmed)")
 
 def test_multi_turn_triage_chat():
     payload = {
@@ -204,6 +252,7 @@ if __name__ == "__main__":
     test_languages_endpoint()
     test_health()
     test_overview()
+    test_live_map()
     test_live_risk_mumbai_marathi()
     test_live_risk_guwahati_assamese()
     test_simulate_risk()
@@ -212,4 +261,4 @@ if __name__ == "__main__":
     test_triage_chat_marathi_auto_detection()
     test_live_risk_language_alias()
     test_adaption_7_pillars_metrics()
-    print("\n🎉 ALL 12 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+    print("\n🎉 ALL 13 INTEGRATION TESTS PASSED SUCCESSFULLY!")

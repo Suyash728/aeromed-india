@@ -10,22 +10,7 @@ import DatasetExplorer from './components/DatasetExplorer';
 import AdaptionProof from './components/AdaptionProof';
 import ClinicalBriefingModal from './components/ClinicalBriefingModal';
 import QuickTriageDrawer from './components/QuickTriageDrawer';
-
-const DEFAULT_LANGUAGES = [
-  { code: 'en', name: 'English', native: 'English' },
-  { code: 'hi', name: 'Hindi', native: 'हिन्दी' },
-  { code: 'mr', name: 'Marathi', native: 'मराठी' },
-  { code: 'bn', name: 'Bengali', native: 'বাংলা' },
-  { code: 'ta', name: 'Tamil', native: 'தமிழ்' },
-  { code: 'te', name: 'Telugu', native: 'తెలుగు' },
-  { code: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ' },
-  { code: 'ml', name: 'Malayalam', native: 'മലയാളം' },
-  { code: 'gu', name: 'Gujarati', native: 'ગુજરાતી' },
-  { code: 'pa', name: 'Punjabi', native: 'ਪੰਜਾਬੀ' },
-  { code: 'or', name: 'Odia', native: 'ଓଡ଼ିଆ' },
-  { code: 'as', name: 'Assamese', native: 'অসমীয়া' },
-  { code: 'ur', name: 'Urdu', native: 'اردو' },
-];
+import { LanguageProvider, useTranslation } from './i18n/LanguageContext';
 
 const DEFAULT_CITIES = [
   { id: 'delhi', name: 'Delhi', state: 'Delhi NCR', lat: 28.6139, lon: 77.209, pm25: 174, aqi: 260, admissions: 152, predicted_risk_score: 78 },
@@ -42,31 +27,21 @@ const DEFAULT_CITIES = [
   { id: 'guwahati', name: 'Guwahati', state: 'Assam', lat: 26.1445, lon: 91.7362, pm25: 62, aqi: 115, admissions: 45, predicted_risk_score: 36 },
 ];
 
-export default function App() {
+function DashboardContent() {
+  const { language, setLanguage, t, isRtl, languages } = useTranslation();
   const [activeTab, setActiveTab] = useState('surveillance');
   const [selectedCity, setSelectedCity] = useState('Delhi');
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [briefingModalOpen, setBriefingModalOpen] = useState(false);
 
   // Live state
-  const [languages, setLanguages] = useState(DEFAULT_LANGUAGES);
   const [overviewData, setOverviewData] = useState(seedData);
   const [liveRiskData, setLiveRiskData] = useState(null);
   const [isLiveApi, setIsLiveApi] = useState(false);
 
-  // 1. Initial background fetch: Languages & Overview
+  // 1. Initial background fetch: Overview
   useEffect(() => {
     async function initData() {
-      try {
-        const langRes = await aqiClient.getLanguages();
-        if (langRes && langRes.languages) {
-          setLanguages(langRes.languages);
-        }
-      } catch (err) {
-        // Fallback to DEFAULT_LANGUAGES
-      }
-
       try {
         const ovRes = await aqiClient.getOverview();
         if (ovRes && ovRes.metadata) {
@@ -84,7 +59,7 @@ export default function App() {
   useEffect(() => {
     async function fetchLiveRisk() {
       try {
-        const riskRes = await aqiClient.getLiveRisk(selectedCity, selectedLanguage);
+        const riskRes = await aqiClient.getLiveRisk(selectedCity, language);
         if (riskRes && (riskRes.predicted_risk_score || riskRes.predicted_admissions || riskRes.aqi)) {
           setLiveRiskData(riskRes);
           setIsLiveApi(true);
@@ -110,7 +85,7 @@ export default function App() {
       }
     }
     fetchLiveRisk();
-  }, [selectedCity, selectedLanguage]);
+  }, [selectedCity, language]);
 
   // Merge seed data with live city list
   const allCitiesData = useMemo(() => {
@@ -130,10 +105,10 @@ export default function App() {
   }, [allCitiesData, selectedCity]);
 
   // Indic Language Font Class
-  const langFontClass = `lang-${selectedLanguage}`;
+  const langFontClass = `lang-${language}`;
 
   return (
-    <div className={`min-h-screen bg-gray-50 flex ${langFontClass}`}>
+    <div className={`min-h-screen bg-gray-50 flex ${langFontClass}`} dir={isRtl ? 'rtl' : 'ltr'}>
       
       {/* Persistent Left Sidebar */}
       <Sidebar 
@@ -147,13 +122,13 @@ export default function App() {
       <div className="flex-1 flex flex-col lg:pl-72 min-w-0 transition-all">
         
         {/* Sticky Top Header */}
-        <TopHeader
+        <TopHeader 
           cities={DEFAULT_CITIES}
           selectedCity={selectedCity}
           onSelectCity={setSelectedCity}
           languages={languages}
-          selectedLanguage={selectedLanguage}
-          onSelectLanguage={setSelectedLanguage}
+          selectedLanguage={language}
+          onSelectLanguage={setLanguage}
           isLiveApi={isLiveApi}
           setSidebarOpen={setSidebarOpen}
           onOpenExportModal={() => setBriefingModalOpen(true)}
@@ -183,7 +158,7 @@ export default function App() {
           {activeTab === 'triage' && (
             <ClinicalTriageCopilot
               activeCity={selectedCity}
-              activeLanguage={selectedLanguage}
+              activeLanguage={language}
             />
           )}
 
@@ -219,19 +194,27 @@ export default function App() {
           cityData={activeCityData}
           liveRiskData={liveRiskData}
           selectedCity={selectedCity}
-          selectedLanguage={selectedLanguage}
+          selectedLanguage={language}
           languages={languages}
         />
 
         {/* Floating Quick-Triage Copilot Drawer */}
         <QuickTriageDrawer
           activeCity={selectedCity}
-          activeLanguage={selectedLanguage}
+          activeLanguage={language}
           languages={languages}
         />
 
       </div>
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <DashboardContent />
+    </LanguageProvider>
   );
 }

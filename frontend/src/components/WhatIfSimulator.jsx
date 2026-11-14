@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import aqiClient from '../api/aqiClient';
 import { Sliders, Sparkles, AlertTriangle, ArrowRight, Activity, ShieldAlert, CheckCircle2, RotateCcw } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissions = 152 }) {
+  const { t } = useTranslation();
+
   const [inputs, setInputs] = useState({
     pm25: 180,
     pm10: 240,
@@ -19,7 +22,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
     predicted_risk_score: 76,
     predicted_admissions: 174,
     delta_admissions: +22,
-    delta_percent: +14.5,
+    delta_percent: '+14.5%',
     grap_stage: 'Stage III (Severe)',
     cpcb_category: 'Very Poor',
     icu_beds_needed: 18,
@@ -124,10 +127,10 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
         <div>
           <h2 className="text-xl font-bold text-gray-900 font-['Outfit'] flex items-center gap-2">
             <Sliders className="w-5 h-5 text-[#465FFF]" />
-            What-If Atmospheric Sensitivity & Hospital Surge Simulator
+            {t('simulator.title', 'What-If Atmospheric Sensitivity & Hospital Surge Simulator')}
           </h2>
           <p className="text-xs text-gray-500 mt-1">
-            Real-time sensitivity analysis powered by the Gradient Boosting Regressor (<span className="font-semibold text-gray-800">R² = 0.9879</span>). Alter pollutant concentrations to project emergency ward admissions and trigger CAQM GRAP stages.
+            {t('simulator.subtitle', 'Real-time sensitivity analysis powered by the Gradient Boosting Regressor (R² = 0.9879). Alter pollutant concentrations to project emergency ward admissions and trigger CAQM GRAP stages.')}
           </p>
         </div>
         <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 shadow-2xs">
@@ -139,14 +142,14 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
       {/* Preset Scenario Cards */}
       <div>
         <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2.5">
-          One-Click Extreme Smog & Weather Presets
+          {t('simulator.presets_title', 'Rapid Scenario Presets')}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {presets.map((preset) => (
             <button
               key={preset.id}
               onClick={() => applyPreset(preset)}
-              className="tailadmin-card p-4 text-left hover:border-[#465FFF] transition-all group flex flex-col justify-between"
+              className="tailadmin-card p-4 text-left hover:border-[#465FFF] transition-all group flex flex-col justify-between cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -183,7 +186,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
               className="text-xs text-[#465FFF] hover:underline flex items-center gap-1 font-semibold cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              Reset Sliders
+              {t('simulator.reset_defaults', 'Reset Defaults')}
             </button>
           </div>
 
@@ -309,7 +312,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
                 <Activity className="w-4 h-4 text-[#465FFF]" />
-                Simulated 48-Hour Impact
+                {t('simulator.hospital_surge_forecast', 'Hospital Surge Forecast')}
               </span>
               <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
                 Live Model Calculation
@@ -324,7 +327,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                   <span className="text-sm font-semibold text-gray-500 ml-1.5">pts/day</span>
                 </div>
                 <div className="text-xs text-gray-500 mt-0.5">
-                  Projected Daily Respiratory Emergency Admissions
+                  {t('simulator.predicted_daily_admissions', 'Projected Daily Respiratory Emergency Admissions')}
                 </div>
               </div>
               <div className="text-right">
@@ -360,7 +363,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
             {/* Hospital Equipment Scaling Checklist */}
             <div className="space-y-2 border-t border-gray-100 pt-4">
               <div className="text-xs font-bold text-gray-800">
-                Recommended Resource Scaling to Avoid Collapse:
+                {t('simulator.critical_care_demands', 'Critical Care & Medical Demands')}:
               </div>
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-200">
@@ -368,7 +371,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                     +{simResult.icu_beds_needed}
                   </div>
                   <div className="text-[10px] font-semibold text-gray-500 uppercase mt-0.5">
-                    ICU Beds
+                    {t('simulator.icu_beds', 'ICU Beds Needed')}
                   </div>
                 </div>
                 <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-200">
@@ -376,7 +379,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                     +{simResult.nebulizers_needed}
                   </div>
                   <div className="text-[10px] font-semibold text-gray-500 uppercase mt-0.5">
-                    Nebulizers
+                    {t('simulator.nebulizers', 'Nebulizers')}
                   </div>
                 </div>
                 <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-200">
@@ -384,7 +387,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                     +{simResult.emergency_oxygen_units}
                   </div>
                   <div className="text-[10px] font-semibold text-gray-500 uppercase mt-0.5">
-                    O2 Vans
+                    {t('simulator.oxygen_cylinders', 'Emergency O₂ Units')}
                   </div>
                 </div>
               </div>

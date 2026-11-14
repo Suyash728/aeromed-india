@@ -170,6 +170,14 @@ export const aqiClient = {
   async getDatasets() {
     return await fetchJson('/api/datasets');
   },
+
+  /**
+   * 9. GET /api/live-map
+   * Retrieves batch real-time Open-Meteo telemetry for all 12 metros with predicted risk scores.
+   */
+  async getLiveMap() {
+    return await fetchJson('/api/live-map');
+  },
 };
 
 export default aqiClient;
