@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import aqiClient from '../api/aqiClient';
+import { useTranslation } from '../i18n/LanguageContext';
 import { 
   Stethoscope, 
   Send, 
@@ -38,6 +39,7 @@ function detectScriptLanguage(text, fallback = 'en') {
 }
 
 export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLanguage = 'en' }) {
+  const { t } = useTranslation();
   const [patientProfile, setPatientProfile] = useState('pediatric_asthma');
   const [spo2, setSpo2] = useState(94);
   const [symptoms, setSymptoms] = useState(['wheezing', 'shortness_of_breath']);
@@ -178,7 +180,7 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
               <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
                 1. Patient Vulnerability Profile
               </span>
-              <span className="text-xs text-gray-400">Context: {activeCity}</span>
+              <span className="text-xs text-gray-400">Context: {t('cities.' + activeCity.toLowerCase(), activeCity)}</span>
             </div>
 
             {/* Profile Selection Pills */}
@@ -312,7 +314,7 @@ export default function ClinicalTriageCopilot({ activeCity = 'Delhi', activeLang
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder={`Ask in मराठी, हिन्दी, தமிழ், or English...`}
+                placeholder={t('copilot.ask_placeholder', 'Ask in मराठी, हिन्दी, தமிழ், or English...')}
                 className="flex-1 px-3.5 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#465FFF]/30 focus:border-[#465FFF]"
               />
               <button

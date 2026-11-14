@@ -10,7 +10,8 @@ import {
   AlertTriangle,
   FileText,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  MapPin
 } from 'lucide-react';
 import RadialGauge from './RadialGauge';
 import SurgeStatisticsChart from './SurgeStatisticsChart';
@@ -44,6 +45,12 @@ export default function SurveillanceOverview({
   const groundedDatasetId = liveRiskData?.grounded_dataset_id || "3bf58b6b-462c-4412-8171-fa1bed843e67";
   const groundingSimilarity = liveRiskData?.grounding_similarity_score ? (liveRiskData.grounding_similarity_score * 100).toFixed(1) : "88.4";
 
+  // Clean markdown asterisks or hashes from advisory text
+  const cleanAdvisory = (localizedAdvisory || '')
+    .replace(/\*\*/g, '')
+    .replace(/###?/g, '')
+    .trim();
+
   // Category Pill styling
   const getCategoryBadge = (cat) => {
     switch (cat?.toLowerCase()) {
@@ -59,10 +66,12 @@ export default function SurveillanceOverview({
     }
   };
 
+  const localizedCity = t('cities.' + (activeCity || '').toLowerCase(), activeCity || 'Delhi');
+
   return (
     <div className="space-y-6">
 
-      {/* Row 1: 4 TailAdmin KPI Cards */}
+      {/* Row 1: 4 TailAdmin KPI Cards (12 Cols) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* KPI 1: Live City AQI */}
@@ -81,7 +90,7 @@ export default function SurveillanceOverview({
                 {aqi}
               </div>
               <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${getCategoryBadge(cpcbCategory)}`}>
-                {cpcbCategory}
+                {t('overview.' + cpcbCategory?.toLowerCase().replace(' ', '_'), cpcbCategory)}
               </span>
             </div>
             <div className="flex items-center justify-between text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100 font-mono">
@@ -108,12 +117,14 @@ export default function SurveillanceOverview({
                 <span className="text-sm font-semibold text-gray-400">/100</span>
               </div>
               <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                High Surge
+                {t('overview.high_surge', 'High Surge')}
               </span>
             </div>
             <div className="flex items-center justify-between text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100">
               <span>{t('overview.projected_admissions', 'Projected Admissions')}:</span>
-              <strong className="text-gray-900 font-mono tabular-nums">{admissions} pts/day</strong>
+              <strong className="text-gray-900 font-mono tabular-nums">
+                {admissions} {t('overview.pts_day', 'pts/day')}
+              </strong>
             </div>
           </div>
         </div>
@@ -135,10 +146,10 @@ export default function SurveillanceOverview({
               </div>
             </div>
             <p className="text-[11px] text-gray-500 mt-1 line-clamp-1">
-              Civic vehicle restrictions & primary school warnings active.
+              {t('overview.grap_sub', 'Civic vehicle restrictions & primary school warnings active.')}
             </p>
             <div className="text-[10px] font-semibold text-[#465FFF] mt-2 pt-2 border-t border-gray-100 flex items-center gap-1">
-              <span>CAQM Statutory Schedule (17 Pages)</span>
+              <span>{t('overview.caqm_schedule', 'CAQM Statutory Schedule (17 Pages)')}</span>
             </div>
           </div>
         </div>
@@ -163,50 +174,70 @@ export default function SurveillanceOverview({
               </span>
             </div>
             <div className="text-xs text-gray-500 mt-2 pt-2 border-t border-gray-100 flex items-center justify-between">
-              <span>Airway Penetration:</span>
-              <strong className="text-rose-600 font-semibold">Alveolar (Deep)</strong>
+              <span>{t('overview.airway_penetration', 'Airway Penetration:')}</span>
+              <strong className="text-rose-600 font-semibold">{t('overview.alveolar_deep', 'Alveolar (Deep)')}</strong>
             </div>
           </div>
         </div>
 
       </div>
 
-      {/* Row 2: 8-Col + 4-Col Bento Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Row 2: Live Geo-Clinical Pair (Side-by-Side: 7/8 Cols Map + 5/4 Cols Capacity & Strain) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Left 8 Cols: Dual-Axis Recharts Chart with Temporal Drill-Down */}
-        <div className="lg:col-span-8">
-          <SurgeStatisticsChart overviewData={overviewData} />
+        {/* Left 7 or 8 Cols: Interactive Pan-India Metro AQI Map */}
+        <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+          <IndiaSvgMap 
+            citiesData={allCitiesData} 
+            selectedCity={activeCity} 
+            onSelectCity={onSelectCity} 
+          />
         </div>
 
-        {/* Right 4 Cols: Radial Gauge + Localized Advisory + RAG Badge */}
-        <div className="lg:col-span-4 space-y-4">
-          <div className="tailadmin-card p-5 flex flex-col justify-between">
-            <div className="border-b border-gray-100 pb-3">
-              <h3 className="font-bold text-gray-900 text-sm font-['Outfit']">
-                {t('overview.capacity_strain', 'Capacity Target & Hospital Strain')}
-              </h3>
-              <p className="text-xs text-gray-400 mt-0.5">
-                48-hour projected ICU & emergency bed threshold
-              </p>
+        {/* Right 5 or 4 Cols: Capacity Target & Hospital Strain + Localized Advisory + Active City Pill */}
+        <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between">
+          <div className="tailadmin-card p-5 h-full flex flex-col justify-between">
+            {/* Header with Active City Pill Badge */}
+            <div className="border-b border-gray-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 className="font-bold text-gray-900 text-sm font-['Outfit']">
+                  {t('overview.capacity_strain', 'Capacity Target & Hospital Strain')}
+                </h3>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  {t('overview.capacity_sub', '48-hour projected ICU & emergency bed threshold')}
+                </p>
+              </div>
+              
+              {/* Active City Pill Badge */}
+              <div className="shrink-0 self-start sm:self-auto flex items-center gap-1.5 px-2.5 py-1 bg-[#465FFF]/10 border border-[#465FFF]/25 rounded-full text-[11px] font-bold text-[#465FFF] shadow-2xs font-mono">
+                <MapPin className="w-3 h-3 text-[#465FFF]" />
+                <span>{localizedCity}</span>
+                <span className="text-gray-300">•</span>
+                <span className="font-normal text-[10px] text-gray-600">
+                  {t('chrome.live_projection', 'Live 48h Projection')}
+                </span>
+              </div>
             </div>
 
             {/* Radial Gauge */}
-            <RadialGauge value={riskScore} max={100} />
+            <div className="my-auto py-2">
+              <RadialGauge value={riskScore} max={100} />
+            </div>
 
             {/* Localized Clinical Advisory Card */}
-            <div className="mt-4 pt-3 border-t border-gray-100">
+            <div className="mt-3 pt-3 border-t border-gray-100">
               <div className="flex items-center justify-between text-xs mb-1.5">
                 <span className="font-bold text-gray-800 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#465FFF]" />
                   {t('overview.localized_advisory', 'Localized Clinical Advisory')}
                 </span>
                 <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  RAG {groundingSimilarity}% Match
+                  RAG {groundingSimilarity}% {t('overview.rag_match', 'Match')}
                 </span>
               </div>
+              
               <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-700 leading-relaxed font-sans border-l-4 border-l-[#465FFF]">
-                "{localizedAdvisory}"
+                "{cleanAdvisory}"
               </div>
 
               {/* Vector RAG Citation Pill */}
@@ -226,26 +257,22 @@ export default function SurveillanceOverview({
 
       </div>
 
-      {/* Row 3: 6-Col + 6-Col Bento Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Row 3: Historical Epidemiological Pair (Side-by-Side: 7/8 Cols Chart + 5/4 Cols Heatmap) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Left 6 Cols: Interactive Esri Light Canvas Map of India with 12 Metros & Leaderboard */}
-        <div className="lg:col-span-6">
-          <IndiaSvgMap 
-            citiesData={allCitiesData} 
-            selectedCity={activeCity} 
-            onSelectCity={onSelectCity} 
-          />
+        {/* Left 7 or 8 Cols: Dual-Axis Recharts Chart with Temporal Drill-Down */}
+        <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+          <SurgeStatisticsChart overviewData={overviewData} />
         </div>
 
-        {/* Right 6 Cols: Interactive Pearson Epidemiological Correlation Heatmap */}
-        <div className="lg:col-span-6">
+        {/* Right 5 or 4 Cols: Interactive Pearson Epidemiological Correlation Heatmap */}
+        <div className="lg:col-span-5 xl:col-span-4 flex flex-col">
           <CorrelationHeatmap />
         </div>
 
       </div>
 
-      {/* Row 4: Hospital Dispatch Queue Table */}
+      {/* Row 4: Hospital Dispatch Queue Table (12 Cols) */}
       <div>
         <HospitalDispatchTable />
       </div>

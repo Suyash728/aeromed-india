@@ -134,8 +134,10 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
           </p>
         </div>
         <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 shadow-2xs">
-          <span>Active City Baseline:</span>
-          <span className="text-[#465FFF] font-bold">{activeCity} ({baselineAdmissions} adm/day)</span>
+          <span>{t('simulator.active_city_baseline', 'Active City Baseline')}:</span>
+          <span className="text-[#465FFF] font-bold">
+            {t('cities.' + activeCity.toLowerCase(), activeCity)} ({baselineAdmissions} {t('overview.pts_day', 'pts/day')})
+          </span>
         </div>
       </div>
 
@@ -179,7 +181,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
         <div className="lg:col-span-7 tailadmin-card p-6 space-y-5">
           <div className="flex items-center justify-between border-b border-gray-100 pb-3">
             <h3 className="font-bold text-gray-900 text-sm font-['Outfit']">
-              Adjust Ambient Criteria Pollutants & Meteorology
+              {t('simulator.adjust_pollutants', 'Adjust Ambient Criteria Pollutants & Meteorology')}
             </h3>
             <button
               onClick={() => applyPreset(presets[0])}
@@ -197,7 +199,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
                 <span className="w-2.5 h-2.5 rounded-full bg-[#465FFF]" />
                 PM2.5 Concentration (Fine Respirable Smog)
                 <span className="text-[10px] font-semibold text-[#465FFF] bg-[#465FFF]/10 px-1.5 py-0.5 rounded">
-                  96.5% ML Weight
+                  {t('simulator.pm25_weight', '96.5% ML Weight')}
                 </span>
               </span>
               <span className="font-extrabold text-base text-gray-900 font-mono tabular-nums">
@@ -324,7 +326,7 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
               <div>
                 <div className="text-4xl font-extrabold text-gray-900 font-['Outfit'] tabular-nums tracking-tight">
                   {simResult.predicted_admissions}
-                  <span className="text-sm font-semibold text-gray-500 ml-1.5">pts/day</span>
+                  <span className="text-sm font-semibold text-gray-500 ml-1.5">{t('overview.pts_day', 'pts/day')}</span>
                 </div>
                 <div className="text-xs text-gray-500 mt-0.5">
                   {t('simulator.predicted_daily_admissions', 'Projected Daily Respiratory Emergency Admissions')}
@@ -347,7 +349,9 @@ export default function WhatIfSimulator({ activeCity = 'Delhi', baselineAdmissio
             {/* CAQM GRAP Trigger Escalation */}
             <div className="p-3.5 bg-white rounded-xl border border-gray-200 mb-4 shadow-2xs">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-semibold text-gray-600">Statutory CAQM GRAP Stage:</span>
+                <span className="text-xs font-semibold text-gray-600">
+                  {t('simulator.statutory_grap_stage', 'Statutory CAQM GRAP Stage:')}
+                </span>
                 <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
                   {simResult.grap_stage}
                 </span>

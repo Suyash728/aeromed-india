@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Grid, Info } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function CorrelationHeatmap() {
+  const { t } = useTranslation();
   const [selectedCell, setSelectedCell] = useState(null);
 
   const variables = [
@@ -11,8 +13,8 @@ export default function CorrelationHeatmap() {
     { key: 'so2', label: 'SO2' },
     { key: 'co', label: 'CO' },
     { key: 'o3', label: 'O3' },
-    { key: 'temp', label: 'Temp' },
-    { key: 'admit', label: 'Admit' },
+    { key: 'temp', label: t('overview.temp_label', 'Temp') },
+    { key: 'admit', label: t('overview.admissions_label', 'Admit') },
   ];
 
   // 8x8 Pearson Correlation Matrix from ICMR-CPCB 10-year epidemiological surveillance
@@ -55,10 +57,10 @@ export default function CorrelationHeatmap() {
         <div>
           <h3 className="font-bold text-gray-900 text-base font-['Outfit'] flex items-center gap-2">
             <Grid className="w-4 h-4 text-[#465FFF]" />
-            Pearson Epidemiological Correlation Matrix (8×8)
+            {t('overview.heatmap_title', 'Pearson Epidemiological Correlation Matrix (8×8)')}
           </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Pairwise correlation coefficients (r) between criteria pollutants, meteorology, and ICU admissions.
+            {t('overview.heatmap_desc', 'Pairwise correlation coefficients (r) between criteria pollutants, meteorology, and ICU admissions.')}
           </p>
         </div>
         <span className="text-[11px] font-bold text-[#465FFF] bg-[#465FFF]/10 px-2.5 py-1 rounded-full tabular-nums">
@@ -133,7 +135,7 @@ export default function CorrelationHeatmap() {
             <span className="font-bold text-gray-900 mr-1.5">
               {selectedCell 
                 ? `${selectedCell.rowLabel} ⟷ ${selectedCell.colLabel}:` 
-                : 'Key Epidemiological Finding:'
+                : t('overview.key_epidemiological_finding', 'Key Epidemiological Finding:')
               }
             </span>
             <span className="text-gray-600">

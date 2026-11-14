@@ -1,28 +1,30 @@
 import React from 'react';
+import { useTranslation } from '../i18n/LanguageContext';
 
-export default function RadialGauge({ value = 78, max = 100, label = "Hospital Surge Index" }) {
+export default function RadialGauge({ value = 78, max = 100, label }) {
+  const { t } = useTranslation();
   const percentage = Math.min(Math.max(value / max, 0), 1);
   const strokeWidth = 14;
   const radius = 80;
   const circumference = Math.PI * radius; // Semi-circle circumference
   const strokeDashoffset = circumference - (percentage * circumference);
 
-  // Determine severity color
+  // Determine severity color & translated status
   let color = '#12B76A'; // Safe
-  let statusText = 'Safe Capacity';
+  let statusText = t('overview.safe_capacity', 'Safe Capacity');
   let badgeBg = 'bg-emerald-50 text-emerald-700 border-emerald-200';
 
   if (value > 80) {
     color = '#D92D20'; // Critical Emergency
-    statusText = 'Critical Surge Alert';
+    statusText = t('overview.critical_surge_alert', 'Critical Surge Alert');
     badgeBg = 'bg-rose-50 text-rose-700 border-rose-200';
   } else if (value > 60) {
     color = '#F04438'; // Severe
-    statusText = 'High Surge Risk';
+    statusText = t('overview.high_surge_risk', 'High Surge Risk');
     badgeBg = 'bg-orange-50 text-orange-700 border-orange-200';
   } else if (value > 35) {
     color = '#F79009'; // Moderate
-    statusText = 'Moderate Strain';
+    statusText = t('overview.moderate_strain', 'Moderate Strain');
     badgeBg = 'bg-amber-50 text-amber-700 border-amber-200';
   }
 
@@ -61,7 +63,7 @@ export default function RadialGauge({ value = 78, max = 100, label = "Hospital S
             <span className="text-sm font-semibold text-gray-400">/{max}</span>
           </div>
           <div className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
-            Surge Score
+            {t('overview.surge_score', 'Surge Score')}
           </div>
         </div>
       </div>

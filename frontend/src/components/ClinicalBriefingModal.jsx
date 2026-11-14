@@ -8,11 +8,12 @@ import {
   Activity, 
   CheckCircle2, 
   FileText, 
-  Building2,
-  Calendar,
-  Clock,
-  Sparkles
+  Building2, 
+  Calendar, 
+  Clock, 
+  Sparkles 
 } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function ClinicalBriefingModal({ 
   isOpen, 
@@ -25,6 +26,7 @@ export default function ClinicalBriefingModal({
 }) {
   if (!isOpen) return null;
 
+  const { t } = useTranslation();
   const activeLangObj = languages.find(l => l.code === selectedLanguage) || { name: 'English', native: 'English' };
 
   const city = selectedCity || 'Delhi';
@@ -36,6 +38,7 @@ export default function ClinicalBriefingModal({
   const cpcbCategory = liveRiskData?.cpcb_category || (pm25 > 150 ? 'Severe' : pm25 > 100 ? 'Very Poor' : 'Moderate');
   const grapStage = liveRiskData?.grap_stage || (pm25 > 250 ? 'Stage IV (Emergency)' : pm25 > 150 ? 'Stage III (Severe)' : 'Stage II (Very Poor)');
   const advisory = liveRiskData?.localized_advisory || cityData?.clinical_advisory || 'Sensitive groups should avoid prolonged outdoor exposure during morning inversion hours.';
+  const cleanAdvisory = (advisory || '').replace(/\*\*/g, '').replace(/###?/g, '').trim();
   const datasetId = liveRiskData?.grounded_dataset_id || '3bf58b6b-462c-4412-8171-fa1bed843e67';
   const similarityScore = liveRiskData?.grounding_similarity_score ? (liveRiskData.grounding_similarity_score * 100).toFixed(1) : '88.4';
 
@@ -248,7 +251,7 @@ export default function ClinicalBriefingModal({
               </span>
             </h3>
             <div className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-800 leading-relaxed font-sans border-l-4 border-l-[#465FFF]">
-              "{advisory}"
+              "{cleanAdvisory}"
             </div>
             <div className="p-2 bg-rose-50 border border-rose-200 rounded-lg text-[11px] text-rose-800 flex items-center gap-1.5 font-semibold">
               <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0" />

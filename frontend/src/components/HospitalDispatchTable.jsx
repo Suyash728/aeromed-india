@@ -1,5 +1,6 @@
 import React from 'react';
 import { Truck, Download, AlertTriangle, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const dispatchLogs = [
   {
@@ -55,6 +56,8 @@ const dispatchLogs = [
 ];
 
 export default function HospitalDispatchTable() {
+  const { t } = useTranslation();
+
   const handleExportLogs = () => {
     const headers = ['Log ID,City,State,Triggered Condition,Resource Dispatched,GRAP Status,Urgency,ETA\n'];
     const rows = dispatchLogs.map(
@@ -90,10 +93,10 @@ export default function HospitalDispatchTable() {
         <div>
           <h3 className="font-bold text-gray-900 text-base font-['Outfit'] flex items-center gap-2">
             <Truck className="w-4 h-4 text-[#465FFF]" />
-            Live Hospital Surge & Emergency Dispatch Queue
+            {t('overview.dispatch_title', 'Live Hospital Surge & Emergency Dispatch Queue')}
           </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            Automated bed, ventilator, and oxygen van allocation triggered by real-time ML risk & CAQM GRAP stages.
+            {t('overview.dispatch_desc', 'Automated bed, ventilator, and oxygen van allocation triggered by real-time ML risk & CAQM GRAP stages.')}
           </p>
         </div>
         
@@ -102,7 +105,7 @@ export default function HospitalDispatchTable() {
           className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-xl text-xs font-semibold shadow-2xs transition self-start sm:self-auto cursor-pointer"
         >
           <Download className="w-3.5 h-3.5 text-gray-500" />
-          Export Queue CSV
+          {t('overview.export_csv', 'Export Queue CSV')}
         </button>
       </div>
 
@@ -112,11 +115,11 @@ export default function HospitalDispatchTable() {
           <thead>
             <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
               <th className="py-2.5 px-3 rounded-l-lg">ID</th>
-              <th className="py-2.5 px-3">Metro Hub</th>
-              <th className="py-2.5 px-3">Atmospheric Trigger</th>
-              <th className="py-2.5 px-3">Resource Allocation</th>
-              <th className="py-2.5 px-3">CAQM GRAP Stage</th>
-              <th className="py-2.5 px-3 text-right rounded-r-lg">Dispatch ETA</th>
+              <th className="py-2.5 px-3">{t('overview.metro', 'Metro Hub')}</th>
+              <th className="py-2.5 px-3">{t('overview.col_trigger', 'Atmospheric Trigger')}</th>
+              <th className="py-2.5 px-3">{t('overview.col_resource', 'Resource Allocation')}</th>
+              <th className="py-2.5 px-3">{t('overview.col_grap', 'CAQM GRAP Stage')}</th>
+              <th className="py-2.5 px-3 text-right rounded-r-lg">{t('overview.col_eta', 'Dispatch ETA')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -126,8 +129,8 @@ export default function HospitalDispatchTable() {
                   {log.id}
                 </td>
                 <td className="py-3 px-3">
-                  <div className="font-bold text-gray-900">{log.city}</div>
-                  <div className="text-[10px] text-gray-400">{log.state}</div>
+                  <div className="font-bold text-gray-900">{t('cities.' + log.city.toLowerCase(), log.city)}</div>
+                  <div className="text-[10px] text-gray-400">{t('cities.' + log.state.toLowerCase(), log.state)}</div>
                 </td>
                 <td className="py-3 px-3">
                   <div className="font-medium text-gray-700 flex items-center gap-1.5">

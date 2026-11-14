@@ -19,6 +19,14 @@ async function fetchJson(endpoint, options = {}, timeoutMs = 15000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
+  if (options.signal) {
+    if (options.signal.aborted) {
+      clearTimeout(timer);
+      throw new DOMException('Aborted', 'AbortError');
+    }
+    options.signal.addEventListener('abort', () => controller.abort());
+  }
+
   try {
     const response = await fetch(url, {
       ...options,
@@ -57,10 +65,11 @@ export const aqiClient = {
    * 1. GET /api/overview
    * Returns metadata, 12-city comparison, feature importances, and historical trends.
    */
-  async getOverview() {
+  async getOverview(options = {}) {
     try {
-      return await fetchJson('/api/overview');
+      return await fetchJson('/api/overview', options);
     } catch (err) {
+      if (err.name === 'AbortError') throw err;
       console.warn('Backend overview request failed, falling back to bundled seed data:', err.message);
       return seedData;
     }
@@ -70,10 +79,11 @@ export const aqiClient = {
    * 2. GET /api/languages
    * Returns list of all 12 supported Indian regional languages + English with native script labels.
    */
-  async getLanguages() {
+  async getLanguages(options = {}) {
     try {
-      return await fetchJson('/api/languages');
+      return await fetchJson('/api/languages', options);
     } catch (err) {
+      if (err.name === 'AbortError') throw err;
       console.warn('Backend languages request failed, falling back to local list:', err.message);
       return {
         total: 13,
@@ -101,14 +111,15 @@ export const aqiClient = {
    * Fetches real-time AQI and ML risk score for a selected city in the requested language.
    * @param {string} city - e.g. "Delhi", "Mumbai", "Bengaluru"
    * @param {string} language - ISO code e.g. "hi", "mr", "ta", "en"
+   * @param {Object} options - { signal }
    */
-  async getLiveRisk(city = 'Delhi', language = 'en') {
+  async getLiveRisk(city = 'Delhi', language = 'en', options = {}) {
     const params = new URLSearchParams({
       city: city.toLowerCase(),
       language: language.toLowerCase(),
       lang: language.toLowerCase(),
     });
-    return await fetchJson(`/api/live-risk?${params.toString()}`);
+    return await fetchJson(`/api/live-risk?${params.toString()}`, options);
   },
 
   /**

@@ -55,16 +55,20 @@ function DashboardContent() {
     initData();
   }, []);
 
-  // 2. City & Language change: fetch live risk & localized advisory
+  // 2. City & Language change: fetch live risk & localized advisory with in-flight abort
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchLiveRisk() {
       try {
-        const riskRes = await aqiClient.getLiveRisk(selectedCity, language);
-        if (riskRes && (riskRes.predicted_risk_score || riskRes.predicted_admissions || riskRes.aqi)) {
+        const riskRes = await aqiClient.getLiveRisk(selectedCity, language, { signal: controller.signal });
+        if (!controller.signal.aborted && riskRes && (riskRes.predicted_risk_score || riskRes.predicted_admissions || riskRes.aqi)) {
           setLiveRiskData(riskRes);
           setIsLiveApi(true);
         }
       } catch (err) {
+        if (controller.signal.aborted || err.name === 'AbortError') {
+          return; // Discard superseded in-flight requests cleanly
+        }
         // Fallback to seed calculation
         const cityObj = DEFAULT_CITIES.find(c => c.name.toLowerCase() === selectedCity.toLowerCase()) || DEFAULT_CITIES[0];
         setLiveRiskData({
@@ -85,6 +89,9 @@ function DashboardContent() {
       }
     }
     fetchLiveRisk();
+    return () => {
+      controller.abort();
+    };
   }, [selectedCity, language]);
 
   // Merge seed data with live city list

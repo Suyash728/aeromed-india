@@ -283,7 +283,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
                   className="bg-transparent font-medium text-gray-800 focus:outline-none cursor-pointer text-xs"
                 >
                   {AVAILABLE_YEARS.map(y => (
-                    <option key={y} value={y}>{y}</option>
+                    <option key={y} value={y}>{y === 'All Years' ? t('overview.all_years', 'All Years') : y}</option>
                   ))}
                 </select>
               </div>
@@ -297,7 +297,9 @@ export default function SurgeStatisticsChart({ overviewData }) {
                   className="bg-transparent font-medium text-gray-800 focus:outline-none cursor-pointer text-xs"
                 >
                   {METROS.map(m => (
-                    <option key={m} value={m}>{m}</option>
+                    <option key={m} value={m}>
+                      {m === 'All 12 Metros Avg' ? t('overview.all_metros_avg', 'All 12 Metros Avg') : t('cities.' + m.toLowerCase(), m)}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -314,7 +316,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
                 onClick={() => { setGranularity('years'); setSelectedQuarter(null); setSelectedMonth('Nov'); }}
                 className={`hover:text-[#465FFF] underline transition cursor-pointer ${granularity === 'years' ? 'text-[#465FFF] font-bold' : ''}`}
               >
-                All Years (2015-2025)
+                {t('overview.all_years_range', 'All Years (2015-2025)')}
               </button>
 
               {granularity !== 'years' && (
@@ -336,7 +338,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
                     onClick={() => setGranularity('months')}
                     className={`hover:text-[#465FFF] underline transition cursor-pointer ${granularity === 'months' ? 'text-[#465FFF] font-bold' : ''}`}
                   >
-                    {selectedQuarter ? selectedQuarter : 'All Months'}
+                    {selectedQuarter ? selectedQuarter : t('overview.all_months', 'All Months')}
                   </button>
                 </>
               )}

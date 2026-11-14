@@ -76,8 +76,10 @@ export default function TopHeader({
                   {t('chrome.active_metro', 'Active Metro')}
                 </div>
                 <div className="text-sm font-bold text-gray-900 leading-tight flex items-center gap-1.5 mt-0.5 font-['Outfit']">
-                  {activeCityObj?.name || 'Delhi'}
-                  <span className="text-xs text-gray-400 font-normal">({activeCityObj?.state})</span>
+                  {t('cities.' + (activeCityObj?.name || '').toLowerCase(), activeCityObj?.name || 'Delhi')}
+                  <span className="text-xs text-gray-400 font-normal">
+                    ({t('cities.' + (activeCityObj?.state || '').toLowerCase(), activeCityObj?.state)})
+                  </span>
                 </div>
               </div>
               <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-700 transition ml-1" />
@@ -121,8 +123,8 @@ export default function TopHeader({
                         `}
                       >
                         <div>
-                          <div className="font-semibold">{city.name}</div>
-                          <div className="text-[10px] text-gray-400 font-normal">{city.state}</div>
+                          <div className="font-semibold">{t('cities.' + (city.name || '').toLowerCase(), city.name)}</div>
+                          <div className="text-[10px] text-gray-400 font-normal">{t('cities.' + (city.state || '').toLowerCase(), city.state)}</div>
                         </div>
                         {isSelected && <Check className="w-4 h-4 text-[#465FFF]" />}
                       </button>
@@ -175,7 +177,7 @@ export default function TopHeader({
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
               className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-gray-700 hover:text-gray-900 hover:bg-white transition cursor-pointer"
             >
-              <span>+{Math.max(1, languages.length - 3)} More</span>
+              <span>{t('chrome.more_languages', `+${Math.max(1, languages.length - 3)} More`)}</span>
               <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
             </button>
 
@@ -256,13 +258,13 @@ export default function TopHeader({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span className="hidden sm:inline">{t('chrome.render_connected', 'Render API Connected • R² = 0.988')}</span>
-                <span className="sm:hidden">Live API</span>
+                <span className="sm:hidden">{t('chrome.live_api', 'Live API')}</span>
               </div>
             ) : (
               <div className="flex items-center gap-1.5 text-amber-700">
                 <Zap className="w-3.5 h-3.5 text-amber-500" />
                 <span className="hidden sm:inline">{t('chrome.seed_mode', 'Instant Seed Mode (0ms)')}</span>
-                <span className="sm:hidden">Seed Mode</span>
+                <span className="sm:hidden">{t('chrome.instant_seed', 'Seed Mode')}</span>
               </div>
             )}
           </div>

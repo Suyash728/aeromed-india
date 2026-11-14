@@ -194,7 +194,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
               }`}
               title="Esri World Light Gray Canvas (Zero Watermark)"
             >
-              Canvas Light
+              {t('overview.basemap_canvas', 'Canvas Light')}
             </button>
             <button
               onClick={() => setBasemapStyle('streets')}
@@ -203,7 +203,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
               }`}
               title="OpenStreetMap Standard Clinical Filter"
             >
-              Streets
+              {t('overview.basemap_streets', 'Streets')}
             </button>
           </div>
 
@@ -283,8 +283,12 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
                   <div className="p-2 min-w-[200px]">
                     <div className="flex items-center justify-between border-b border-gray-100 pb-1.5 mb-2">
                       <div>
-                        <div className="font-bold text-gray-900 text-sm font-['Outfit']">{city.name}</div>
-                        <div className="text-[10px] text-gray-500">{city.state}</div>
+                        <div className="font-bold text-gray-900 text-sm font-['Outfit']">
+                          {t('cities.' + (city.name || '').toLowerCase(), city.name)}
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          {t('cities.' + (city.state || '').toLowerCase(), city.state)}
+                        </div>
                       </div>
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${severity.bg}`}>
                         {severity.label}
@@ -316,7 +320,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
                       onClick={() => handleCityClick(city)}
                       className="mt-2.5 w-full py-1.5 bg-[#465FFF] hover:bg-[#3649db] text-white text-[11px] font-bold rounded-lg transition text-center shadow-xs cursor-pointer"
                     >
-                      Focus Dashboard
+                      {t('overview.focus_dashboard', 'Focus Dashboard')}
                     </button>
                   </div>
                 </Popup>
@@ -331,7 +335,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>Live Open-Meteo Synced ({formattedTime})</span>
+          <span>{t('overview.live_open_meteo_synced', 'Live Open-Meteo Synced')} ({formattedTime})</span>
         </div>
 
         {/* CPCB AQI Legend Overlay in Bottom Left */}
@@ -356,7 +360,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
       <div className="mt-4 pt-3 border-t border-gray-100">
         <div className="flex items-center justify-between text-xs font-semibold text-gray-500 mb-2">
           <span>{t('overview.severity_ranking', 'Regional AQI Severity Ranking (12 Metros)')}</span>
-          <span className="text-[11px] text-gray-400">Click to Fly</span>
+          <span className="text-[11px] text-gray-400">{t('overview.click_to_fly', 'Click to Fly')}</span>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
           {sortedCities.map((city, idx) => {
@@ -377,9 +381,9 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
                 <div className="min-w-0 pr-1.5 flex-1">
                   <div className="text-[11px] font-semibold text-gray-900 flex items-center gap-1">
                     <span className="text-[10px] text-gray-400 font-mono">#{idx+1}</span>
-                    <span className="truncate">{city.name}</span>
+                    <span className="truncate">{t('cities.' + (city.name || '').toLowerCase(), city.name)}</span>
                   </div>
-                  <div className="text-[10px] text-gray-400 truncate">{city.state}</div>
+                  <div className="text-[10px] text-gray-400 truncate">{t('cities.' + (city.state || '').toLowerCase(), city.state)}</div>
                 </div>
                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded ${sev.bg} tabular-nums shrink-0`}>
                   {city.aqi}

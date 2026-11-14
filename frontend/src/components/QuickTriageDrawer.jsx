@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import aqiClient from '../api/aqiClient';
+import { useTranslation } from '../i18n/LanguageContext';
 import { 
   Stethoscope, 
   X, 
@@ -35,6 +36,7 @@ function detectScriptLanguage(text, fallback = 'en') {
 }
 
 export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage = 'en' }) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [spo2, setSpo2] = useState(94);
   const [inputMessage, setInputMessage] = useState('');
@@ -123,9 +125,9 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
           </span>
           <Stethoscope className="w-4 h-4 stroke-[2.2]" />
-          <span>Ask AeroMed Copilot</span>
+          <span>{t('copilot.floating_button', 'Ask AeroMed Copilot')}</span>
           <span className="bg-white/20 text-[10px] px-2 py-0.5 rounded-full font-mono uppercase">
-            RAG Live
+            {t('copilot.rag_live', 'RAG Live')}
           </span>
         </button>
       )}
@@ -142,7 +144,7 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
               </div>
               <div>
                 <div className="font-bold text-gray-900 text-xs font-['Outfit'] flex items-center gap-1.5">
-                  AeroMed Clinical Copilot
+                  {t('copilot.title', 'AeroMed Clinical Copilot')}
                   <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.2 rounded font-mono">
                     8,188 Rules
                   </span>
@@ -262,7 +264,7 @@ export default function QuickTriageDrawer({ activeCity = 'Delhi', activeLanguage
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder="मराठी, हिन्दी, தமிழ், or English..."
+              placeholder={t('copilot.ask_placeholder', 'मराठी, हिन्दी, தமிழ், or English...')}
               className="flex-1 px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#465FFF]/30 focus:border-[#465FFF]"
             />
             <button

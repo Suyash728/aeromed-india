@@ -167,7 +167,9 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, setIsOpen, me
           <div className="space-y-1.5 text-xs text-gray-600">
             <div className="flex items-center justify-between">
               <span className="text-gray-500">{t('nav.mae_label', 'Mean Abs Error')}</span>
-              <span className="font-semibold text-gray-800 tabular-nums">±1.88 pts/day</span>
+              <span className="font-semibold text-gray-800 tabular-nums">
+                ±1.88 {t('overview.pts_day', 'pts/day')}
+              </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-gray-500">{t('nav.autoscientist_win', 'AutoScientist Win')}</span>

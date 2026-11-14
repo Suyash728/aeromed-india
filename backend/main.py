@@ -670,6 +670,48 @@ def build_triage_chat_fallback(lang_code: str, city: str, air: dict, grap: dict,
     }
     return fallbacks.get(lang_code, fallbacks["en"])
 
+def clean_advisory_text(text: str) -> str:
+    """
+    Cleans raw markdown formatting (such as **bold** or # headings)
+    and ensures the advisory does not terminate with an abrupt mid-word cut-off.
+    Truncates cleanly at a full sentence boundary if needed.
+    """
+    if not text:
+        return ""
+    import re
+    # Strip markdown bold/italic asterisks and header hashes
+    cleaned = re.sub(r'\*{1,3}', '', text)
+    cleaned = re.sub(r'#{1,6}\s*', '', cleaned)
+    cleaned = cleaned.strip()
+
+    # Check if the text ends properly with punctuation (Hindi danda '।', '.', '!', '?', or closing quote/bracket)
+    sentence_endings = ['।', '.', '!', '?', '"', '”', ')']
+    if cleaned and not any(cleaned.endswith(p) for p in sentence_endings):
+        # Find the last valid sentence boundary
+        last_boundary = -1
+        for p in ['।', '.', '!', '?']:
+            idx = cleaned.rfind(p)
+            if idx > last_boundary:
+                last_boundary = idx
+        # If we found a valid sentence boundary that leaves at least 30 characters, truncate there
+        if last_boundary >= 30:
+            cleaned = cleaned[:last_boundary + 1].strip()
+        else:
+            # If no boundary found, append a proper sentence terminator
+            cleaned += "।"
+    return cleaned
+
+def clean_sentence_boundary(text: str, max_chars: int = 600) -> str:
+    """Truncates text at a clean sentence boundary rather than cutting a word mid-character."""
+    if not text or len(text) <= max_chars:
+        return text or ""
+    sliced = text[:max_chars]
+    sentence_endings = ['।', '.', '!', '?']
+    last_idx = max(sliced.rfind(p) for p in sentence_endings)
+    if last_idx > 40:
+        return sliced[:last_idx + 1].strip()
+    return sliced.rsplit(' ', 1)[0].strip() + '...'
+
 def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity: str, lang: str, condition: str) -> dict:
     """Invokes Adaption AI platform model for clinical respiratory advisory with robust localized fallback."""
     client = get_adaption_client()
@@ -695,24 +737,25 @@ def generate_clinical_advisory(city: str, air: dict, risk_score: float, severity
             resp = client.responses.create(
                 model="deepseek-v4-flash",
                 input=prompt,
-                max_output_tokens=1000,
+                max_output_tokens=3000,
                 temperature=0.3
             )
             if resp and resp.output_text:
-                candidate_text = resp.output_text.strip()
-                # Verify script if Indic was requested
-                if lang_code == "en" or detect_indic_language(candidate_text, default_lang="english") != "english":
-                    return {
-                        "advisory": candidate_text,
-                        "language": lang_display,
-                        "model_used": "deepseek-v4-flash (Adaption AI)",
-                        "source": "live_adaption_inference"
-                    }
+                candidate_text = clean_advisory_text(resp.output_text.strip())
+                # Verify script if Indic was requested and ensure it ends with proper sentence punctuation
+                if len(candidate_text) >= 40:
+                    if lang_code == "en" or detect_indic_language(candidate_text, default_lang="english") != "english":
+                        return {
+                            "advisory": candidate_text,
+                            "language": lang_display,
+                            "model_used": "deepseek-v4-flash (Adaption AI)",
+                            "source": "live_adaption_inference"
+                        }
         except Exception as e:
             logger.warning(f"Adaption live inference fallback due to: {e}")
 
     # Fallback to verified clinical advisory in native script
-    text = build_clinical_advisory_fallback(lang_code, city, air, risk_score, severity, condition)
+    text = clean_advisory_text(build_clinical_advisory_fallback(lang_code, city, air, risk_score, severity, condition))
     return {
         "advisory": text,
         "language": lang_display,
@@ -811,7 +854,7 @@ def get_live_risk(
     if evidence:
         response_payload["grounded_dataset_id"] = evidence["grounded_dataset_id"]
         response_payload["grounded_dataset_name"] = evidence["grounded_dataset_name"]
-        response_payload["matched_clinical_protocol"] = evidence["matched_clinical_protocol"][:600]
+        response_payload["matched_clinical_protocol"] = clean_sentence_boundary(evidence["matched_clinical_protocol"], 600)
         response_payload["grounding_similarity_score"] = evidence["grounding_similarity_score"]
         response_payload["quality_grade"] = evidence["quality_grade"]
         response_payload["quality_score"] = evidence["quality_score"]
@@ -943,21 +986,22 @@ def triage_chat(req: TriageChatRequest):
             resp = client.responses.create(
                 model="deepseek-v4-flash",
                 input=full_prompt,
-                max_output_tokens=1000,
+                max_output_tokens=3000,
                 temperature=0.3
             )
             if resp and resp.output_text:
-                candidate_reply = resp.output_text.strip()
+                candidate_reply = clean_advisory_text(resp.output_text.strip())
                 # Ensure it didn't reply in English when an Indic language was expected
-                if lang_code == "en" or detect_indic_language(candidate_reply, default_lang="english") != "english":
-                    reply_text = candidate_reply
-                else:
-                    logger.warning("Adaption model replied in English despite Indic directive, invoking localized fallback.")
+                if len(candidate_reply) >= 30:
+                    if lang_code == "en" or detect_indic_language(candidate_reply, default_lang="english") != "english":
+                        reply_text = candidate_reply
+                    else:
+                        logger.warning("Adaption model replied in English despite Indic directive, invoking localized fallback.")
         except Exception as e:
             logger.warning(f"Triage chat Adaption inference error: {e}")
 
     if not reply_text:
-        reply_text = build_triage_chat_fallback(lang_code, geo["name"], air, grap, req.condition)
+        reply_text = clean_advisory_text(build_triage_chat_fallback(lang_code, geo["name"], air, grap, req.condition))
 
     response_data = {
         "reply": reply_text,
@@ -974,7 +1018,7 @@ def triage_chat(req: TriageChatRequest):
     if evidence:
         response_data["grounded_dataset_id"] = evidence["grounded_dataset_id"]
         response_data["grounded_dataset_name"] = evidence["grounded_dataset_name"]
-        response_data["matched_clinical_protocol"] = evidence["matched_clinical_protocol"][:600]
+        response_data["matched_clinical_protocol"] = clean_sentence_boundary(evidence["matched_clinical_protocol"], 600)
         response_data["grounding_similarity_score"] = evidence["grounding_similarity_score"]
         response_data["quality_grade"] = evidence["quality_grade"]
         response_data["quality_score"] = evidence["quality_score"]
