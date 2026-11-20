@@ -11,6 +11,7 @@ FastAPI Server for Pan-India Air Pollution & Respiratory Disease Surveillance
 import json
 import logging
 import os
+import time
 from contextlib import asynccontextmanager
 from typing import List, Optional
 import joblib
@@ -55,6 +56,55 @@ CITY_COORDINATES = {
     "bhubaneswar": {"name": "Bhubaneswar", "latitude": 20.2961, "longitude": 85.8245, "state": "Odisha", "region": "East"},
     "guwahati": {"name": "Guwahati", "latitude": 26.1445, "longitude": 91.7362, "state": "Assam", "region": "North-East"}
 }
+
+# Common alternate names, normalised the same way as user input
+CITY_ALIASES = {
+    "new delhi": "delhi", "bangalore": "bengaluru", "bombay": "mumbai",
+    "calcutta": "kolkata", "madras": "chennai", "navi-mumbai": "navi mumbai",
+}
+
+def resolve_city(city: Optional[str]) -> dict:
+    """Maps a city name to its CITY_COORDINATES entry, or raises 404 listing the supported cities."""
+    key = " ".join((city or "").lower().replace("_", " ").split())
+    key = CITY_ALIASES.get(key, key)
+    geo = CITY_COORDINATES.get(key)
+    if geo is None:
+        supported = sorted({c["name"] for c in CITY_COORDINATES.values()})
+        raise HTTPException(
+            status_code=404,
+            detail=f"Unsupported city '{city}'. Supported cities: {', '.join(supported)}.",
+        )
+    return geo
+
+# ---- India National AQI (CPCB NAQI) ----
+# Breakpoints: (conc_low, conc_high, index_low, index_high). Units: µg/m³, CO in mg/m³.
+# CPCB defines the Severe band (401-500) as open-ended above its lower bound; to resolve
+# GRAP Stage III (401-450) vs Stage IV (>450) we give it the same width as the band below
+# (e.g. PM2.5 250-380, PM10 430-510) and cap the index at 500.
+NAQI_BREAKPOINTS = {
+    "pm25": [(0, 30, 0, 50), (30, 60, 50, 100), (60, 90, 100, 200), (90, 120, 200, 300), (120, 250, 300, 400), (250, 380, 400, 500)],
+    "pm10": [(0, 50, 0, 50), (50, 100, 50, 100), (100, 250, 100, 200), (250, 350, 200, 300), (350, 430, 300, 400), (430, 510, 400, 500)],
+    "no2": [(0, 40, 0, 50), (40, 80, 50, 100), (80, 180, 100, 200), (180, 280, 200, 300), (280, 400, 300, 400), (400, 520, 400, 500)],
+    "so2": [(0, 40, 0, 50), (40, 80, 50, 100), (80, 380, 100, 200), (380, 800, 200, 300), (800, 1600, 300, 400), (1600, 2400, 400, 500)],
+    "o3": [(0, 50, 0, 50), (50, 100, 50, 100), (100, 168, 100, 200), (168, 208, 200, 300), (208, 748, 300, 400), (748, 1288, 400, 500)],
+    "co": [(0, 1.0, 0, 50), (1.0, 2.0, 50, 100), (2.0, 10, 100, 200), (10, 17, 200, 300), (17, 34, 300, 400), (34, 51, 400, 500)],
+}
+AQI_STANDARD = "India NAQI (CPCB) from current hourly concentrations"
+
+def naqi_sub_index(pollutant: str, conc: Optional[float]) -> Optional[float]:
+    if conc is None or conc < 0:
+        return None
+    for c_lo, c_hi, i_lo, i_hi in NAQI_BREAKPOINTS[pollutant]:
+        if conc <= c_hi:
+            return i_lo + (i_hi - i_lo) * (conc - c_lo) / (c_hi - c_lo)
+    return 500.0
+
+def compute_indian_aqi(air: dict) -> int:
+    """Overall NAQI = max pollutant sub-index. CPCB requires PM2.5 or PM10 among the inputs."""
+    subs = {p: naqi_sub_index(p, air.get(p)) for p in NAQI_BREAKPOINTS}
+    if subs["pm25"] is None and subs["pm10"] is None:
+        raise ValueError("NAQI needs PM2.5 or PM10")
+    return int(round(min(500.0, max(v for v in subs.values() if v is not None))))
 
 # 12 Indian Languages with Native Scripts (+ English) and regional tags
 SUPPORTED_LANGUAGES = [
@@ -238,7 +288,7 @@ init_resources()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_resources()
+    # init_resources() already ran at import time; running it again re-indexed the corpus
     get_adaption_client()
     yield
 
@@ -253,7 +303,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -350,12 +400,31 @@ live_map_cache = {
     "data": None
 }
 
+CACHE_TTL_SECONDS = 600
+CACHE_MAX_ENTRIES = 256
+live_risk_cache = {}
+
+def cache_get(cache: dict, key):
+    entry = cache.get(key)
+    if entry and (time.time() - entry["ts"]) < CACHE_TTL_SECONDS:
+        return entry["data"]
+    return None
+
+def cache_put(cache: dict, key, data) -> None:
+    """Stores data, evicting expired entries and then the oldest so the cache stays bounded."""
+    now = time.time()
+    if len(cache) >= CACHE_MAX_ENTRIES:
+        for k in [k for k, v in cache.items() if now - v["ts"] >= CACHE_TTL_SECONDS]:
+            del cache[k]
+        while len(cache) >= CACHE_MAX_ENTRIES:
+            del cache[next(iter(cache))]
+    cache[key] = {"ts": now, "data": data}
+
 def fetch_batch_live_map():
     """
     Fetches real-time Open-Meteo atmospheric telemetry for all 12 Indian Metros
     in a single batch API call, with in-memory 10-minute caching.
     """
-    import time
     now = time.time()
     if live_map_cache["data"] and (now - live_map_cache["timestamp"]) < 600:
         return live_map_cache["data"]
@@ -386,20 +455,20 @@ def fetch_batch_live_map():
         for idx, geo in enumerate(coords_list):
             item = res_list[idx] if idx < len(res_list) else {}
             data = item.get("current", {}) if isinstance(item, dict) else {}
-            pm25 = float(data.get("pm2_5") or 55.0)
-            pm10 = float(data.get("pm10") or 85.0)
-            aqi = int(data.get("us_aqi") or round(pm25 * 1.8))
+            pm25 = _num(data.get("pm2_5"), 55.0)
+            pm10 = _num(data.get("pm10"), 85.0)
+            pollutants = {
+                "pm25": pm25, "pm10": pm10,
+                "no2": _num(data.get("nitrogen_dioxide"), 25.0),
+                "so2": _num(data.get("sulphur_dioxide"), 12.0),
+                "co": _num(data.get("carbon_monoxide"), 400.0) / 1000.0,
+                "o3": _num(data.get("ozone"), 35.0),
+            }
+            aqi = compute_indian_aqi(pollutants)
+            us_aqi = data.get("us_aqi")
 
             if "model" in ml_bundle:
-                f_df = pd.DataFrame([{
-                    "pm25": pm25, "pm10": pm10,
-                    "no2": float(data.get("nitrogen_dioxide") or 25.0),
-                    "so2": float(data.get("sulphur_dioxide") or 12.0),
-                    "co": float((data.get("carbon_monoxide") or 400.0) / 1000.0),
-                    "o3": float(data.get("ozone") or 35.0),
-                    "temperature": 26.0,
-                    "humidity": 60.0
-                }])
+                f_df = pd.DataFrame([{**pollutants, "temperature": 26.0, "humidity": 60.0}])
                 risk = float(ml_bundle["model"].predict(f_df)[0])
             else:
                 risk = min(100.0, (pm25 / 150.0) * 85.0 + 10.0)
@@ -414,6 +483,8 @@ def fetch_batch_live_map():
                 "lat": geo["latitude"],
                 "lon": geo["longitude"],
                 "aqi": aqi,
+                "aqi_standard": AQI_STANDARD,
+                "us_aqi": int(us_aqi) if us_aqi is not None else None,
                 "pm25": round(pm25, 1),
                 "pm10": round(pm10, 1),
                 "predicted_risk_score": risk,
@@ -425,7 +496,7 @@ def fetch_batch_live_map():
 
         payload = {
             "status": "success",
-            "sync_timestamp": pd.Timestamp.utcnow().isoformat(),
+            "sync_timestamp": pd.Timestamp.now("UTC").isoformat(),
             "sync_label": "Live Open-Meteo Synced",
             "source": "Live Open-Meteo Synced Atmospheric Telemetry",
             "total_cities": len(cities_out),
@@ -443,7 +514,7 @@ def fetch_batch_live_map():
         for geo in coords_list:
             c_meta = seed_cities.get(geo["name"], {})
             pm25 = c_meta.get("avg_pm25", 70.0)
-            aqi = int(pm25 * 1.6)
+            aqi = compute_indian_aqi({"pm25": pm25, "pm10": c_meta.get("avg_pm10", pm25 * 1.7)})
             grap = determine_grap_stage(aqi)
             cities_out.append({
                 "id": geo["name"].lower(),
@@ -452,6 +523,8 @@ def fetch_batch_live_map():
                 "lat": geo["latitude"],
                 "lon": geo["longitude"],
                 "aqi": aqi,
+                "aqi_standard": "India NAQI (CPCB) from historical city averages",
+                "us_aqi": None,
                 "pm25": pm25,
                 "pm10": c_meta.get("avg_pm10", pm25 * 1.7),
                 "predicted_risk_score": c_meta.get("avg_risk_score", 50.0),
@@ -462,7 +535,7 @@ def fetch_batch_live_map():
             })
         return {
             "status": "fallback",
-            "sync_timestamp": pd.Timestamp.utcnow().isoformat(),
+            "sync_timestamp": pd.Timestamp.now("UTC").isoformat(),
             "sync_label": "Live Open-Meteo Synced",
             "source": "Live Open-Meteo Synced Baseline Telemetry",
             "total_cities": len(cities_out),
@@ -491,6 +564,10 @@ def get_overview():
             raise HTTPException(status_code=500, detail="Frontend seed data is not generated yet.")
     return seed_data_cache
 
+def _num(value, default):
+    """Float of value, or default when the API returned null. Unlike `value or default`, keeps a real 0."""
+    return default if value is None else float(value)
+
 def fetch_live_air_quality(lat: float, lon: float):
     """Fetches real-time air pollution data from Open-Meteo Air Quality API."""
     url = "https://air-quality-api.open-meteo.com/v1/air-quality"
@@ -508,30 +585,35 @@ def fetch_live_air_quality(lat: float, lon: float):
         w_resp = requests.get(weather_url, params={"latitude": lat, "longitude": lon, "current": "temperature_2m,relative_humidity_2m"}, timeout=5)
         w_data = w_resp.json().get("current", {}) if w_resp.status_code == 200 else {}
         
-        return {
-            "pm25": float(data.get("pm2_5") or 45.0),
-            "pm10": float(data.get("pm10") or 75.0),
-            "no2": float(data.get("nitrogen_dioxide") or 25.0),
-            "so2": float(data.get("sulphur_dioxide") or 12.0),
-            "co": float((data.get("carbon_monoxide") or 400.0) / 1000.0),
-            "o3": float(data.get("ozone") or 35.0),
-            "aqi": int(data.get("us_aqi") or 120),
-            "temperature": float(w_data.get("temperature_2m") or 28.0),
-            "humidity": float(w_data.get("relative_humidity_2m") or 65.0)
+        air = {
+            "pm25": _num(data.get("pm2_5"), 45.0),
+            "pm10": _num(data.get("pm10"), 75.0),
+            "no2": _num(data.get("nitrogen_dioxide"), 25.0),
+            "so2": _num(data.get("sulphur_dioxide"), 12.0),
+            "co": _num(data.get("carbon_monoxide"), 400.0) / 1000.0,
+            "o3": _num(data.get("ozone"), 35.0),
+            "temperature": _num(w_data.get("temperature_2m"), 28.0),
+            "humidity": _num(w_data.get("relative_humidity_2m"), 65.0),
         }
+        us_aqi = data.get("us_aqi")
+        air["us_aqi"] = int(us_aqi) if us_aqi is not None else None
     except Exception as e:
         logger.warning(f"Open-Meteo API live fetch warning: {e}. Using city fallback metrics.")
-        return {
+        air = {
             "pm25": 58.0,
             "pm10": 95.0,
             "no2": 28.0,
             "so2": 15.0,
             "co": 0.8,
             "o3": 30.0,
-            "aqi": 140,
             "temperature": 27.5,
-            "humidity": 68.0
+            "humidity": 68.0,
+            "us_aqi": None,
         }
+    # GRAP stages are defined on India's NAQI scale, not the US AQI that Open-Meteo reports
+    air["aqi"] = compute_indian_aqi(air)
+    air["aqi_standard"] = AQI_STANDARD
+    return air
 
 def build_clinical_advisory_fallback(lang_code: str, city: str, air: dict, risk_score: float, severity: str, condition: str) -> str:
     aqi = air.get("aqi", 140)
@@ -628,7 +710,7 @@ def build_triage_chat_fallback(lang_code: str, city: str, air: dict, grap: dict,
         ),
         "te": (
             f"{city} లో ప్రస్తుత AQI {aqi} ({stage}). {condition} ఉన్న రోగులు తక్షణమే ఇంట్లోనే ఉండాలి. "
-            f"కిటికీలు మూసివేసి ఎయిర్ ప్యూరిಫైయర్ వాడండి. వైద్యులు సూచించిన ఇన్హేలర్ వెంటనే తీసుకోండి. శ్వాస తీసుకోవడంలో తీవ్ర ఇబ్బంది లేదా ఆక్సిజన్ స్థాయి 92% కన్నా తగ్గితే వెంటనే అత్యవసర విభాగానికి తరలించండి."
+            f"కిటికీలు మూసివేసి ఎయిర్ ప్యూరిఫైయర్ వాడండి. వైద్యులు సూచించిన ఇన్హేలర్ వెంటనే తీసుకోండి. శ్వాస తీసుకోవడంలో తీవ్ర ఇబ్బంది లేదా ఆక్సిజన్ స్థాయి 92% కన్నా తగ్గితే వెంటనే అత్యవసర విభాగానికి తరలించండి."
         ),
         "bn": (
             f"{city}-এ বর্তমান AQI {aqi} ({stage})। {condition}-এর জন্য অবিলম্বে রোগীকে ঘরের ভেতর রাখুন ও জানালা বন্ধ রাখুন। "
@@ -670,6 +752,32 @@ def build_triage_chat_fallback(lang_code: str, city: str, air: dict, grap: dict,
     }
     return fallbacks.get(lang_code, fallbacks["en"])
 
+# Sentence terminators: Latin, Devanagari danda (also used by Bengali, Assamese, Odia,
+# Punjabi), and the Urdu full stop. A '.' between two digits is a decimal point
+# (e.g. "PM2.5 58.0"), never a sentence end.
+SENTENCE_TERMINATORS = ('.', '!', '?', '\u0964', '\u06D4')
+DANDA_LANGUAGES = {"hindi", "marathi", "bengali", "assamese", "odia", "punjabi"}
+
+def _last_sentence_boundary(text: str) -> int:
+    """Index of the last real sentence terminator in text, or -1."""
+    for i in range(len(text) - 1, -1, -1):
+        ch = text[i]
+        if ch not in SENTENCE_TERMINATORS:
+            continue
+        if ch == '.' and 0 < i < len(text) - 1 and text[i - 1].isdigit() and text[i + 1].isdigit():
+            continue
+        return i
+    return -1
+
+def _terminator_for(text: str) -> str:
+    """Picks the sentence terminator that matches the text's script."""
+    lang = detect_indic_language(text, default_lang="english")
+    if lang == "urdu":
+        return '\u06D4'
+    if lang in DANDA_LANGUAGES:
+        return '\u0964'
+    return '.'
+
 def clean_advisory_text(text: str) -> str:
     """
     Cleans raw markdown formatting (such as **bold** or # headings)
@@ -684,21 +792,15 @@ def clean_advisory_text(text: str) -> str:
     cleaned = re.sub(r'#{1,6}\s*', '', cleaned)
     cleaned = cleaned.strip()
 
-    # Check if the text ends properly with punctuation (Hindi danda '।', '.', '!', '?', or closing quote/bracket)
-    sentence_endings = ['।', '.', '!', '?', '"', '”', ')']
-    if cleaned and not any(cleaned.endswith(p) for p in sentence_endings):
-        # Find the last valid sentence boundary
-        last_boundary = -1
-        for p in ['।', '.', '!', '?']:
-            idx = cleaned.rfind(p)
-            if idx > last_boundary:
-                last_boundary = idx
-        # If we found a valid sentence boundary that leaves at least 30 characters, truncate there
+    # Text that already ends a sentence (or a quote/bracket) is left as is
+    sentence_endings = SENTENCE_TERMINATORS + ('"', '\u201d', ')')
+    if cleaned and not cleaned.endswith(sentence_endings):
+        last_boundary = _last_sentence_boundary(cleaned)
+        # Drop a trailing fragment only if a reasonable amount of text remains
         if last_boundary >= 30:
             cleaned = cleaned[:last_boundary + 1].strip()
         else:
-            # If no boundary found, append a proper sentence terminator
-            cleaned += "।"
+            cleaned += _terminator_for(cleaned)
     return cleaned
 
 def clean_sentence_boundary(text: str, max_chars: int = 600) -> str:
@@ -706,8 +808,7 @@ def clean_sentence_boundary(text: str, max_chars: int = 600) -> str:
     if not text or len(text) <= max_chars:
         return text or ""
     sliced = text[:max_chars]
-    sentence_endings = ['।', '.', '!', '?']
-    last_idx = max(sliced.rfind(p) for p in sentence_endings)
+    last_idx = _last_sentence_boundary(sliced)
     if last_idx > 40:
         return sliced[:last_idx + 1].strip()
     return sliced.rsplit(' ', 1)[0].strip() + '...'
@@ -774,11 +875,16 @@ def get_live_risk(
     Fetches real-time AQI from Open-Meteo, predicts respiratory hospital surge risk,
     and returns localized Adaption AI clinical advisories + CAQM GRAP stage.
     """
-    city_key = city.lower().strip()
-    geo = CITY_COORDINATES.get(city_key, CITY_COORDINATES["mumbai"])
+    geo = resolve_city(city)
+    city_key = geo["name"].lower()
+    active_lang = (language or lang or "english").lower().strip()
+    condition_key = condition.lower().strip()
+    cache_key = (city_key, active_lang, condition_key)
+    cached = cache_get(live_risk_cache, cache_key)
+    if cached is not None:
+        return cached
 
     air = fetch_live_air_quality(geo["latitude"], geo["longitude"])
-    active_lang = language or lang or "english"
 
     if "model" in ml_bundle:
         features = ml_bundle["features"]
@@ -859,18 +965,20 @@ def get_live_risk(
         response_payload["quality_grade"] = evidence["quality_grade"]
         response_payload["quality_score"] = evidence["quality_score"]
 
+    if clinical_advisory["source"] == "live_adaption_inference":
+        cache_put(live_risk_cache, cache_key, response_payload)
     return response_payload
 
 class CustomSimulationRequest(BaseModel):
     city: str = Field(default="Mumbai")
-    pm25: float = Field(default=120.0, description="PM2.5 in ug/m3")
-    pm10: float = Field(default=180.0, description="PM10 in ug/m3")
-    no2: float = Field(default=40.0, description="NO2 in ug/m3")
-    so2: float = Field(default=20.0, description="SO2 in ug/m3")
-    co: float = Field(default=1.2, description="CO in mg/m3")
-    o3: float = Field(default=35.0, description="O3 in ug/m3")
+    pm25: float = Field(default=120.0, ge=0, description="PM2.5 in ug/m3")
+    pm10: float = Field(default=180.0, ge=0, description="PM10 in ug/m3")
+    no2: float = Field(default=40.0, ge=0, description="NO2 in ug/m3")
+    so2: float = Field(default=20.0, ge=0, description="SO2 in ug/m3")
+    co: float = Field(default=1.2, ge=0, description="CO in mg/m3")
+    o3: float = Field(default=35.0, ge=0, description="O3 in ug/m3")
     temperature: float = Field(default=24.0, description="Temperature in Celsius")
-    humidity: float = Field(default=65.0, description="Relative Humidity %")
+    humidity: float = Field(default=65.0, ge=0, le=100, description="Relative Humidity %")
     lang: Optional[str] = Field(default=None)
     language: Optional[str] = Field(default=None)
     condition: str = Field(default="Bronchial Asthma")
@@ -885,10 +993,10 @@ def simulate_risk(req: CustomSimulationRequest):
         "so2": req.so2,
         "co": req.co,
         "o3": req.o3,
-        "aqi": int(req.pm25 * 1.8),
         "temperature": req.temperature,
         "humidity": req.humidity
     }
+    air["aqi"] = compute_indian_aqi(air)
 
     if "model" in ml_bundle:
         features = ml_bundle["features"]
@@ -912,7 +1020,7 @@ def simulate_risk(req: CustomSimulationRequest):
     )
 
     return {
-        "simulation_inputs": req.dict(),
+        "simulation_inputs": req.model_dump(),
         "predicted_risk_score": predicted_risk,
         "severity": severity,
         "grap_protocol": determine_grap_stage(air["aqi"]),
@@ -930,14 +1038,28 @@ class TriageChatRequest(BaseModel):
     condition: str = Field(default="Pediatric Asthma")
     messages: List[ChatMessage]
 
+triage_chat_cache = {}
+
 @app.post("/api/triage-chat")
 def triage_chat(req: TriageChatRequest):
     """
     Multi-Turn Interactive Doctor-Patient Triage Chat powered by Adaption AI Inference
     and CAQM GRAP Protocol context (Pillar E Trajectory Extension).
     """
-    city_key = req.city.lower().strip()
-    geo = CITY_COORDINATES.get(city_key, CITY_COORDINATES["mumbai"])
+    geo = resolve_city(req.city)
+    city_key = geo["name"].lower()
+    requested_lang = req.language or req.lang or "english"
+    # The reply depends on the requested language and on the conversation so far,
+    # so both belong in the key; otherwise a Hindi request can get a cached English reply.
+    cache_key = (
+        city_key,
+        req.condition.lower().strip(),
+        requested_lang.lower().strip(),
+        tuple((m.role, m.content.strip()) for m in req.messages[-5:]),
+    )
+    cached = cache_get(triage_chat_cache, cache_key)
+    if cached is not None:
+        return cached
 
     air = fetch_live_air_quality(geo["latitude"], geo["longitude"])
     grap = determine_grap_stage(air["aqi"])
@@ -953,7 +1075,6 @@ def triage_chat(req: TriageChatRequest):
     last_user_query = req.messages[-1].content if req.messages else "What should I do?"
 
     # Resolve target language using both requested parameter and auto-detection from query
-    requested_lang = req.language or req.lang or "english"
     target_lang = resolve_language(requested_lang, user_text=last_user_query)
     lang_display = f"{target_lang['name']} ({target_lang['native']})"
     lang_code = target_lang["code"]
@@ -1000,7 +1121,8 @@ def triage_chat(req: TriageChatRequest):
         except Exception as e:
             logger.warning(f"Triage chat Adaption inference error: {e}")
 
-    if not reply_text:
+    used_live_model = reply_text is not None
+    if not used_live_model:
         reply_text = clean_advisory_text(build_triage_chat_fallback(lang_code, geo["name"], air, grap, req.condition))
 
     response_data = {
@@ -1011,8 +1133,9 @@ def triage_chat(req: TriageChatRequest):
         "current_air_quality": air,
         "grap_protocol": grap,
         "triage_urgency": "High Alert (ER Guidance Available)" if air["aqi"] > 300 else "Standard Clinical Precaution",
-        "model_used": "deepseek-v4-flash (Adaption AI)",
-        "source": "adaption_multi_turn_triage"
+        # Report what actually produced the reply: a canned template must not be labelled as model output
+        "model_used": "deepseek-v4-flash (Adaption AI)" if used_live_model else "Adaption Clinical Engine (Rule-Enforced Fallback)",
+        "source": "adaption_multi_turn_triage" if used_live_model else "adaption_clinical_rules"
     }
 
     if evidence:
@@ -1023,6 +1146,9 @@ def triage_chat(req: TriageChatRequest):
         response_data["quality_grade"] = evidence["quality_grade"]
         response_data["quality_score"] = evidence["quality_score"]
 
+    # Cache only live model replies, so one transient Adaption failure doesn't pin the template for 10 minutes
+    if used_live_model:
+        cache_put(triage_chat_cache, cache_key, response_data)
     return response_data
 
 @app.get("/api/adaption-metrics")
@@ -1051,7 +1177,7 @@ def list_datasets_catalog():
         try:
             df = pd.read_csv(cpcb_csv)
             fsize = os.path.getsize(cpcb_csv)
-            samples = df.head(10).fillna("").to_dict(orient="records")
+            samples = df.head(10).astype(object).fillna("").to_dict(orient="records")
             catalog.append({
                 "dataset_name": "Pan-India Air Quality & Respiratory Historical Surveillance (2015-2025)",
                 "filename": "india_air_quality_respiratory_2015_2025.csv",
@@ -1085,7 +1211,7 @@ def list_datasets_catalog():
             try:
                 df = pd.read_csv(fpath)
                 fsize = os.path.getsize(fpath)
-                samples = df.head(10).fillna("").to_dict(orient="records")
+                samples = df.head(10).astype(object).fillna("").to_dict(orient="records")
                 catalog.append({
                     "dataset_name": meta["name"],
                     "filename": fname,

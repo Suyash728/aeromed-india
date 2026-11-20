@@ -46,18 +46,28 @@ function getSeverity(aqiVal) {
   return { color: '#12B76A', bg: 'bg-emerald-50 text-emerald-700', label: 'Good' };
 }
 
-// Programmatic Map Controller for smooth flyTo and Pan-India reset
-function MapController({ targetCoords, resetTrigger }) {
+// Programmatic Map Controller for smooth flyTo and Pan-India reset.
+// Depends on primitive lat/lon so it flies only when the selected city changes,
+// not on every re-render (which used to snap the map back whenever the user panned).
+function MapController({ targetLat, targetLon, focusNonce, resetTrigger }) {
   const map = useMap();
 
   useEffect(() => {
-    if (targetCoords) {
-      map.flyTo([targetCoords.lat, targetCoords.lon], 7, {
+    if (targetLat != null && targetLon != null) {
+      map.flyTo([targetLat, targetLon], 7, {
         duration: 1.2,
         easeLinearity: 0.25,
       });
     }
-  }, [targetCoords, map]);
+  }, [targetLat, targetLon, focusNonce, map]);
+
+  // The card stretches to match its row, so tell Leaflet whenever its box resizes
+  useEffect(() => {
+    const container = map.getContainer();
+    const observer = new ResizeObserver(() => map.invalidateSize());
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [map]);
 
   useEffect(() => {
     if (resetTrigger > 0) {
@@ -72,8 +82,9 @@ function MapController({ targetCoords, resetTrigger }) {
 
 export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCity }) {
   const { t } = useTranslation();
-  const [hoveredCity, setHoveredCity] = useState(null);
   const [resetTrigger, setResetTrigger] = useState(0);
+  // Bumped on every city click so re-clicking the already-selected city re-centres the map
+  const [focusNonce, setFocusNonce] = useState(0);
   const [basemapStyle, setBasemapStyle] = useState('canvas'); // 'canvas' | 'streets'
   const [liveMapBatch, setLiveMapBatch] = useState(null);
   const [syncTimestamp, setSyncTimestamp] = useState(null);
@@ -90,7 +101,8 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
           setSyncTimestamp(res.sync_timestamp || new Date().toISOString());
         }
       } catch (err) {
-        // Quiet fallback to prop cities
+        // Fall back to the prop cities, but leave a trace so a dead backend is diagnosable
+        console.warn('Live map refresh failed; showing baseline cities.', err);
       }
     }
     loadLiveMap();
@@ -136,9 +148,8 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
     const val = city.aqi;
     const color = severity.color;
     const isPulsing = isSelected || val > 200;
-    const isHovered = hoveredCity?.id === city.id;
     const layout = METRO_LAYOUT[city.id] || { pinOffset: [0, 0], labelClass: 'mt-1', zIndex: 20 };
-    const zIndexVal = isSelected ? 1000 : (isHovered ? 900 : layout.zIndex);
+    const zIndexVal = isSelected ? 1000 : layout.zIndex;
 
     return L.divIcon({
       className: 'custom-leaflet-marker',
@@ -159,7 +170,22 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
     });
   };
 
+  const selectedKey = (selectedCity || '').toLowerCase();
+
+  // Icons are memoised: rebuilding a DivIcon makes Leaflet replace the marker's DOM node,
+  // which swallowed clicks when it happened on hover. Rebuild only when data or selection change.
+  const cityIcons = useMemo(() => {
+    const icons = {};
+    for (const city of enrichedCities) {
+      const isSelected = selectedKey === (city.name || '').toLowerCase();
+      icons[city.id] = createCityIcon(city, isSelected, getSeverity(city.aqi));
+    }
+    return icons;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enrichedCities, selectedKey]);
+
   const handleCityClick = (city) => {
+    setFocusNonce(n => n + 1);
     onSelectCity(city.name || city.id);
   };
 
@@ -170,7 +196,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
   const formattedTime = syncTimestamp ? new Date(syncTimestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Live';
 
   return (
-    <div className="tailadmin-card p-5 h-full flex flex-col justify-between">
+    <div className="tailadmin-card p-5 h-full flex flex-col">
       {/* Card Header with Basemap Switcher & Reset Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
         <div>
@@ -219,7 +245,7 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
       </div>
 
       {/* Interactive Map Canvas (100% Free Zero-Key Basemaps) */}
-      <div className="relative w-full h-[360px] rounded-xl overflow-hidden border border-gray-200 shadow-inner z-0">
+      <div className="relative w-full flex-1 min-h-[360px] rounded-xl overflow-hidden border border-gray-200 shadow-inner z-0">
         <MapContainer
           center={[22.5, 79.0]}
           zoom={4.7}
@@ -258,25 +284,25 @@ export default function IndiaSvgMap({ citiesData = [], selectedCity, onSelectCit
 
           {/* Programmatic Map Controller */}
           <MapController
-            targetCoords={activeTarget ? { lat: activeTarget.lat, lon: activeTarget.lon } : null}
+            targetLat={activeTarget?.lat}
+            targetLon={activeTarget?.lon}
+            focusNonce={focusNonce}
             resetTrigger={resetTrigger}
           />
 
           {/* 12 Metro Pins with Anti-Collision Offsets */}
           {enrichedCities.map((city) => {
-            const isSelected = (selectedCity || '').toLowerCase() === (city.name || '').toLowerCase();
             const severity = getSeverity(city.aqi);
-            const icon = createCityIcon(city, isSelected, severity);
 
             return (
               <Marker
                 key={city.id || city.name}
                 position={[city.lat, city.lon]}
-                icon={icon}
+                icon={cityIcons[city.id]}
+                zIndexOffset={selectedKey === (city.name || '').toLowerCase() ? 1000 : 0}
+                riseOnHover
                 eventHandlers={{
                   click: () => handleCityClick(city),
-                  mouseover: () => setHoveredCity(city),
-                  mouseout: () => setHoveredCity(null),
                 }}
               >
                 <Popup closeButton={false} className="tailadmin-popup">

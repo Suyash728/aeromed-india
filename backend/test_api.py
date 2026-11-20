@@ -283,3 +283,136 @@ if __name__ == "__main__":
     test_live_risk_language_alias()
     test_adaption_7_pillars_metrics()
     print("\n🎉 ALL 14 INTEGRATION TESTS PASSED SUCCESSFULLY!")
+
+
+# --- Offline regression tests (no network, no Adaption key) -------------------------
+
+import main as _main
+from unittest.mock import patch as _patch
+
+_FIXED_AIR = {"pm25": 58.0, "pm10": 95.0, "no2": 28.0, "so2": 15.0, "co": 0.8,
+              "o3": 30.0, "aqi": 140, "temperature": 27.5, "humidity": 68.0}
+
+
+def test_clean_advisory_text_ignores_decimal_points():
+    # A '.' inside "58.0" is not a sentence end; truncating there cut mid-number.
+    out = _main.clean_advisory_text("Stay indoors. Your AQI is 140 and PM2.5 is 58.0 ug, keep inhaler handy")
+    assert out == "Stay indoors. Your AQI is 140 and PM2.5 is 58.0 ug, keep inhaler handy."
+
+
+def test_clean_advisory_text_uses_script_appropriate_terminator():
+    assert _main.clean_advisory_text("Wear an N95 mask outdoors today").endswith(".")
+    assert _main.clean_advisory_text("बाहर जाते समय मास्क पहनें").endswith("।")
+
+
+def test_urdu_fallback_keeps_er_guidance():
+    # Previously truncated at the decimal in the risk score, dropping the SpO2/ER directive.
+    text = _main.clean_advisory_text(_main.build_clinical_advisory_fallback(
+        "ur", "Delhi", _FIXED_AIR, 62.3, "High", "Asthma"))
+    assert "SpO2" in text and text.endswith("۔")
+
+
+def test_triage_cache_respects_requested_language():
+    _main.triage_chat_cache.clear()
+    msgs = [{"role": "user", "content": "What precautions should I take?"}]
+    with _patch.object(_main, "fetch_live_air_quality", return_value=_FIXED_AIR), \
+         _patch.object(_main, "get_adaption_client", return_value=None):
+        en = client.post("/api/triage-chat", json={"city": "Delhi", "language": "english", "messages": msgs}).json()
+        hi = client.post("/api/triage-chat", json={"city": "Delhi", "language": "hindi", "messages": msgs}).json()
+    assert en["language"] == "en"
+    assert hi["language"] == "hi"
+
+
+def test_cache_is_bounded():
+    cache = {}
+    for i in range(_main.CACHE_MAX_ENTRIES + 50):
+        _main.cache_put(cache, i, i)
+    assert len(cache) <= _main.CACHE_MAX_ENTRIES
+    assert _main.cache_get(cache, _main.CACHE_MAX_ENTRIES + 49) == _main.CACHE_MAX_ENTRIES + 49
+
+
+def test_live_reading_of_zero_is_kept():
+    class _Resp:
+        status_code = 200
+        def __init__(self, payload): self._p = payload
+        def raise_for_status(self): pass
+        def json(self): return self._p
+    air = {"current": {"pm2_5": 0, "pm10": 0, "nitrogen_dioxide": 0, "sulphur_dioxide": 0,
+                       "ozone": 0, "carbon_monoxide": 0, "us_aqi": 0}}
+    weather = {"current": {"temperature_2m": 0, "relative_humidity_2m": 0}}
+    with _patch.object(_main.requests, "get", side_effect=[_Resp(air), _Resp(weather)]):
+        out = _main.fetch_live_air_quality(0.0, 0.0)
+    assert out["pm25"] == 0.0 and out["aqi"] == 0 and out["temperature"] == 0.0
+
+
+def test_simulate_rejects_negative_pollutants():
+    assert client.post("/api/simulate-risk", json={"pm25": -50}).status_code == 422
+
+
+def test_indian_aqi_matches_cpcb_breakpoints():
+    # Each value is a CPCB band edge or a hand-interpolated point inside a band.
+    assert _main.compute_indian_aqi({"pm25": 30}) == 50
+    assert _main.compute_indian_aqi({"pm25": 60}) == 100
+    assert _main.compute_indian_aqi({"pm25": 120}) == 300
+    assert _main.compute_indian_aqi({"pm25": 250}) == 400
+    assert _main.compute_indian_aqi({"pm10": 100}) == 100
+    # Max sub-index wins: PM10 350 -> 300 beats PM2.5 60 -> 100
+    assert _main.compute_indian_aqi({"pm25": 60, "pm10": 350}) == 300
+    # Severe band resolves Stage III vs IV and caps at 500
+    assert _main.compute_indian_aqi({"pm25": 300}) == 438
+    assert _main.compute_indian_aqi({"pm25": 900}) == 500
+
+
+import pytest as _pytest
+from conftest import LIVE as _LIVE
+
+
+@_pytest.mark.skipif(_LIVE, reason="asserts the stubbed Open-Meteo reading")
+def test_grap_stage_uses_indian_aqi_not_us_aqi():
+    # Stub reports us_aqi=152; on India's scale the same reading (PM2.5 58) is ~97, i.e. no GRAP stage.
+    data = client.get("/api/live-risk?city=Delhi").json()
+    assert data["current_air_quality"]["us_aqi"] == 152
+    assert data["aqi"] == 97
+    assert data["grap_stage"] == "Normal"
+    severe = client.post("/api/simulate-risk", json={"pm25": 400, "pm10": 520}).json()
+    assert severe["grap_protocol"]["stage"] == "Stage IV"
+
+
+def test_unknown_city_is_404_not_mumbai():
+    r = client.get("/api/live-risk?city=Atlantis")
+    assert r.status_code == 404
+    assert "Supported cities" in r.json()["detail"]
+    r = client.post("/api/triage-chat", json={"city": "Atlantis", "messages": [{"role": "user", "content": "hi"}]})
+    assert r.status_code == 404
+
+
+def test_city_aliases_resolve():
+    assert client.get("/api/live-risk?city=Bangalore").json()["city"] == "Bengaluru"
+    assert client.get("/api/live-risk?city=navi-mumbai").json()["city"] == "Navi Mumbai"
+
+
+class _FakeAdaption:
+    """Stands in for the Adaption client and returns a fixed model reply."""
+    def __init__(self, text):
+        self.responses = self
+        self._text = text
+    def create(self, **kwargs):
+        return type("R", (), {"output_text": self._text})()
+
+
+def test_triage_reports_fallback_honestly():
+    msgs = [{"role": "user", "content": "Should I go outside today?"}]
+    r = client.post("/api/triage-chat", json={"city": "Delhi", "language": "en", "messages": msgs}).json()
+    assert r["source"] == "adaption_clinical_rules"
+    assert "Fallback" in r["model_used"]
+    assert _main.triage_chat_cache == {}  # template replies are not cached
+
+
+def test_triage_reports_live_model_when_used():
+    msgs = [{"role": "user", "content": "Should I go outside today?"}]
+    fake = _FakeAdaption("Stay indoors today and keep your rescue inhaler close. Seek ER care if SpO2 falls below 92%.")
+    with _patch.object(_main, "get_adaption_client", return_value=fake):
+        r = client.post("/api/triage-chat", json={"city": "Delhi", "language": "en", "messages": msgs}).json()
+    assert r["source"] == "adaption_multi_turn_triage"
+    assert r["model_used"] == "deepseek-v4-flash (Adaption AI)"
+    assert len(_main.triage_chat_cache) == 1
