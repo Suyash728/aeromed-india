@@ -134,7 +134,7 @@ export const translations = {
       "all_metros_avg": "All 12 Metros Avg",
       "drill_path": "Drill Path",
       "drill_up": "↑ Drill Up",
-      "legend_aqi": "Average US AQI",
+      "legend_aqi": "Average AQI",
       "legend_admissions": "Daily Hospital Admissions",
       "pm25_conc": "PM2.5 (µg/m³)",
       "click_to_drill": "💡 Click any bar to drill down",

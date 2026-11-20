@@ -406,7 +406,7 @@ export default function SurgeStatisticsChart({ overviewData }) {
                 yAxisId="left"
                 type="monotone" 
                 dataKey="aqi" 
-                name={t('overview.legend_aqi', 'Average US AQI')}
+                name={t('overview.legend_aqi', 'Average AQI')}
                 stroke="#465FFF" 
                 strokeWidth={2.5}
                 fillOpacity={1} 
